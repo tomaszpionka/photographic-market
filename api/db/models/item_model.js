@@ -18,6 +18,12 @@ const getItems = () => {
     SELECT * FROM ${tableItem};
     `;
     return connection.query(sql);
+};
+const getItem = (id) => {
+    const sql = `SELECT * FROM ${tableItem} WHERE item_id = ${id};`;
+    return connection.query(sql).then((response) => response.rows)
 }
 //insertItem();
-getItems().then((res) => console.log(res.rows));
+//getItems().then((res) => console.log(res.rows));
+getItem(1).then((res) => console.log(res));
+module.export = { getItems, getItem}
