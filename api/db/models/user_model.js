@@ -16,9 +16,16 @@ const getUsers = () => {
     const sql = `
         SELECT* FROM ${tableName};
     `;
-    return connection.query(sql);
+    return connection.query(sql).then((response) => response.rows);
 }
 
-// insertUser();
+const getUser = (id) => {
+    const sql = `SELECT * FROM ${tableName} WHERE id = ${id}`;
 
-getUsers().then(res => console.log(res.rows));
+    return connection.query(sql).then((response) => response.rows);
+
+}
+
+getUser(1).then(r => console.log(r));
+
+module.export = { getUser, getUsers };
