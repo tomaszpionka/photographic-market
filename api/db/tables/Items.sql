@@ -1,6 +1,6 @@
 CREATE TABLE items (
   	item_id serial,
-  	user_id INTEGER,
+  	user_id serial,
   	item_name varchar(128) not NULL,
   	category VARCHAR(64) not NULL,
   	description TEXT not NULL,
