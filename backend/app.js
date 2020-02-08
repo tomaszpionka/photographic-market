@@ -4,6 +4,8 @@ const cors = require('cors');
 const AuthRouter = require("./db/users/userRouter");
 const DbRouter = require("./db/items/itemRouter");
 
+app.use(cors());
+
 class AppRouter {
   constructor() {
     this.router = express.Router();
@@ -11,11 +13,12 @@ class AppRouter {
   }
   routes(){
     this.router.use('/auth', new AuthRouter().router);
-    this.router.use('/item', new DbRouter().router);
+    this.router.use('/item', new ItemRouter().router);
   }
 };
 
-app.use(cors());
+
+app.use("/api", new AppRouter().router);
 
 // app.get('/', function(req, res) {
 //   return res.json({});
