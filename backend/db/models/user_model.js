@@ -10,22 +10,22 @@ const insertUser = () => {
     )
     `;
     return connection.query(sql);
-}
+};
 
 const getUsers = () => {
     const sql = `
         SELECT* FROM ${tableName};
     `;
     return connection.query(sql).then((response) => response.rows);
-}
+};
 
 const getUser = (id) => {
     const sql = `SELECT * FROM ${tableName} WHERE id = ${id}`;
 
     return connection.query(sql).then((response) => response.rows);
 
-}
+};
 
 getUser(1).then(r => console.log(r));
 
-module.export = { getUser, getUsers };
+module.exports = { insertUser, getUser, getUsers };
