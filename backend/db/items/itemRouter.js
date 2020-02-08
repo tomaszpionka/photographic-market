@@ -10,7 +10,7 @@ const jsonBodyParser = bodyParser.json();
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, "api/public/images/items");
+    cb(null, "backend/assets/itemsImages");
   },
   filename: function(req, file, cb) {
     cb(null, file.fieldname + Date.now() + path.extname(file.originalname));
@@ -35,7 +35,7 @@ class ItemRouter {
   _addItem(req, res) {
     const { userId, itemName, category, description } = req.body;
     console.log(req.files);
-    const images = this.controllers.collectImgsPath(req.files);
+    const images = this.controller.collectImgsPath(req.files);
 
     this.controller
       .insertItem(userId, itemName, category, description, images)
