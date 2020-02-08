@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const AuthRouter = require("./db/users/userRouter");
-const DbRouter = require("./db/items/itemRouter");
+// const AuthRouter = require("./db/users/userRouter");
+const ItemRouter = require("./db/items/itemRouter");
 
 app.use(cors());
 
@@ -12,7 +12,7 @@ class AppRouter {
     this.routes();
   }
   routes(){
-    this.router.use('/auth', new AuthRouter().router);
+    //this.router.use('/auth', new AuthRouter().router);
     this.router.use('/item', new ItemRouter().router);
   }
 };

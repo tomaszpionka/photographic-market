@@ -43,4 +43,4 @@ class ItemControllers {
   }
 }
 
-export default ItemControllers;
+module.exports = ItemControllers;
