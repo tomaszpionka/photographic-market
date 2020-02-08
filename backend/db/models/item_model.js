@@ -1,5 +1,3 @@
-
-
 const connection = require('../connection');
 const tableItem = 'items';
 
@@ -13,6 +11,7 @@ const insertItem = () => {
     `;
     return connection.query(sql);
 };
+
 const getItems = () => {
     const sql = `
     SELECT * FROM ${tableItem};
@@ -22,8 +21,12 @@ const getItems = () => {
 const getItem = (id) => {
     const sql = `SELECT * FROM ${tableItem} WHERE item_id = ${id};`;
     return connection.query(sql).then((response) => response.rows)
-}
+};
+
 //insertItem();
-//getItems().then((res) => console.log(res.rows));
+
+getItems().then((res) => console.log(res.rows));
+
 getItem(1).then((res) => console.log(res));
-module.export = { getItems, getItem}
+
+module.exports = { getItems, getItem};
