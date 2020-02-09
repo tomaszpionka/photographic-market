@@ -60,8 +60,8 @@ class ItemRouter {
     this.controller
       .deleteItem(id)
       .then(result => {
-        this.controller.removeImg(result);
         res.send(result);
+        this.controller.removeImg(result);
       })
       .catch(error =>
         res.status(500).send(`SQL ERROR ${error.code} - ${error.detail}`)
