@@ -34,7 +34,6 @@ class ItemRouter {
 
   _addItem(req, res) {
     const { userId, itemName, category, description } = req.body;
-    console.log(req.files);
     const images = this.controller.collectImgsPath(req.files);
 
     this.controller
@@ -60,7 +59,10 @@ class ItemRouter {
 
     this.controller
       .deleteItem(id)
-      .then(result => res.send(result))
+      .then(result => {
+        this.controller.removeImg(result);
+        res.send(result);
+      })
       .catch(error =>
         res.status(500).send(`SQL ERROR ${error.code} - ${error.detail}`)
       );

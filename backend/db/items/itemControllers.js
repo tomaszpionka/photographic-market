@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 class ItemControllers {
   constructor() {
     this.tableItem = "items";
@@ -23,6 +25,19 @@ class ItemControllers {
     }
 
     return images;
+  }
+
+  removeImg(result) {
+    const img = result.rows[0].images_json;
+    const imgKeys = Object.keys(img);
+    console.log(imgKeys);
+    imgKeys.forEach(key => {
+      console.log(img[key]);
+      fs.unlink(img[key], err => {
+        if (err) throw err;
+        console.log(img[key] + " was deleted");
+      });
+    });
   }
 
   getAllItems() {
