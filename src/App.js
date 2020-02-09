@@ -12,6 +12,7 @@ import Button from 'react-bootstrap/Button'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 
 function App() {
+    const userIsRegistered = false;
   return (
     <Router>
       <Container className="p-0" fluid={true}>
