@@ -1,20 +1,44 @@
 import React from "react";
 
-function Login(props) {
+function Login() {
     return (
         <div>
             <h1>login h1</h1>
-        <form>
-            <label htmlFor="email">email</label>
-            <input type="email" placeholder="email" name="username"/>
-            <label htmlFor="password">password</label>
-            <input type="password" placeholder="password" name="password"/>
-            {/*{!props.isRegistered && (*/}
-            {/*    <input type="password" placeholder="Confirm Password" />*/}
-            {/*)}*/}
 
-            <button type="submit">{props.isRegistered ? "Login" : "Register"}</button>
-        </form>
+            <div>
+                <div>
+                    <div>
+                        <div>
+
+                            {/*// <!-- Makes POST request to /login route -->*/}
+                            <form action="/" method="POST">
+                                <div>
+                                    <label htmlFor="email">Email</label>
+                                    <input type="email" name="email"/>
+                                </div>
+                                <div>
+                                    <label htmlFor="password">Password</label>
+                                    <input type="password"name="password"/>
+                                </div>
+                                <button type="submit">Login</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <div>
+                            <a href="/auth/google" role="button">
+                                <i className="fab fa-google"></i>
+                                Sign In with Google
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     );
 }

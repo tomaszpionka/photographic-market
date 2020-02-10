@@ -11,38 +11,11 @@ import Root from "./pages/Root";
 import Login from "./pages/Login";
 import About from "./pages/About";
 import Home from "./pages/Home";
-//
-// function TestHeader() {
-//     return <h1>Test</h1>;
-// }
-// const auth = require('backend/auth');
-//
-// app.use('/auth', auth);
-
-const Test = () => (
-    <div>
-
-        <h2>Welcome to the Test route</h2>
-
-        <Route exact path={'/path'}>
-            <h2>path header</h2>
-        </Route>
-
-        <Route exact path={'/path/2'}>
-            <h2>Path 2</h2>
-        </Route>
-
-        <Route exact path={'/login'}>
-            <Login/>
-        </Route>
-    </div>
-);
-
-
+import Users from "./pages/Users";
 
 function App() {
-    const userIsRegistered = false;
-  return (
+
+    return (
 
 <Router>
     <header>
@@ -57,6 +30,8 @@ function App() {
         <Link to={"/login"}>_login</Link>
 
         <Link to={"/about"}>_about</Link>
+
+        <Link to={"/users"}>_users</Link>
     </header>
     <main>
         <Switch>
@@ -65,6 +40,7 @@ function App() {
             <Route exact path={'/home'} component={Home}/>
             <Route exact path={'/login'} component={Login}/>
             <Route exact path={'/about'} component={About}/>
+            <Route exact path={'/users'} component={Users}/>
         </Switch>
     </main>
 </Router>
