@@ -2,6 +2,7 @@ const express = require("express");
 const UserControllers = require("./userControllers");
 const bodyParser = require("body-parser");
 const jsonBodyParser = bodyParser.json();
+// const bcrypt = require("bcrypt");
 
 class UserRouter {
     constructor() {
@@ -19,14 +20,13 @@ class UserRouter {
 
     _addUser(req, res) {
         const { email, password } = req.body;
-        console.log(req.body);
 
-        this.controller
-            .insertUser(email, password)
-            .then(result => res.send({ result }))
-            .catch(error =>
-                res.status(500).send(`SQL ERROR ${error.code} - ${error}`)
-            );
+            this.controller
+                .insertUser(email, password)
+                .then(result => res.send({result}))
+                .catch(error =>
+                    res.status(500).send(`SQL ERROR ${error.code} - ${error}`)
+                );
     }
 
     _getUser(req,res)   {

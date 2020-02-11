@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import Users from "./pages/Users";
+import Location from "./pages/Location";
 
 function App() {
 
@@ -32,6 +33,8 @@ function App() {
         <Link to={"/about"}>_about</Link>
 
         <Link to={"/users"}>_users</Link>
+
+        <Link to ={"/location"}>_location</Link>
     </header>
     <main>
         <Switch>
@@ -41,6 +44,7 @@ function App() {
             <Route exact path={'/login'} component={Login}/>
             <Route exact path={'/about'} component={About}/>
             <Route exact path={'/users'} component={Users}/>
+            <Route exact path={"/location"} component={Location}/>
         </Switch>
     </main>
 </Router>
