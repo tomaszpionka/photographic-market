@@ -24,18 +24,29 @@ class Location extends React.Component {
     }
 
     render() {
-
+        if(this.state.errorMessage && !this.state.lat){
+            return (
+                <div>
+                    <h1>location h1</h1>
+                    Error: {this.state.errorMessage}</div>
+            )
+        }
+        if (!this.state.errorMessage && this.state.lat) {
+            return (
+                <div>
+                    <h1>location h1</h1>
+                latitude: {this.state.lat}
+            <br/>
+            longitude: {this.state.long}
+                </div>
+            )
+        }
         return (
             <div>
                 <h1>location h1</h1>
-
-                latitude: {this.state.lat}
-                <br/>
-                longitude: {this.state.long}
-                <br/>
-                Error: {this.state.errorMessage}
+                <p>loading</p>
             </div>
-        )
+        );
     }
 }
 
