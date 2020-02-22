@@ -1,4 +1,5 @@
 import React from "react"
+import Display from "./Display";
 
 class Location extends React.Component {
     state = {
@@ -24,28 +25,24 @@ class Location extends React.Component {
         console.log("my component was just updated");
     }
 
-    render() {
+    renderContent() {
         if(this.state.errorMessage && !this.state.lat){
             return (
-                <div>
-                    <h1>location h1</h1>
-                    Error: {this.state.errorMessage}</div>
+                <div>Error: {this.state.errorMessage}</div>
             )
         }
         if (!this.state.errorMessage && this.state.lat) {
             return (
-                <div>
-                    <h1>location h1</h1>
-                latitude: {this.state.lat}
-            <br/>
-            longitude: {this.state.long}
-                </div>
+                <Display lat={this.state.lat} long={this.state.long}/>
             )
         }
+        return (<div><h1>please accept location request</h1></div>)
+    }
+
+    render() {
         return (
             <div>
-                <h1>location h1</h1>
-                <p>loading</p>
+                {this.renderContent()}
             </div>
         );
     }

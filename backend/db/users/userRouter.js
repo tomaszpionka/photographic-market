@@ -19,10 +19,10 @@ class UserRouter {
     }
 
     _addUser(req, res) {
-        const { email, password } = req.body;
+        const { email, passwordForm } = req.body;
 
             this.controller
-                .insertUser(email, password)
+                .insertUser({email, passwordForm})
                 .then(result => res.send({result}))
                 .catch(error =>
                     res.status(500).send(`SQL ERROR ${error.code} - ${error}`)

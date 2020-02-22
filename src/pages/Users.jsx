@@ -6,7 +6,7 @@ class Users extends React.Component{
         users: [],
         user: {
             email: "email",
-            password: ""
+            passwordForm: ""
         }
     };
 
@@ -58,8 +58,8 @@ class Users extends React.Component{
                     />
                     <input
                         type="password"
-                        value={user.password}
-                        onChange={e => this.setState({user: {...user, password: e.target.value}})}
+                        value={user.passwordForm}
+                        onChange={e => this.setState({user: {...user, passwordForm: e.target.value}})}
                     />
                     <button onClick={this.addUser}>add user</button>
                 </div>

@@ -1,3 +1,8 @@
+const util = require("util");
+const crypto = require("crypto");
+
+const scrypt = util.promisify(crypto.scrypt);
+
 class UserControllers {
     constructor() {
         // this.tableUser = "users";
@@ -5,7 +10,11 @@ class UserControllers {
         this.connection = require("../connection");
     }
 
-    insertUser(email, password) {
+    async insertUser(email, passwordForm) {
+        
+        const salt = crypto.randomBytes(8).toString("hex");
+        const password = await scrypt(passwordForm, salt, 64);
+        console.log(password);
         const sql = `
     INSERT INTO ${this.tableUser} VALUES (
     DEFAULT,
