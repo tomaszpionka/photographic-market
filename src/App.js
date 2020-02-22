@@ -11,6 +11,9 @@ import Root from "./pages/Root";
 import Login from "./pages/Login";
 import About from "./pages/About";
 import Home from "./pages/Home";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import "./style.css";
 //
 // function TestHeader() {
 //     return <h1>Test</h1>;
@@ -45,18 +48,19 @@ function App() {
   return (
 
 <Router>
-    <header>
-        <Link to={'/'}>_root</Link>
+    <Header></Header>
+    <header className='wraper'>
+        <Link to={'/'} className='link'>Strona główna</Link>
 
         {/*<Link to={'/path'}>_path</Link>
 
         <Link to={'/path/2'}>_path/2</Link>*/}
 
-        <Link to={'/home'}>_home</Link>
+        <Link to={'/home'} className='link'>Oferta</Link>
 
-        <Link to={"/login"}>_login</Link>
+        <Link to={"/login"} className='link'>Logowanie</Link>
 
-        <Link to={"/about"}>_about</Link>
+        <Link to={"/about"} className='link'>O nas</Link>
     </header>
     <main>
         <Switch>
@@ -67,6 +71,8 @@ function App() {
             <Route exact path={'/about'} component={About}/>
         </Switch>
     </main>
+    <Footer className='footer'></Footer>
+    
 </Router>
   );
 }

@@ -1,0 +1,9 @@
+{
+    "DB": {
+      "user": "postgres",
+      "host": "35.246.198.183",
+      "database": "postgres",
+      "password": "!D0p4!1234",
+      "port": 5432
+    }
+  }
