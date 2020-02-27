@@ -5,5 +5,7 @@
     "database": "postgres",
     "password": "!D0p4!1234",
     "port": 5432
-  }
+  },
+  "SECRET": "MyJwtSecret"
 }
+

@@ -1,32 +1,42 @@
 const express = require('express');
-const app = express();
+const path = require('path');
+const morgan = require('morgan');
+const logger = require('./logger');
+const authRoutes = require('./router/routes');
 const cors = require('cors');
-const UserRouter = require("./db/users/userRouter");
-const ItemRouter = require("./db/items/itemRouter");
 
+const app = express();
 
+const morganFormat = process.env.NODE_ENV !== "production" ? "dev" : "combined";
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
-class AppRouter {
-  constructor() {
-    this.router = express.Router();
-    this.routes();
-  }
-  routes(){
-    this.router.use('/user', new UserRouter().router);
-    this.router.use('/item', new ItemRouter().router);
-  }
-};
+app.use(
+  morgan(morganFormat, {
+    skip: function(req, res) {
+      return res.statusCode < 400;
+    },
+    stream: process.stderr
+  })
+);
 
-app.use("/api", new AppRouter().router);
+app.use(
+  morgan(morganFormat, {
+    skip: function(req, res) {
+      return res.statusCode >= 400;
+    },
+    stream: process.stdout
+  })
+);
 
-// app.get('/', function(req, res) {
-//   return res.json({});
-// });
+app.use(express.static(path.join(__dirname + '/authentication')));
 
-const runServer = port => {
-  console.log(`Server is running on port${port}`);
-  app.listen(port);
-};
+/// use routes
+app.use('/', authRoutes);
 
-module.exports = { runServer };
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+    logger.info(`Server started on port ${port}`)
+});
