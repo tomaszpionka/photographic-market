@@ -24,4 +24,5 @@ yarn-error.log*
 
 .idea/
 
+# config data
 config.json
