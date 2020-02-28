@@ -24,6 +24,4 @@ yarn-error.log*
 
 .idea/
 
-backend/config.json
-
-config.json
+config.json*
