@@ -1,5 +1,5 @@
 const passport = require('passport');
-//// usare dotenv
+
 const config = require('../config');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -28,7 +28,7 @@ const jwtOptions = {
   secretOrKey: config.SECRET
 };
 
-/// Create JWT strategy. jwtOptions sono delle istruzioni che passiamo alla JwtStrategy per fargli decodificare il token. Payload is the unencrypted token data. So payload.sub is equivalent to the user.id
+/// Create JWT strategy.Payload is the unencrypted token data. So payload.sub is equivalent to the user.id
 const jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
   /// See if the user ID in the payload exists in our database. If it does, call 'done' with that other. Otherwise, call done without a user object
 //   return findUserById(payload.sub)

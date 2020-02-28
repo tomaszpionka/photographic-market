@@ -1,6 +1,6 @@
 const express = require('express');
 const auth = require('./authentication');
-/// in passportService sono contenute le nostre strategie di autenticazione 
+ 
 const passport = require('passport');
 const passportService = require('../services/passport');
 

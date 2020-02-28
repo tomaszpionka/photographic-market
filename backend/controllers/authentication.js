@@ -1,10 +1,8 @@
-/// jwt-simple è il token creation package
+/// token creation
 const jwt = require("jwt-simple");
 const { hashPass } = require("./_helpers");
-//// usare dotenv
-const config = require('../config');
 
-// - const config = require('../config');
+const config = require('../config');
 
 /// The tokenForUser function takes in a user object, and returns an encoded token that is created with a subject (conventionally called sub) set to the user’s id and a timestamp (also conventionally called iat), along with the imported secret
 const tokenForUser = user => {

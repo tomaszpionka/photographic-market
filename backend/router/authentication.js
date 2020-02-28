@@ -1,19 +1,13 @@
 const express = require('express');
 const passport = require('passport');
 
-/// Importiamo le funzioni signin e signup
 const Authentication = require('../controllers/authentication');
 
 /// we are setting session to false because JWTs don’t require sessions on the server.
-//// requireSignin si può rifare su react invece che sul server
 const requireSignin = passport.authenticate('local', { session: false });
 
 const router = express.Router();
 
-//// Mancano i router.get perchè devono essere componenti di react raggiungibili da react-router-dom
-/* router.get('/', requireAuth, (req, res) => {
-    res.send({ hi: 'there' });
-}); */
 router.get('/signup', (req, res) => {
     res.sendFile('signup.html');
 })
