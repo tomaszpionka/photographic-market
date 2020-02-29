@@ -11,6 +11,7 @@ import Root from "./pages/Root";
 import Login from "./pages/Login";
 import About from "./pages/About";
 import Home from "./pages/Home";
+import AddItem from './components/AddItem'
 //
 // function TestHeader() {
 //     return <h1>Test</h1>;
@@ -65,6 +66,7 @@ function App() {
             <Route exact path={'/home'} component={Home}/>
             <Route exact path={'/login'} component={Login}/>
             <Route exact path={'/about'} component={About}/>
+            <Route exact path={'/addItem'} component={AddItem} />
         </Switch>
     </main>
 </Router>
