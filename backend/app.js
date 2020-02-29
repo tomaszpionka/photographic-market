@@ -3,6 +3,7 @@ const path = require('path');
 const morgan = require('morgan');
 const logger = require('./logger');
 const authRoutes = require('./router/routes');
+
 const cors = require('cors');
 
 const app = express();

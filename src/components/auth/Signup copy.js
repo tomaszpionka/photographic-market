@@ -3,7 +3,6 @@ import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 
 class Signup extends Component {
   onSubmit = formProps => {
@@ -16,9 +15,6 @@ class Signup extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <MDBContainer>
-      <MDBRow>
-      <MDBCol md="6">
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <fieldset>
           <label>email</label>
@@ -41,9 +37,6 @@ class Signup extends Component {
         <div>{this.props.errorMessage}</div>
         <button>sign up</button>
       </form>
-      </MDBCol>
-  </MDBRow>
-</MDBContainer> 
     );
   }
 }
@@ -56,3 +49,4 @@ export default compose(
   connect(mapStateToProps, actions),
   reduxForm({ form: 'signup' })
 )(Signup);
+

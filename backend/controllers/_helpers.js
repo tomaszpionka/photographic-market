@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const {createUser} = require('../actions/signUp');
+const {createItem} = require('../actions/inventory');
 const logger = require('../logger');
 
 function comparePass(userPassword, databasePassword, userIsValid, userIsNotValid) {
@@ -29,10 +30,21 @@ function hashPass(email, password, givingTokenToUser, userNotSaved, catchingErro
     .catch(catchingError)
 };
 
+function addItem(name, category, itemNotSaved, catchingError) {
+  logger.info("Creating item...")
+  .then(() => {
+    logger.debug(`name: ${name}, category: ${category}`);
+    return createItem(name, category)
+    .then(logger.info("Success..."))
+    .catch(itemNotSaved)
+  })
+  .catch(catchingError)
+};
 
 module.exports = {
   comparePass,
-  hashPass
+  hashPass,
+  addItem
 };
 
 
