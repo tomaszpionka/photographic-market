@@ -27,7 +27,7 @@ class ItemRouter {
   }
 
   routes() {
-    this.router.post("/", upload.array("img", 5), this._addItem.bind(this));
+    this.router.post("/", upload.array("img", 3), this._addItem.bind(this));
     this.router.get("/", jsonBodyParser, this._getAllItems.bind(this));
     this.router.delete("/:id", jsonBodyParser, this._deleteItem.bind(this));
   }
