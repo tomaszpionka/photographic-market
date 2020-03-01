@@ -11,7 +11,7 @@ import Root from "./pages/Root";
 import Login from "./pages/Login";
 import About from "./pages/About";
 import Home from "./pages/Home";
-import AddItem from './components/AddItem'
+import AddItem from './components/AddItem/AddItem'
 //
 // function TestHeader() {
 //     return <h1>Test</h1>;
