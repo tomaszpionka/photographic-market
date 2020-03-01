@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 function AddItem() {
     const [itemData, setItemData] = useState({
@@ -7,6 +6,8 @@ function AddItem() {
         category: '',
         description: ''
     });
+    
+    const images = useRef([]);
 
     const handleChange = (e) => {
         const target = e.target;
@@ -16,9 +17,10 @@ function AddItem() {
         setItemData({ ...itemData,
             [key]: value
         });
+    
     }
-    const handleAdd = (e) => {
-        console.log(itemData);
+    const handleAdd = (e) => {     
+        console.log(images.current.files);
         e.preventDefault();
     }
 
@@ -41,9 +43,14 @@ function AddItem() {
             <textarea 
             name="description"
             rows="5"
-            onChange={handleChange}>Opis produktu</textarea>
+            onChange={handleChange}></textarea>
             <label htmlFor="images">Dodaj zdjęcia:</label>
-            <input name="images" type="file" accept="image/png, image/jpeg" multiple/>
+            <input 
+                name="images"
+                type="file"
+                accept="image/png, image/jpeg"
+                multiple
+                ref={images} />
             <button type="submit">Dodaj</button>
         </form>
     )
