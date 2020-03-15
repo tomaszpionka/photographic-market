@@ -1,2 +1,0 @@
-// query to a database
-
