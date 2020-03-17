@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const config = require('../config');
 
-const User = require('../models/user');
+const config = require('../config');
+const User = require('../controllers/user');
 
 const tokenForUser = (user) => {
     const timestamp = new Date().getTime();
@@ -34,11 +34,7 @@ const signup = function (req, res, next) {
         });
     }
 
-    User.findOne({
-            where: {
-                email: email
-            }
-        })
+    User.getUserByMailController(email)
         .then(user => {
             if (user) {
                 return res.status(422).send({
@@ -56,7 +52,7 @@ const signup = function (req, res, next) {
                 }
 
                 user.password = hash;
-                User.create(user)
+                User.addUserController(user)
                     .then(user => {
 
                         res.json({
