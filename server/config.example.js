@@ -1,6 +1,5 @@
 module.exports = {
     secret: 'fixme',
-    time: 60,
     database: 'postgres',
     username: 'postgres',
     dialect: 'postgres',
