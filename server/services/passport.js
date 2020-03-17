@@ -1,21 +1,18 @@
 const passport = require('passport');
 const bcrypt = require('bcrypt');
-const User = require('../models/user');
-const config = require('../config');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require('passport-local');
+
+const config = require('../config');
+const User = require('../controllers/user');
 
 const localOptions = {
   usernameField: 'email'
 };
 const localLogin = new LocalStrategy(localOptions, function (email, password, done) {
   
-  User.findOne({
-      where: {
-        email: email
-      }
-    })
+  User.getUserByMailController(email)
     .then(user => {
       if (!user) {
         return done(null, false);
@@ -42,7 +39,7 @@ const jwtOptions = {
 
 const jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
 
-  User.findByPk(payload.sub)
+  User.getUserByIdController(payload.sub)
     .then(user => {
       if (user) {
         done(null, user);
