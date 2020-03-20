@@ -87,7 +87,7 @@ const deleteItem = (req, res) => {
         );
 }
 
-module.exports ={
+module.exports = {
     addItem,
     getAllItems,
     getItem,
