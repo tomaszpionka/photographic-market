@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 const { sequelize, Sequelize } = require('../database/db');
 const table = 'items';
@@ -41,7 +40,7 @@ const getAll = () => {
 }
 const getAllItems = (req, res) => {
     getAll() 
-        .then(result => res.send(result[1].rows))
+        .then(result => res.send(result[0]))
         .catch(error => res.status(500).send(`SQL ERROR ${error}`));
 }
 
@@ -53,30 +52,44 @@ const getOne = id => {
 const getItem = (req, res) => {
     const id = req.params.id;
     getOne(id)
-        .then(result => send(result.rows[0]))
+        .then(result => res.send(result[0]))
         .catch( error => res.status(500).send(`SQL Error ${error}`));
+    //TODO add 404 if result []
 }
 
-const deleteItem = id => {
+const removeItem = id => {
     const sql = `DELETE FROM ${table} WHERE item_id = ${id} RETURNING *`;
     return sequelize.query(sql);
 }
- const removeImg = result => {
-    const img = result.rows[0].images_json;
+const removeImg = result => {
+    const img = result[0].images_json;
     const imgKeys = Object.keys(img);
     console.log(imgKeys);
     imgKeys.forEach(key => {
-        console.log(img[key]);
+        // console.log(img[key]);
         fs.unlink(img[key], err => {
             if (err) throw err;
             console.log(img[key] + " was deleted");
         });
     });
 }
+const deleteItem = (req, res) => {
+    // console.log(req)
+    const id = req.params.id;
+
+    removeItem(id)
+        .then(result => {
+            res.send(result);
+            removeImg(result);
+        })
+        .catch(error =>
+            res.status(500).send(`SQL ERROR ${error.code} - ${error.detail}`)
+        );
+}
 
 module.exports ={
     addItem,
     getAllItems,
     getItem,
-
+    deleteItem
 }

@@ -1,8 +1,11 @@
 const express = require("express");
-const ItemController = require("../controllers/itemController");
+const bodyParser = require('body-parser');
 const multer = require("multer");
 const path = require("path");
 
+const itemController = require("../controllers/itemController");
+
+const jsonParser = bodyParser.json();
 const itemRouter = express.Router();
 
 const storage = multer.diskStorage({
@@ -16,7 +19,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-itemRouter.get('/', ItemController.getAllItems);
-// itemRouter.post('/', upload.array("img", 3), ItemController.addItem)
+itemRouter.get('/', jsonParser, itemController.getAllItems);
+itemRouter.get('/:id', jsonParser, itemController.getItem);
+itemRouter.post('/', upload.array("img", 3), itemController.addItem);
+itemRouter.delete('/:id', jsonParser, itemController.deleteItem);
 
 module.exports = itemRouter;
