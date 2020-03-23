@@ -1,26 +1,30 @@
 import React, { useState, useRef } from 'react';
+import jwt_decode from 'jwt-decode';
 import axios from 'axios';
+
 
 function AddItem() {
     const [name, setName] = useState('');
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
-
     const images = useRef([]);
+    
+    const usertoken = localStorage.token
+    const decoded = jwt_decode(usertoken);
 
     const handleAdd = (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("itemName", name);
-        formData.append("userId", 1);
+        formData.append("userId", decoded.sub);
         formData.append("description", description);
         formData.append("category", category);
         
         for (let i = 0; i < images.current.files.length; i++) {
             formData.append("img", images.current.files[i]);  
         }
-        console.log(name);
-
+        
+        // console.log(decoded)
         axios.post('http://localhost:5000/item', formData)
         .then(res => console.log('Success!'))
         .catch(e => console.log(e));
@@ -39,7 +43,7 @@ function AddItem() {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}>
                 <option value="" disabled hidden>Choose category</option>
-                <option value="o1">opcja1</option>
+                <option value="">opcja1</option>
                 <option value="o2">opcja2</option>
             </select>
             <label htmlFor="description">Description:</label>
