@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { sequelize, Sequelize } = require('../database/db');
-const table = 'items';
+const table = 'items_old';
 
 
 const insertItem = (userId, itemName, category, description, images) => {
