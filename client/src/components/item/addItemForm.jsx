@@ -8,8 +8,10 @@ function AddItem() {
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
     const images = useRef([]);
+
+    const categoriesNames = ['film', 'lens', 'camera', 'accessories']
     
-    const usertoken = localStorage.token
+    const usertoken = localStorage.token;
     const decoded = jwt_decode(usertoken);
 
     const handleAdd = (e) => {
@@ -43,8 +45,11 @@ function AddItem() {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}>
                 <option value="" disabled hidden>Choose category</option>
-                <option value="">opcja1</option>
-                <option value="o2">opcja2</option>
+                {
+                    categoriesNames.map(category =>(
+                           <option key={category} value={category}>{category}</option> 
+                        ))
+                }
             </select>
             <label htmlFor="description">Description:</label>
             <textarea
