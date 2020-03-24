@@ -4,5 +4,5 @@ module.exports = {
     username: 'postgres',
     dialect: 'postgres',
     password: 'fixme',
-    host: 'fixme'
+    host: 'fixmee'
 }
