@@ -58,6 +58,7 @@ const DesktopContainer = ({ children }) => {
       localStorage.removeItem("token");
       setAuth(false);
       toast.success("Logout successfully");
+      window.location.href = "/";
     } catch (err) {
       console.error(err.message);
     }
@@ -164,6 +165,7 @@ const MobileContainer = ({ children }) => {
       localStorage.removeItem("token");
       setAuth(false);
       toast.success("Logout successfully");
+      window.location.href = "/";
     } catch (err) {
       console.error(err.message);
     }
