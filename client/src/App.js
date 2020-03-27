@@ -15,6 +15,8 @@ import Home from "./components/home/Home";
 import Items from "./components/items/Items";
 import Users from "./components/users/Users";
 import Orders from "./components/orders/Orders";
+import ResponsiveContainer from "./components/menu/Header";
+import Footer from "./components/menu/Footer";
 
 toast.configure();
 
@@ -46,6 +48,7 @@ function App() {
   return (
     <Fragment>
       <BrowserRouter>
+        <ResponsiveContainer />
         <Switch>
           <Route
             exact
@@ -101,6 +104,7 @@ function App() {
             }
           />
         </Switch>
+        <Footer />
       </BrowserRouter>
     </Fragment>
   );

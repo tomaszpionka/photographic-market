@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { Component, Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -18,15 +18,11 @@ import {
 } from "semantic-ui-react";
 
 import Footer from "../menu/Footer";
+import ResponsiveContainer from "../menu/Header";
 
 // Heads up!
 // We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
 // For more advanced usage please check Responsive docs under the "Usage" section.
-const getWidth = () => {
-  const isSSR = typeof window === "undefined";
-
-  return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth;
-};
 
 /* eslint-disable react/no-multi-comp */
 /* Heads up! HomepageHeading uses inline styling, however it's not the best practice. Use CSS or styled components for
@@ -66,189 +62,12 @@ HomepageHeading.propTypes = {
   mobile: PropTypes.bool
 };
 
-/* Heads up!
- * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
- * It can be more complicated, but you can create really flexible markup.
- */
-class DesktopContainer extends Component {
-  state = {};
-
-  hideFixedMenu = () => this.setState({ fixed: false });
-  showFixedMenu = () => this.setState({ fixed: true });
-
-  render() {
-    const { children } = this.props;
-    const { fixed } = this.state;
-
-    return (
-      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-        <Visibility
-          once={false}
-          onBottomPassed={this.showFixedMenu}
-          onBottomPassedReverse={this.hideFixedMenu}
-        >
-          <Segment
-            inverted
-            textAlign="center"
-            style={{ minHeight: 700, padding: "1em 0em" }}
-            vertical
-          >
-            <Menu
-              fixed={fixed ? "top" : null}
-              inverted={!fixed}
-              pointing={!fixed}
-              secondary={!fixed}
-              size="large"
-            >
-              <Container>
-                <Menu.Item as={Link} to="/" active>
-                  Home
-                </Menu.Item>
-                <Menu.Item as={Link} to="/dashboard">
-                  Dashboard
-                </Menu.Item>
-                <Menu.Item as={Link} to="/items">
-                  Items
-                </Menu.Item>
-                <Menu.Item as={Link} to="/users">
-                  Users
-                </Menu.Item>
-                <Menu.Item as={Link} to="/orders">
-                  Orders
-                </Menu.Item>
-                <Menu.Item position="right">
-                  <Button as={Link} to="/login" inverted={!fixed}>
-                    Log in
-                  </Button>
-                  <Button
-                    as={Link}
-                    to="/register"
-                    inverted={!fixed}
-                    primary={fixed}
-                    style={{ marginLeft: "0.5em" }}
-                  >
-                    Sign Up
-                  </Button>
-                </Menu.Item>
-              </Container>
-            </Menu>
-            <HomepageHeading />
-          </Segment>
-        </Visibility>
-
-        {children}
-      </Responsive>
-    );
-  }
-}
-
-DesktopContainer.propTypes = {
-  children: PropTypes.node
-};
-
-class MobileContainer extends Component {
-  state = {};
-
-  handleSidebarHide = () => this.setState({ sidebarOpened: false });
-
-  handleToggle = () => this.setState({ sidebarOpened: true });
-
-  render() {
-    const { children } = this.props;
-    const { sidebarOpened } = this.state;
-
-    return (
-      <Responsive
-        as={Sidebar.Pushable}
-        getWidth={getWidth}
-        maxWidth={Responsive.onlyMobile.maxWidth}
-      >
-        <Sidebar
-          as={Menu}
-          animation="push"
-          inverted
-          onHide={this.handleSidebarHide}
-          vertical
-          visible={sidebarOpened}
-        >
-          <Menu.Item as="a" active>
-            Home
-          </Menu.Item>
-          <Menu.Item as={Link} to="/dashboard">
-            Dashboard
-          </Menu.Item>
-          <Menu.Item as={Link} to="/items">
-            Items
-          </Menu.Item>
-          <Menu.Item as={Link} to="/users">
-            Users
-          </Menu.Item>
-          <Menu.Item as={Link} to="/orders">
-            Orders
-          </Menu.Item>
-          <Menu.Item as={Link} to="/login">
-            Log in
-          </Menu.Item>
-          <Menu.Item as={Link} to="/register">
-            Sign Up
-          </Menu.Item>
-        </Sidebar>
-
-        <Sidebar.Pusher dimmed={sidebarOpened}>
-          <Segment
-            inverted
-            textAlign="center"
-            style={{ minHeight: 350, padding: "1em 0em" }}
-            vertical
-          >
-            <Container>
-              <Menu inverted pointing secondary size="large">
-                <Menu.Item onClick={this.handleToggle}>
-                  <Icon name="sidebar" />
-                </Menu.Item>
-                <Menu.Item position="right">
-                  <Button as={Link} to="/login" inverted>
-                    Log in
-                  </Button>
-                  <Button
-                    as={Link}
-                    to="/register"
-                    inverted
-                    style={{ marginLeft: "0.5em" }}
-                  >
-                    Sign Up
-                  </Button>
-                </Menu.Item>
-              </Menu>
-            </Container>
-            <HomepageHeading mobile />
-          </Segment>
-
-          {children}
-        </Sidebar.Pusher>
-      </Responsive>
-    );
-  }
-}
-
-MobileContainer.propTypes = {
-  children: PropTypes.node
-};
-
-const ResponsiveContainer = ({ children }) => (
-  <div>
-    <DesktopContainer>{children}</DesktopContainer>
-    <MobileContainer>{children}</MobileContainer>
-  </div>
-);
-
-ResponsiveContainer.propTypes = {
-  children: PropTypes.node
-};
+// responsive container
 
 const Home = ({ setAuth }) => {
   return (
-    <ResponsiveContainer>
+    <Fragment>
+      {/* <ResponsiveContainer /> */}
       <Segment style={{ padding: "8em 0em" }} vertical>
         <Grid container stackable verticalAlign="middle">
           <Grid.Row>
@@ -348,8 +167,11 @@ const Home = ({ setAuth }) => {
           </Button>
         </Container>
       </Segment>
-      <Footer></Footer>
-      {/* <Segment inverted vertical style={{ padding: "5em 0em" }}>
+      {/* <Footer></Footer> */}
+    </Fragment>
+  );
+
+  /* <Segment inverted vertical style={{ padding: "5em 0em" }}>
         <Container>
           <Grid divided inverted stackable>
             <Grid.Row>
@@ -383,9 +205,7 @@ const Home = ({ setAuth }) => {
             </Grid.Row>
           </Grid>
         </Container>
-      </Segment> */}
-    </ResponsiveContainer>
-  );
+  </Segment> */
 };
 
 export default Home;

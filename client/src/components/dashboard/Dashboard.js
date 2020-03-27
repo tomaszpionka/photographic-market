@@ -1,9 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
-import Header from "../menu/Header";
-import Footer from "../menu/Footer";
 
 import { toast } from "react-toastify";
-import { Button, Container, Image } from "semantic-ui-react";
+import { Button, Container, Image, Header } from "semantic-ui-react";
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
@@ -41,7 +39,6 @@ const Dashboard = ({ setAuth }) => {
 
   return (
     <Fragment>
-      <Header />
       <Container>
         <Container text style={{ marginTop: "7em" }}>
           <Header as="h1">Semantic UI React Fixed Template</Header>
@@ -58,7 +55,6 @@ const Dashboard = ({ setAuth }) => {
           <Button onClick={e => logout(e)}>logout</Button>
         </Container>
       </Container>
-      <Footer />
     </Fragment>
   );
 };

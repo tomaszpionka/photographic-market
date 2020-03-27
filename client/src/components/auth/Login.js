@@ -6,7 +6,8 @@ import {
   Header,
   Image,
   Message,
-  Segment
+  Segment,
+  Modal
 } from "semantic-ui-react";
 import { toast } from "react-toastify";
 
@@ -50,46 +51,52 @@ const Login = ({ setAuth }) => {
 
   return (
     <Fragment>
-      <Grid
-        textAlign="center"
-        style={{ height: "100vh" }}
-        verticalAlign="middle"
-      >
-        <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as="h2" color="teal" textAlign="center">
-            {/* <Image src="/logo.png" />  */}
-            Login to your account
-          </Header>
-          <Form size="large" onSubmit={onSubmitForm}>
-            <Segment stacked>
-              <Form.Input
-                fluid
-                icon="user"
-                iconPosition="left"
-                placeholder="E-mail address"
-                name="email"
-                value={email}
-                onChange={e => onChange(e)}
-              />
-              <Form.Input
-                fluid
-                icon="lock"
-                iconPosition="left"
-                type="password"
-                name="password"
-                value={password}
-                onChange={e => onChange(e)}
-              />
-              <Button color="teal" fluid size="large">
-                Login
-              </Button>
-            </Segment>
-          </Form>
-          <Message>
-            New to us? <a href="/register">Register</a>
-          </Message>
-        </Grid.Column>
-      </Grid>
+      <Modal open={true}>
+        <Grid
+          textAlign="center"
+          style={{ height: "50vh" }}
+          verticalAlign="middle"
+        >
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as="h2" color="black" textAlign="center">
+              {/* <Image src="/logo.png" />  */}
+              Login to your account
+            </Header>
+            <Form size="large" onSubmit={onSubmitForm}>
+              <Segment stacked>
+                <Form.Input
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="E-mail address"
+                  name="email"
+                  value={email}
+                  onChange={e => onChange(e)}
+                />
+                <Form.Input
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={e => onChange(e)}
+                />
+                <Button color="black" fluid size="large">
+                  Login
+                </Button>
+              </Segment>
+            </Form>
+            <Message>
+              New to us? <a href="/register">Register</a> or{" "}
+              <a href="/"> see more</a>
+            </Message>
+            {/* <Message>
+              Go back? <a href="/register">Register</a>
+            </Message> */}
+          </Grid.Column>
+        </Grid>
+      </Modal>
     </Fragment>
   );
 };

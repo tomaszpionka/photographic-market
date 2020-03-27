@@ -1,7 +1,5 @@
 import React, { useEffect, useState, Fragment } from "react";
-import Header from "../menu/Header";
-import Footer from "../menu/Footer";
-import { Container } from "semantic-ui-react";
+import { Container, Header } from "semantic-ui-react";
 
 const Users = () => {
   const [name, setName] = useState("");
@@ -28,7 +26,6 @@ const Users = () => {
 
   return (
     <Fragment>
-      <Header />
       <Container>
         <Container text style={{ marginTop: "7em" }}>
           <Header as="h1">Semantic UI React Fixed Template</Header>
@@ -44,7 +41,6 @@ const Users = () => {
           </p>
         </Container>
       </Container>
-      <Footer />
     </Fragment>
   );
 };
