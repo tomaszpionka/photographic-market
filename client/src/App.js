@@ -1,15 +1,8 @@
-import React, { Fragment, useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import React, { Fragment, useState, useEffect, Component } from "react";
 
 import "react-toastify/dist/ReactToastify.css";
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
-  Redirect
-} from "react-router-dom";
-
-import { Menu } from "semantic-ui-react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import { toast } from "react-toastify";
 
@@ -18,6 +11,12 @@ import { toast } from "react-toastify";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Dashboard from "./components/dashboard/Dashboard";
+import Home from "./components/home/Home";
+import Items from "./components/items/Items";
+import Users from "./components/users/Users";
+import Orders from "./components/orders/Orders";
+import ResponsiveContainer from "./components/menu/Header";
+import Footer from "./components/menu/Footer";
 
 toast.configure();
 
@@ -48,28 +47,29 @@ function App() {
 
   return (
     <Fragment>
-      <Router>
-        <Menu.Menu>
-          <Menu.Item as={Link} to="/login">
-            login
-          </Menu.Item>
-          <Menu.Item as={Link} to="/register">
-            register
-          </Menu.Item>
-          <Menu.Item as={Link} to="/items">
-            items
-          </Menu.Item>
-          <Menu.Item as={Link} to="/orders">
-            orders
-          </Menu.Item>
-          <Menu.Item as={Link} to="/users">
-            users
-          </Menu.Item>
-          <Menu.Item as={Link} to="/dashboard">
-            dashboard
-          </Menu.Item>
-        </Menu.Menu>
+      <BrowserRouter>
+        <ResponsiveContainer />
         <Switch>
+          <Route
+            exact
+            path="/"
+            render={props => <Home {...props} setAuth={setAuth} />}
+          />
+          <Route
+            exact
+            path="/items"
+            render={props => <Items {...props} setAuth={setAuth} />}
+          />
+          <Route
+            exact
+            path="/users"
+            render={props => <Users {...props} setAuth={setAuth} />}
+          />
+          <Route
+            exact
+            path="/orders"
+            render={props => <Orders {...props} setAuth={setAuth} />}
+          />
           <Route
             exact
             path="/login"
@@ -104,7 +104,8 @@ function App() {
             }
           />
         </Switch>
-      </Router>
+        <Footer />
+      </BrowserRouter>
     </Fragment>
   );
 }

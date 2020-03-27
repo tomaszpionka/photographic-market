@@ -6,7 +6,8 @@ import {
   Header,
   Image,
   Message,
-  Segment
+  Segment,
+  Modal
 } from "semantic-ui-react";
 import { toast } from "react-toastify";
 
@@ -51,66 +52,69 @@ const Register = ({ setAuth }) => {
 
   return (
     <Fragment>
-      <Grid
-        textAlign="center"
-        style={{ height: "100vh" }}
-        verticalAlign="middle"
-      >
-        <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as="h2" color="teal" textAlign="center">
-            {/* <Image src="/logo.png" />  */}
-            Register your account
-          </Header>
-          <Form size="large" onSubmit={onSubmitForm}>
-            <Segment stacked>
-              <Form.Input
-                fluid
-                icon="user"
-                iconPosition="left"
-                placeholder="E-mail address"
-                name="email"
-                value={email}
-                onChange={e => onChange(e)}
-              />
-              <Form.Input
-                fluid
-                icon="lock"
-                iconPosition="left"
-                type="password"
-                name="password"
-                value={password}
-                onChange={e => onChange(e)}
-              />
-              <Form.Input
-                fluid
-                icon="user"
-                iconPosition="left"
-                type="text"
-                name="name"
-                value={name}
-                placeholder="name"
-                onChange={e => onChange(e)}
-              />
-              <Form.Input
-                fluid
-                icon="user"
-                iconPosition="left"
-                type="text"
-                name="surname"
-                value={surname}
-                placeholder="surname"
-                onChange={e => onChange(e)}
-              />
-              <Button color="teal" fluid size="large">
-                Register
-              </Button>
-            </Segment>
-          </Form>
-          <Message>
-            Already have an account? <a href="/login">Login</a>
-          </Message>
-        </Grid.Column>
-      </Grid>
+      <Modal open={true}>
+        <Grid
+          textAlign="center"
+          style={{ height: "50vh" }}
+          verticalAlign="middle"
+        >
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as="h2" color="black" textAlign="center">
+              {/* <Image src="/logo.png" />  */}
+              Register your account
+            </Header>
+            <Form size="large" onSubmit={onSubmitForm}>
+              <Segment stacked>
+                <Form.Input
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="E-mail address"
+                  name="email"
+                  value={email}
+                  onChange={e => onChange(e)}
+                />
+                <Form.Input
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={e => onChange(e)}
+                />
+                <Form.Input
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  type="text"
+                  name="name"
+                  value={name}
+                  placeholder="name"
+                  onChange={e => onChange(e)}
+                />
+                <Form.Input
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  type="text"
+                  name="surname"
+                  value={surname}
+                  placeholder="surname"
+                  onChange={e => onChange(e)}
+                />
+                <Button color="black" fluid size="large">
+                  Register
+                </Button>
+              </Segment>
+            </Form>
+            <Message>
+              Already have an account? <a href="/login">Login</a> or{" "}
+              <a href="/">see more</a>
+            </Message>
+          </Grid.Column>
+        </Grid>
+      </Modal>
     </Fragment>
   );
 };
