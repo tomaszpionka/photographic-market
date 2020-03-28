@@ -6,8 +6,10 @@ const { QueryTypes } = require("sequelize");
 const validInfo = require("../middleware/validInfo");
 const jwtGenerator = require("../utils/jwtGenerator");
 const authorize = require("../middleware/authorize");
+const bodyParser = require('body-parser');
 
-router.post("/register", validInfo, async (req, res) => {
+
+router.post("/register", bodyParser.json(), validInfo, async (req, res) => {
   const { email, name, surname, password } = req.body;
 
   try {
@@ -18,7 +20,7 @@ router.post("/register", validInfo, async (req, res) => {
       }
     );
 
-    if (user.lenght > 0) {
+    if (user.length > 0) {
       return res.status(401).json("user already exist!");
     }
 
@@ -41,7 +43,7 @@ router.post("/register", validInfo, async (req, res) => {
   }
 });
 
-router.post("/login", validInfo, async (req, res) => {
+router.post("/login", bodyParser.json(), validInfo, async (req, res) => {
   const { email, password } = req.body;
 
   try {

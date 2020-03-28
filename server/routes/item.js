@@ -1,4 +1,5 @@
 const express = require("express");
+const fs = require('fs')
 const bodyParser = require('body-parser');
 const multer = require("multer");
 const path = require("path");
@@ -8,6 +9,9 @@ const itemController = require("../controllers/itemController");
 const jsonParser = bodyParser.json();
 const router = express.Router();
 
+fs.mkdir('assets', { recursive: true }, (err) => {
+    if (err) throw err;
+});
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
