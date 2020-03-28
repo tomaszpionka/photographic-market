@@ -18,7 +18,10 @@ CREATE TABLE users(
 CREATE TABLE items (
     item_id SERIAL,
     user_id INTEGER,
-    item_description VARCHAR(255),
+    item_name VARCHAR(128),
+    item_category VARCHAR(64),
+    item_description TEXT,
+    item_images JSON,
     item_value INTEGER,
     PRIMARY KEY (item_id, user_id),
     FOREIGN KEY (user_id) REFERENCES users (user_id)
