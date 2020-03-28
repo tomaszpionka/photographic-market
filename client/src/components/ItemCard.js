@@ -1,29 +1,29 @@
 import React from 'react';
-import { Card, Icon, Image, Button, Modal, Form } from 'semantic-ui-react';
+import { Card, Icon, Image, Button, } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 function ItemCard(props) {
-
+  const { id, title, price, imageUrl, description } = props.itemData;
   return (
-    <Card style={{ margin: '30px' }}>
+    <Card style={{ margin: '10px' }}>
       <Image
-        src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
-        wrapped
-        ui={false}
+        src={imageUrl}
+        style={{ maxWidth: '100%', maxHeight: '100%', display: 'block' }}
       />
       <Card.Content>
-        <Card.Header>
-          
-        </Card.Header>
-        <Card.Meta>
-          Joined 
-        </Card.Meta>
+        <Card.Header>{title}</Card.Header>
+        <Card.Meta>Price {price}</Card.Meta>
         <Card.Description>
-          <Icon name="mail"></Icon>
-          
+          <Icon name="tag"></Icon>
+          {description}
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <Icon name="talk" />
+        <Link to={`/item/${id}`}>
+          <Button inverted color="green">
+            Item page
+          </Button>
+        </Link>
       </Card.Content>
     </Card>
   );

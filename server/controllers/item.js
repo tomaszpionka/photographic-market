@@ -18,8 +18,16 @@ const getItemByIdController = x => {
   });
 };
 
+const deleteItemByIdController = x => {
+  return Item.destroy({
+    where: {
+      id: x
+    }
+  });
+};
+
 const getItemsByUserController = x => {
-  return Item.findOne({
+  return Item.findAll({
     where: {
       userId: x
     }
@@ -29,14 +37,14 @@ const getItemsByUserController = x => {
 const updateItemData = req => {
   return Item.update(
     {
-      item_name: req[1],
-      category: req[2],
-      description: req[3],
-      image_url: req[4]
+      title: req[1],
+      price: req[2],
+      imageUrl: req[3],
+      description: req[4]
     },
     {
       where: {
-        item_id: req[0]
+        id: req[0]
       }
     }
   );
@@ -45,6 +53,7 @@ const updateItemData = req => {
 module.exports = {
   addItemController,
   getItemByIdController,
+  deleteItemByIdController,
   getItemsByUserController,
   updateItemData
 };

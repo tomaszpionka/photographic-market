@@ -3,35 +3,41 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { Grid } from 'semantic-ui-react';
 
+import ItemCard from './ItemCard';
+
 class UserItems extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      items: []
+    };
   }
   componentDidMount() {
     const usertoken = localStorage.token;
     const decoded = jwt_decode(usertoken);
 
     axios
-      .get('/api/get/useritemsfromdb', { params: { id: decoded.id } })
-      .then(res => this.setState({ ...res.data }))
+      .get('/api/get/useritemsfromdb', { params: { id: decoded.sub } })
+      .then(res => this.setState({ items: [...res.data] }))
       .catch(function(error) {
         console.log(error);
       });
-    console.log(this.state)
   }
-//   makeItems = items => {
-//     return items.map(item => {
-//       return <Card item={item} key={item.id} />;
-//     });
-//   };
+  makeItems = items => {
+    return items.map(item => {
+      return (
+        <Grid.Column key={item.id}>
+          <ItemCard itemData={item} item={item} />
+        </Grid.Column>
+      );
+    });
+  };
 
   render() {
     return (
-        <Grid.Column>
-  
-          {/* {this.makeItems(this.state.items)} */}
-        </Grid.Column>
+      <Grid divided="vertically">
+        <Grid.Row columns={2}>{this.makeItems(this.state.items)}</Grid.Row>
+      </Grid>
     );
   }
 }

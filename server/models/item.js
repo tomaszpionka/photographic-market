@@ -29,7 +29,7 @@ const Item = db.sequelize.define(
             allowNull: false,
         },
         userId: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
         }
     }
 )
