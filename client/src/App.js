@@ -17,6 +17,7 @@ import Users from "./components/users/Users";
 import Orders from "./components/orders/Orders";
 import ResponsiveContainer from "./components/menu/Header";
 import Footer from "./components/menu/Footer";
+import AddItemForm from "./components/items/AddItemForm"
 
 toast.configure();
 
@@ -59,6 +60,11 @@ function App() {
             exact
             path="/items"
             render={props => <Items {...props} setAuth={setAuth} />}
+          />
+          <Route
+            exact
+            path="/items/add"
+            render={props => <AddItemForm {...props} setAuth={setAuth} />}
           />
           <Route
             exact
