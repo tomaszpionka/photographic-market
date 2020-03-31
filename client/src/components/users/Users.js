@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
-import { Container, Header, List } from "semantic-ui-react";
-
+import { Container, Header, List, Icon } from "semantic-ui-react";
+import SingleUser from './SingleUser'
 const Users = () => {
   const [name, setName] = useState("");
   const [id, setId] = useState("");
@@ -21,21 +21,17 @@ const Users = () => {
     }
   };
 
-  const getAllUsers = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/users/", {
-        method: "GET",
-        headers: { 
-          "Content-Type": "application/json"
-        }
-      });
-      const users = response.json();
-      console.log(users)
-      setAllUsers(users);
-    }
-    catch (err) {
-      console.error(err.message);
-    }
+  const getAllUsers = () => {
+    return fetch("http://localhost:5000/users/", {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(res => setAllUsers(res))
+      .catch(err => console.log(err))
   }
 
   useEffect(() => {
@@ -44,15 +40,16 @@ const Users = () => {
 
   useEffect(() => {
     getAllUsers();
-    
   }, []);
-  
+
   return (
     <Fragment>
       <Container>
         <Container text style={{ marginTop: "7em" }}>
-          <List>
-
+          <List divided relaxed>
+            {allUsers.map((user, i) => (
+              <SingleUser key={i} redirect={() =>{}} userData={user} />
+            ))}
           </List>
         </Container>
       </Container>
