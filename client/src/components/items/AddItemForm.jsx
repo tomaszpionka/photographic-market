@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Form, Button, Icon, Image } from 'semantic-ui-react';
 
-// import axios from 'axios';
-
-
 function AddItem() {
 
     const [id, setId] = useState("");
@@ -29,16 +26,17 @@ function AddItem() {
     const [name, setName] = useState('');
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
-    const [imgs, setImgs] = useState([]);
-    const images = useRef([]);
+    const images = useRef();
 
-    const categoriesNames = ['film', 'lens', 'camera', 'accessories'];
+    const categoriesNames = ["film", "lens", "camera", "accessories"];
     const categoryOptions = categoriesNames.map(category => ({
         key: category,
         text: category,
         value: category
     }
     ));
+
+   
 
     const handleAdd = (e) => {
         e.preventDefault();
@@ -52,22 +50,15 @@ function AddItem() {
             formData.append("img", images.current.files[i]);
         }
         console.log(formData);
-        // axios.post('http://localhost:5000/items', formData)
-        // .then(res => console.log('Success!'))
-        // .catch(e => console.log(e));
-    }
+        console.log(id);
 
-    const showThumbnails = () => {
-        for (let [key, value] of Object.entries(imgs)) {
-            return (
-                <Image 
-                    key={key} 
-                    src={URL.createObjectURL(value)} 
-                    style={{ height: '60px' }} 
-                    />
-            )
-        }
-    };
+        return fetch("http://localhost:5000/items/", {
+            method: "POST",
+            body: formData
+        }).then(res => res.json())
+        .then(res => console.log(res))
+        .catch(e => console.log(e));
+    }
 
     return (
         <Form onSubmit={handleAdd}>
@@ -83,11 +74,12 @@ function AddItem() {
                 required
                 fluid
                 selection
+                value={category}
                 placeholder="Select category"
                 label="Category"
                 name="category"
                 options={categoryOptions}
-                onChange={(e) => setCategory(e.target.value)} />
+                onChange={(e, {value}) => setCategory(value)} />
             <Form.TextArea
                 required
                 fluid
@@ -95,10 +87,6 @@ function AddItem() {
                 label="Description"
                 name="description"
                 onChange={(e) => setDescription(e.target.value)} />
-            <div>
-                {imgs.length > 0 ? showThumbnails() : <p>No file selected!</p>}
-
-            </div>
             <Button as="label" htmlFor="file" type="button" >
                 <Icon name="file image" />
                     Add images
@@ -109,7 +97,6 @@ function AddItem() {
                 hidden
                 multiple
                 ref={images}
-                onChange={(e) => setImgs(e.target.files)}
             />
             
             <Form.Button>Save</Form.Button>
