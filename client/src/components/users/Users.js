@@ -1,9 +1,10 @@
 import React, { useEffect, useState, Fragment } from "react";
-import { Container, Header } from "semantic-ui-react";
-
+import { Container, Header, List, Icon } from "semantic-ui-react";
+import SingleUser from './SingleUser'
 const Users = () => {
   const [name, setName] = useState("");
   const [id, setId] = useState("");
+  const [allUsers, setAllUsers] = useState([]);
 
   const getProfile = async () => {
     try {
@@ -20,25 +21,36 @@ const Users = () => {
     }
   };
 
+  const getAllUsers = () => {
+    return fetch("http://localhost:5000/users/", {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(res => setAllUsers(res))
+      .catch(err => console.log(err))
+  }
+
   useEffect(() => {
     getProfile();
+  }, []);
+
+  useEffect(() => {
+    getAllUsers();
   }, []);
 
   return (
     <Fragment>
       <Container>
         <Container text style={{ marginTop: "7em" }}>
-          <Header as="h1">Semantic UI React Fixed Template</Header>
-          <p>
-            This is a basic fixed menu template using fixed size containers.
-          </p>
-          <p>
-            A text container is used for the main container, which is useful for
-            single column layouts.
-          </p>
-          <p>
-            welcome user: {name} with id: {id}
-          </p>
+          <List divided relaxed>
+            {allUsers.map((user, i) => (
+              <SingleUser key={i} redirect={() =>{}} userData={user} />
+            ))}
+          </List>
         </Container>
       </Container>
     </Fragment>
