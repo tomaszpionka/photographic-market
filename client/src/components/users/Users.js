@@ -1,12 +1,13 @@
 import React, { useEffect, useState, Fragment } from "react";
-import { Container, List, Input, Button  } from "semantic-ui-react";
+import { Container, List, Form } from "semantic-ui-react";
 import SingleUser from './SingleUser'
 
 
 const Users = () => {
-  const [name, setName] = useState("");
+  const [users, setUsers] = useState([]);
+  const [name, setName] = useState('');
   const [id, setId] = useState("");
-  const [allUsers, setAllUsers] = useState([]);
+  const [query, setQuery] = useState("");
 
   const getProfile = async () => {
     try {
@@ -23,6 +24,10 @@ const Users = () => {
     }
   };
 
+  useEffect(() => {
+    getProfile();
+  }, []);
+
   const getAllUsers = () => {
     return fetch("http://localhost:5000/users/", {
       method: "GET",
@@ -32,30 +37,49 @@ const Users = () => {
       }
     })
       .then(res => res.json())
-      .then(res => setAllUsers(res))
+      .then(res => setUsers(res))
       .catch(err => console.log(err))
   }
-
-  useEffect(() => {
-    getProfile();
-  }, []);
 
   useEffect(() => {
     getAllUsers();
   }, []);
 
+  const search = async e => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:5000/users/find/?name=${query}`);
+
+      const parseResponse = await response.json();
+
+      setUsers(parseResponse);
+      console.log(parseResponse)
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <Fragment>
       <Container style={{ marginTop: "3em" }}>
-        <Input type="text" placeholder="Search user..." action >
-          <input />
-          <Button type="submit" primary icon="search"/>
-        </Input>
-        <Container text style={{ marginTop: "4em", marginBottom:"7em" }}>
+        <Form onSubmit={search}>
+           <Form.Input  type="text" placeholder="Search user..." onChange={e => setQuery(e.target.value)} action={{
+             type: 'submit',
+             icon: 'search',
+             color: 'primary',
+             content: 'Search'
+           }} />
+        </Form>
+       
+        <Container text style={{ marginTop: "4em", marginBottom: "7em" }}>
           <List divided relaxed>
-            {allUsers.map((user, i) => (
-              <SingleUser key={i} redirect={() =>{}} userData={user} />
-            ))}
+            {
+            users.length===0 
+              ? <p>Not found</p> 
+              : users.map((user, i) => (
+              <SingleUser key={i} redirect={() => { }} userData={user} />
+            ))
+            }
           </List>
         </Container>
       </Container>
