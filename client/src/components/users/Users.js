@@ -1,6 +1,8 @@
 import React, { useEffect, useState, Fragment } from "react";
-import { Container, Header, List, Icon } from "semantic-ui-react";
+import { Container, List, Input, Button  } from "semantic-ui-react";
 import SingleUser from './SingleUser'
+
+
 const Users = () => {
   const [name, setName] = useState("");
   const [id, setId] = useState("");
@@ -44,8 +46,12 @@ const Users = () => {
 
   return (
     <Fragment>
-      <Container>
-        <Container text style={{ marginTop: "7em" }}>
+      <Container style={{ marginTop: "3em" }}>
+        <Input type="text" placeholder="Search user..." action >
+          <input />
+          <Button type="submit" primary icon="search"/>
+        </Input>
+        <Container text style={{ marginTop: "4em", marginBottom:"7em" }}>
           <List divided relaxed>
             {allUsers.map((user, i) => (
               <SingleUser key={i} redirect={() =>{}} userData={user} />
