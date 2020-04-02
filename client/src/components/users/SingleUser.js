@@ -3,7 +3,6 @@ import { List } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 
 const SingleUser = ({ userData, redirect }) => {
-    console.log(userData)
    
     return (
         //todo przekierować po kliknięciu na ściezkę do profilu użytkownika
