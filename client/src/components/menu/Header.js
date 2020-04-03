@@ -14,7 +14,7 @@ import {
   Responsive,
   Segment,
   Sidebar,
-  Visibility
+  Visibility,
 } from "semantic-ui-react";
 import { toast } from "react-toastify";
 /* Heads up!
@@ -32,7 +32,7 @@ const DesktopContainer = ({ children }) => {
     try {
       const res = await fetch("http://localhost:5000/auth/verify", {
         method: "POST",
-        headers: { jwt_token: localStorage.token }
+        headers: { jwt_token: localStorage.token },
       });
 
       const parseRes = await res.json();
@@ -48,11 +48,11 @@ const DesktopContainer = ({ children }) => {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const setAuth = boolean => {
+  const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   };
 
-  const logout = async e => {
+  const logout = async (e) => {
     e.preventDefault();
     try {
       localStorage.removeItem("token");
@@ -103,27 +103,32 @@ const DesktopContainer = ({ children }) => {
                 Orders
               </Menu.Item>
               <Menu.Item position="right">
-                <Button as={Link} to="/login" inverted={!fixed}>
-                  Log in
-                </Button>
-                <Button
-                  as={Link}
-                  to="/register"
-                  inverted={!fixed}
-                  primary={fixed}
-                  style={{ marginLeft: "0.5em" }}
-                >
-                  Sign Up
-                </Button>
-                <Button
-                  as={Button}
-                  onClick={e => logout(e)}
-                  inverted={!fixed}
-                  primary={fixed}
-                  style={{ marginLeft: "0.5em" }}
-                >
-                  logout
-                </Button>
+                {!isAuthenticated ? (
+                  <Fragment>
+                    <Button as={Link} to="/login" inverted={!fixed}>
+                      Log in
+                    </Button>
+                    <Button
+                      as={Link}
+                      to="/register"
+                      inverted={!fixed}
+                      primary={fixed}
+                      style={{ marginLeft: "0.5em" }}
+                    >
+                      Sign Up
+                    </Button>
+                  </Fragment>
+                ) : (
+                  <Button
+                    as={Button}
+                    onClick={(e) => logout(e)}
+                    inverted={!fixed}
+                    primary={fixed}
+                    style={{ marginLeft: "0.5em" }}
+                  >
+                    logout
+                  </Button>
+                )}
               </Menu.Item>
             </Container>
           </Menu>
@@ -137,7 +142,7 @@ const DesktopContainer = ({ children }) => {
 };
 
 DesktopContainer.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const MobileContainer = ({ children }) => {
@@ -145,7 +150,7 @@ const MobileContainer = ({ children }) => {
     try {
       const res = await fetch("http://localhost:5000/auth/verify", {
         method: "POST",
-        headers: { jwt_token: localStorage.token }
+        headers: { jwt_token: localStorage.token },
       });
 
       const parseRes = await res.json();
@@ -159,7 +164,7 @@ const MobileContainer = ({ children }) => {
     checkAuthenticated();
   }, []);
 
-  const logout = async e => {
+  const logout = async (e) => {
     e.preventDefault();
     try {
       localStorage.removeItem("token");
@@ -173,7 +178,7 @@ const MobileContainer = ({ children }) => {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const setAuth = boolean => {
+  const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   };
 
@@ -236,7 +241,7 @@ const MobileContainer = ({ children }) => {
                 </Button>
                 <Button
                   as={Button}
-                  onClick={e => logout(e)}
+                  onClick={(e) => logout(e)}
                   inverted
                   style={{ marginLeft: "0.5em" }}
                 >
@@ -255,7 +260,7 @@ const MobileContainer = ({ children }) => {
 };
 
 MobileContainer.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const ResponsiveContainer = ({ children }) => (
@@ -266,7 +271,7 @@ const ResponsiveContainer = ({ children }) => (
 );
 
 ResponsiveContainer.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default ResponsiveContainer;
