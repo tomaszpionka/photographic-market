@@ -1,62 +1,36 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { Component } from 'react';
+import jwt_decode from 'jwt-decode';
+import { Grid } from 'semantic-ui-react';
 
-import { toast } from "react-toastify";
-import { Button, Container, Image, Header } from "semantic-ui-react";
+import UserCard from '../users/UserCard';
+import AddItemForm from '../items/AddItemForm';
+import UserItems from '../users/UserItems';
 
-const Dashboard = ({ setAuth }) => {
-  const [name, setName] = useState("");
-  const [id, setId] = useState("");
+class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  componentDidMount() {
+    const usertoken = localStorage.token;
+    const decoded = jwt_decode(usertoken);
+    this.setState({id: decoded.sub})
+  }
 
-  const getProfile = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/dashboard", {
-        method: "GET",
-        headers: { jwt_token: localStorage.token }
-      });
+  render() {
+    console.log(this.props.auth.authenticated)
+    return (
+      <Grid>
+        <Grid.Column width={5}>
+          <UserCard/>
+          <AddItemForm userId={this.state.id} />
+        </Grid.Column>
+        <Grid.Column width={10}>
+          <UserItems />
+        </Grid.Column>
+      </Grid>
+    );
+  }
+}
 
-      const parseData = await res.json();
-      setName(parseData.user_name);
-      setId(parseData.user_id);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  const logout = async e => {
-    e.preventDefault();
-    try {
-      localStorage.removeItem("token");
-      setAuth(false);
-      toast.success("Logout successfully");
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  useEffect(() => {
-    getProfile();
-  }, []);
-
-  return (
-    <Fragment>
-      <Container>
-        <Container text style={{ marginTop: "7em" }}>
-          <Header as="h1">Semantic UI React Fixed Template</Header>
-          <p>
-            This is a basic fixed menu template using fixed size containers.
-          </p>
-          <p>
-            A text container is used for the main container, which is useful for
-            single column layouts.
-          </p>
-          <p>
-            welcome user: {name} with id: {id}
-          </p>
-          <Button onClick={e => logout(e)}>logout</Button>
-        </Container>
-      </Container>
-    </Fragment>
-  );
-};
-
-export default Dashboard;
+export default Profile;

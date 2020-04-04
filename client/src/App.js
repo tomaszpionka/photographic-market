@@ -1,31 +1,32 @@
-import PropTypes from "prop-types";
-import React, { Fragment, useState, useEffect, Component } from "react";
+import PropTypes from 'prop-types';
+import React, { Fragment, useState, useEffect, Component } from 'react';
 
-import "react-toastify/dist/ReactToastify.css";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
 //components
 
-import Login from "./components/auth/Login";
-import Register from "./components/auth/Register";
-import Dashboard from "./components/dashboard/Dashboard";
-import Home from "./components/home/Home";
-import Items from "./components/items/Items";
-import Users from "./components/users/Users";
-import Orders from "./components/orders/Orders";
-import ResponsiveContainer from "./components/menu/Header";
-import Footer from "./components/menu/Footer";
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import Dashboard from './components/dashboard/Dashboard';
+import Home from './components/home/Home';
+import Items from './components/items/Items';
+import Users from './components/users/Users';
+import Orders from './components/orders/Orders';
+import ResponsiveContainer from './components/menu/Header';
+import Footer from './components/menu/Footer';
+import SingleItem from './components/items/SingleItem';
 
 toast.configure();
 
 function App() {
   const checkAuthenticated = async () => {
     try {
-      const res = await fetch("http://localhost:5000/auth/verify", {
-        method: "POST",
-        headers: { jwt_token: localStorage.token }
+      const res = await fetch('http://localhost:5000/auth/verify', {
+        method: 'POST',
+        headers: { jwt_token: localStorage.token },
       });
 
       const parseRes = await res.json();
@@ -41,7 +42,7 @@ function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const setAuth = boolean => {
+  const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   };
 
@@ -53,27 +54,27 @@ function App() {
           <Route
             exact
             path="/"
-            render={props => <Home {...props} setAuth={setAuth} />}
+            render={(props) => <Home {...props} setAuth={setAuth} />}
           />
           <Route
             exact
             path="/items"
-            render={props => <Items {...props} setAuth={setAuth} />}
+            render={(props) => <Items {...props} setAuth={setAuth} />}
           />
           <Route
             exact
             path="/users"
-            render={props => <Users {...props} setAuth={setAuth} />}
+            render={(props) => <Users {...props} setAuth={setAuth} />}
           />
           <Route
             exact
             path="/orders"
-            render={props => <Orders {...props} setAuth={setAuth} />}
+            render={(props) => <Orders {...props} setAuth={setAuth} />}
           />
           <Route
             exact
             path="/login"
-            render={props =>
+            render={(props) =>
               !isAuthenticated ? (
                 <Login {...props} setAuth={setAuth} />
               ) : (
@@ -84,7 +85,7 @@ function App() {
           <Route
             exact
             path="/register"
-            render={props =>
+            render={(props) =>
               !isAuthenticated ? (
                 <Register {...props} setAuth={setAuth} />
               ) : (
@@ -95,7 +96,7 @@ function App() {
           <Route
             exact
             path="/dashboard"
-            render={props =>
+            render={(props) =>
               isAuthenticated ? (
                 <Dashboard {...props} setAuth={setAuth} />
               ) : (
@@ -103,6 +104,7 @@ function App() {
               )
             }
           />
+          <Route path="/item/:item_id" component={SingleItem} />
         </Switch>
         <Footer />
       </BrowserRouter>

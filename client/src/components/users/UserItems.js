@@ -3,7 +3,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { Grid } from 'semantic-ui-react';
 
-import ItemCard from './ItemCard';
+import ItemCard from '../items/ItemCard';
 
 class UserItems extends Component {
   constructor(props) {
