@@ -87,9 +87,25 @@ const deleteItem = (req, res) => {
         );
 }
 
+const findItem = (req, res) => {
+    const { name, category } = req.query;
+    let sql='';
+    if (category === undefined) {
+        sql = `SELECT * FROM items WHERE item_name ILIKE '%${name}%'`
+    } else if (name === undefined) {
+        sql = `SELECT * FROM items WHERE item_category='${category}'`
+    } else {
+        sql = `SELECT * FROM items WHERE item_category='${category}' AND item_name ILIKE '%${name}%'`
+    }
+    return sequelize.query(sql)
+        .then(result => res.send(result[0]))
+        .catch(error => res.send(error));
+}
+
 module.exports = {
     addItem,
     getAllItems,
     getItem,
-    deleteItem
+    deleteItem,
+    findItem
 }
