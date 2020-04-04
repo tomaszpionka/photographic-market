@@ -1,23 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import reduxThunk from 'redux-thunk';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import reduxThunk from "redux-thunk";
 
-import reducers from './reducers';
-import App from './components/App';
-import Welcome from './components/Welcome';
-import Signup from './components/auth/Signup';
-import Profile from './components/Profile';
-import Signout from './components/auth/Signout';
-import Signin from './components/auth/Signin';
-import SingleItem from './components/SingleItem';
+import reducers from "./reducers";
+import App from "./components/App";
+import Welcome from "./components/Welcome";
+import Signup from "./components/auth/Signup";
+import Profile from "./components/Profile";
+import Signout from "./components/auth/Signout";
+import Signin from "./components/auth/Signin";
+import SingleItem from "./components/items/SingleItem";
 
 const store = createStore(
   reducers,
   {
-    auth: { authenticated: localStorage.getItem('token') }
+    auth: { authenticated: localStorage.getItem("token") },
   },
   applyMiddleware(reduxThunk)
 );
@@ -31,9 +31,9 @@ ReactDOM.render(
         <Route path="/profile" component={Profile} />
         <Route path="/signout" component={Signout} />
         <Route path="/signin" component={Signin} />
-        <Route path="/item/:item_id" component={SingleItem}/>
+        <Route path="/item/:item_id" component={SingleItem} />
       </App>
     </BrowserRouter>
   </Provider>,
-  document.querySelector('#root')
+  document.querySelector("#root")
 );

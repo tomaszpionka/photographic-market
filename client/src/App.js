@@ -17,6 +17,8 @@ import Users from "./components/users/Users";
 import Orders from "./components/orders/Orders";
 import ResponsiveContainer from "./components/menu/Header";
 import Footer from "./components/menu/Footer";
+import Profile from "./components/profile/Profile";
+import SingleItem from "./components/items/SingleItem";
 
 toast.configure();
 
@@ -25,7 +27,7 @@ function App() {
     try {
       const res = await fetch("http://localhost:5000/auth/verify", {
         method: "POST",
-        headers: { jwt_token: localStorage.token }
+        headers: { jwt_token: localStorage.token },
       });
 
       const parseRes = await res.json();
@@ -41,7 +43,7 @@ function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const setAuth = boolean => {
+  const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   };
 
@@ -52,28 +54,38 @@ function App() {
         <Switch>
           <Route
             exact
+            path="/profile"
+            render={(props) => <Profile {...props} setAuth={setAuth} />}
+          />
+          <Route
+            exact
+            path="/item/:id"
+            render={(props) => <SingleItem {...props} setAuth={setAuth} />}
+          />
+          <Route
+            exact
             path="/"
-            render={props => <Home {...props} setAuth={setAuth} />}
+            render={(props) => <Home {...props} setAuth={setAuth} />}
           />
           <Route
             exact
             path="/items"
-            render={props => <Items {...props} setAuth={setAuth} />}
+            render={(props) => <Items {...props} setAuth={setAuth} />}
           />
           <Route
             exact
             path="/users"
-            render={props => <Users {...props} setAuth={setAuth} />}
+            render={(props) => <Users {...props} setAuth={setAuth} />}
           />
           <Route
             exact
             path="/orders"
-            render={props => <Orders {...props} setAuth={setAuth} />}
+            render={(props) => <Orders {...props} setAuth={setAuth} />}
           />
           <Route
             exact
             path="/login"
-            render={props =>
+            render={(props) =>
               !isAuthenticated ? (
                 <Login {...props} setAuth={setAuth} />
               ) : (
@@ -84,7 +96,7 @@ function App() {
           <Route
             exact
             path="/register"
-            render={props =>
+            render={(props) =>
               !isAuthenticated ? (
                 <Register {...props} setAuth={setAuth} />
               ) : (
@@ -95,7 +107,7 @@ function App() {
           <Route
             exact
             path="/dashboard"
-            render={props =>
+            render={(props) =>
               isAuthenticated ? (
                 <Dashboard {...props} setAuth={setAuth} />
               ) : (

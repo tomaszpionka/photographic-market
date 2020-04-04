@@ -1,7 +1,8 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Container, Header } from "semantic-ui-react";
-import ItemSearchFilter from './ItemSearchFilter';
+import ItemSearchFilter from "./ItemSearchFilter";
 import ItemsForm from "./ItemsForm";
+// import AddItemForm from "../AddItemForm";
 
 const Items = () => {
   const [name, setName] = useState("");
@@ -30,9 +31,9 @@ const Items = () => {
     <Fragment>
       <Container>
         <Container text style={{ marginTop: "7em" }}>
-         <ItemSearchFilter />
-         <Header as="h1">Semantic UI React Fixed Template</Header>
-          
+          <ItemSearchFilter />
+          <Header as="h1">Semantic UI React Fixed Template</Header>
+
           <p>
             This is a basic fixed menu template using fixed size containers.
           </p>
@@ -45,6 +46,7 @@ const Items = () => {
           </p>
         </Container>
         <ItemsForm />
+        {/* <AddItemForm /> */}
       </Container>
     </Fragment>
   );

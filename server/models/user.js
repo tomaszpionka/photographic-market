@@ -6,23 +6,33 @@ const User = db.sequelize.define("user", {
     type: Sequelize.INTEGER,
     primaryKey: true,
     allowNull: false,
-    autoIncrement: true
+    autoIncrement: true,
   },
   user_name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   user_surname: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   user_email: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   user_password: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   user_city: {
-    type: Sequelize.STRING
-  }
+    type: Sequelize.STRING,
+  },
+  createdAt: {
+    allowNull: false,
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.fn("NOW"),
+  },
+  updatedAt: {
+    allowNull: false,
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.fn("NOW"),
+  },
 });
 
 module.exports = User;

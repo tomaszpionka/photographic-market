@@ -61,7 +61,7 @@ const ItemsForm = () => {
     <Form onSubmit={handleAdd}>
       <Form.Input
         required
-        fluid
+        fluid={true}
         placeholder="Name"
         label="Name"
         type="text"
@@ -70,7 +70,7 @@ const ItemsForm = () => {
       />
       <Form.Dropdown
         required
-        fluid
+        fluid={true}
         selection
         value={category}
         placeholder="Select category"
@@ -81,7 +81,7 @@ const ItemsForm = () => {
       />
       <Form.TextArea
         required
-        fluid
+        fluid="true"
         placeholder="Add description"
         label="Description"
         name="description"

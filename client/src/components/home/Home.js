@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Component, Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -9,16 +9,13 @@ import {
   Header,
   Icon,
   Image,
-  List,
-  Menu,
-  Responsive,
+  // List,
+  // Menu,
+  // Responsive,
   Segment,
-  Sidebar,
-  Visibility
+  // Sidebar,
+  // Visibility,
 } from "semantic-ui-react";
-
-import Footer from "../menu/Footer";
-import ResponsiveContainer from "../menu/Header";
 
 // Heads up!
 // We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
@@ -38,7 +35,7 @@ const HomepageHeading = ({ mobile }) => (
         fontSize: mobile ? "2em" : "4em",
         fontWeight: "normal",
         marginBottom: 0,
-        marginTop: mobile ? "1.5em" : "3em"
+        marginTop: mobile ? "1.5em" : "3em",
       }}
     />
     <Header
@@ -48,7 +45,7 @@ const HomepageHeading = ({ mobile }) => (
       style={{
         fontSize: mobile ? "1.5em" : "1.7em",
         fontWeight: "normal",
-        marginTop: mobile ? "0.5em" : "1.5em"
+        marginTop: mobile ? "0.5em" : "1.5em",
       }}
     />
     <Button primary size="huge" as={Link} to="/items">
@@ -59,7 +56,7 @@ const HomepageHeading = ({ mobile }) => (
 );
 
 HomepageHeading.propTypes = {
-  mobile: PropTypes.bool
+  mobile: PropTypes.bool,
 };
 
 // responsive container
