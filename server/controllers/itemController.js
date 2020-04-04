@@ -31,7 +31,15 @@ const addItem = (req, res) => {
 
     insertItem(userId, itemName, category, description, images)
         .then(result => res.send({ result }))
-        .catch(error => res.status(500).send(`SQL ERROR ${error}`));
+        .catch(error => {
+            res.status(500).send(`SQL ERROR ${error}`);
+            Object.keys(images).forEach(key => {
+                fs.unlink(images[key], err => {
+                    if (err) throw err;
+                    console.log(images[key] + " was deleted");
+                })
+            })
+        })
 }
 
 const getAll = () => {

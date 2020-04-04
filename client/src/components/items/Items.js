@@ -11,7 +11,7 @@ const Items = () => {
     try {
       const res = await fetch("http://localhost:5000/dashboard", {
         method: "GET",
-        headers: { jwt_token: localStorage.token }
+        headers: { jwt_token: localStorage.token },
       });
 
       const parseData = await res.json();
@@ -44,6 +44,7 @@ const Items = () => {
             welcome user: {name} with id: {id}
           </p>
         </Container>
+        <ItemsForm />
       </Container>
     </Fragment>
   );
