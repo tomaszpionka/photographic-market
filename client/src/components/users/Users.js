@@ -62,23 +62,23 @@ const Users = () => {
   return (
     <Fragment>
       <Container style={{ marginTop: "3em" }}>
-        <Form onSubmit={search}>
-           <Form.Input  type="text" placeholder="Search user..." onChange={e => setQuery(e.target.value)} action={{
-             type: 'submit',
-             icon: 'search',
-             color: 'primary',
-             content: 'Search'
-           }} />
+        <Form onSubmit={search} style={{margin: '0 auto', width: '40%'}}>
+          <Form.Input type="text" placeholder="Search user..." onChange={e => setQuery(e.target.value)} action={{
+            type: 'submit',
+            icon: 'search',
+            color: 'primary',
+            content: 'Search'
+          }} />
         </Form>
-       
+
         <Container text style={{ marginTop: "4em", marginBottom: "7em" }}>
           <List divided relaxed>
             {
-            users.length===0 
-              ? <p>Not found</p> 
-              : users.map((user, i) => (
-              <SingleUser key={i} redirect={() => { }} userData={user} />
-            ))
+              users.length === 0
+                ? <p>Not found</p>
+                : users.map((user, i) => (
+                  <SingleUser key={i} redirect={() => { }} userData={user} />
+                ))
             }
           </List>
         </Container>
