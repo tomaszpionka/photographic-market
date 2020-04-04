@@ -47,7 +47,7 @@ const getAll = () => {
     return sequelize.query(sql);
 }
 const getAllItems = (req, res) => {
-    getAll() 
+    getAll()
         .then(result => res.send(result[0]))
         .catch(error => res.status(500).send(`SQL ERROR ${error}`));
 }
@@ -61,7 +61,7 @@ const getItem = (req, res) => {
     const id = req.params.id;
     getOne(id)
         .then(result => res.send(result[0]))
-        .catch( error => res.status(500).send(`SQL Error ${error}`));
+        .catch(error => res.status(500).send(`SQL Error ${error}`));
     //TODO add 404 if result []
 }
 
@@ -95,9 +95,28 @@ const deleteItem = (req, res) => {
         );
 }
 
+const findItem = (req, res) => {
+    const { name, category } = req.query;
+    let sql = '';
+    if (category === "all") {
+        name !== undefined
+            ? sql = `SELECT * FROM ${table} WHERE item_name ILIKE '%${name}%'`
+            : sql = `SELECT * FROM ${table}`
+    } else {
+        name !== undefined
+            ? sql = `SELECT * FROM ${table} WHERE item_category='${category}' AND item_name ILIKE '%${name}%'`
+            : sql = `SELECT * FROM ${table} WHERE item_category='${category}'`
+    }
+
+    return sequelize.query(sql)
+        .then(result => res.send(result[0]))
+        .catch(error => res.send(error));
+}
+
 module.exports = {
     addItem,
     getAllItems,
     getItem,
-    deleteItem
+    deleteItem,
+    findItem
 }

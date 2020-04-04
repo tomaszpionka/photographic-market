@@ -25,8 +25,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.get('/', jsonParser, itemController.getAllItems);
+router.get('/find', bodyParser.json(), itemController.findItem);
 router.get('/:id', jsonParser, itemController.getItem);
 router.post('/', upload.array("img", 3), itemController.addItem);
 router.delete('/:id', jsonParser, itemController.deleteItem);
+
 
 module.exports = router;
