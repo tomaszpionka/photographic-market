@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Container, Header } from "semantic-ui-react";
 import ItemSearchFilter from './ItemSearchFilter';
+import ItemsForm from "./ItemsForm";
 
 const Items = () => {
   const [name, setName] = useState("");
