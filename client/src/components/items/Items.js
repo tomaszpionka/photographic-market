@@ -1,10 +1,15 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Container, Header } from "semantic-ui-react";
 import ItemsForm from "./ItemsForm";
+import ShowAllItems from "./showAllItems";
+import ShowItem from "./showItem";
+
 
 const Items = () => {
   const [name, setName] = useState("");
   const [id, setId] = useState("");
+  const [item, setItem] = useState({});
+  const [itemUrl, setItemUrl] = useState({});
 
   const getProfile = async () => {
     try {
@@ -24,7 +29,11 @@ const Items = () => {
   useEffect(() => {
     getProfile();
   }, []);
-
+  
+  const getItem = (item, url) => {
+    setItem(item);
+    setItemUrl(url);
+  }
   return (
     <Fragment>
       <Container>
@@ -42,6 +51,8 @@ const Items = () => {
           </p>
         </Container>
         <ItemsForm />
+        <ShowAllItems showItem = {getItem}/>
+        <ShowItem item = {{item, itemUrl}}/>
       </Container>
     </Fragment>
   );
