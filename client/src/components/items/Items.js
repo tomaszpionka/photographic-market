@@ -15,10 +15,9 @@ const Items = () => {
         method: "GET",
         headers: { jwt_token: localStorage.token },
       });
-      console.log(parseData);
       const parseData = await res.json();
-      setName(parseData.user_name);
-      setId(parseData.user_id);
+      setName(parseData[0].user_name);
+      setId(parseData[0].user_id);
     } catch (err) {
       console.error(err.message);
     }
