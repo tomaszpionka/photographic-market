@@ -32,7 +32,7 @@ const Items = () => {
     <Fragment>
       <Container>
         <Container text style={{ marginTop: "7em" }}>
-          <ItemSearchFilter />
+          {/* <ItemSearchFilter /> */}
           <Header as="h1">Semantic UI React Fixed Template</Header>
 
           <p>

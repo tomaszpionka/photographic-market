@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import ItemsEdit from "./ItemsEdit";
+import { Container, Segment } from "semantic-ui-react";
 
 const ItemsUser = ({ allItems, setItemsChange }) => {
   const [items, setItems] = useState([]); //empty array
@@ -24,37 +25,41 @@ const ItemsUser = ({ allItems, setItemsChange }) => {
 
   return (
     <Fragment>
-      <table className="table mt-5">
-        <thead>
-          <tr>
-            <th>Owner</th>
-            <th>Description</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.length !== 0 &&
-            items[0].item_id !== null &&
-            items.map((item) => (
-              <tr key={item.item_id}>
-                <td>{item.user_name}</td>
-                <td>{item.item_description}</td>
-                <td>
-                  <ItemsEdit item={item} setItemsChange={setItemsChange} />
-                </td>
-                <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => deleteItem(item.item_id)}
-                  >
-                    Delete
-                  </button>
-                </td>
+      <Segment>
+        <Container>
+          <table className="table mt-5">
+            <thead>
+              <tr>
+                <th>Owner</th>
+                <th>Description</th>
+                <th>Edit</th>
+                <th>Delete</th>
               </tr>
-            ))}
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {items.length !== 0 &&
+                items[0].item_id !== null &&
+                items.map((item) => (
+                  <tr key={item.item_id}>
+                    <td>{item.user_name}</td>
+                    <td>{item.item_description}</td>
+                    <td>
+                      <ItemsEdit item={item} setItemsChange={setItemsChange} />
+                    </td>
+                    <td>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => deleteItem(item.item_id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </Container>
+      </Segment>
     </Fragment>
   );
 };

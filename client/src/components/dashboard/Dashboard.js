@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { toast } from "react-toastify";
-import { Segment } from "semantic-ui-react";
+import { Header, Container } from "semantic-ui-react";
 
 //components
 
@@ -66,19 +66,34 @@ const Dashboard = ({ setAuth }) => {
   }, [itemsChange]);
 
   return (
-    <div>
-      <div className="d-flex mt-5 justify-content-around">
+    <Fragment>
+      <Container>
+        {/* <div className="d-flex mt-5 justify-content-around">
         <h2>{name} 's Items List</h2>
         <button onClick={(e) => logout(e)} className="btn btn-primary">
           Logout
         </button>
-      </div>
-      <Segment>
+      </div> */}
+        <Container text style={{ marginTop: "7em" }}>
+          {/* <ItemSearchFilter /> */}
+          <Header as="h1">Semantic UI React Fixed Template</Header>
+
+          <p>
+            This is a basic fixed menu template using fixed size containers.
+          </p>
+          <p>
+            A text container is used for the main container, which is useful for
+            single column layouts.
+          </p>
+          <p>
+            welcome user: {name} with id: {id}
+          </p>
+        </Container>
         <ItemsForm setItemsChange={setItemsChange} />
-      </Segment>
-      <ItemsUser allItems={allItems} setItemsChange={setItemsChange} />
-      <ItemsList user_id={id} user_name={name} /*otherItems={otherItems}*/ />
-    </div>
+        <ItemsUser allItems={allItems} setItemsChange={setItemsChange} />
+        <ItemsList user_id={id} user_name={name} /*otherItems={otherItems}*/ />
+      </Container>
+    </Fragment>
   );
 };
 
