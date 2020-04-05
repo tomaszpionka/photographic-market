@@ -7,10 +7,12 @@ import {
   Button,
   Icon,
   Segment,
+  Modal,
 } from "semantic-ui-react";
 
 const ItemsList = ({ user_id, user_name }) => {
   const [items, setItems] = useState([]);
+
   const getItems = async () => {
     try {
       const res = await fetch("http://localhost:5000/items", {
@@ -20,7 +22,7 @@ const ItemsList = ({ user_id, user_name }) => {
 
       const parseData = await res.json();
       console.log(parseData);
-      setItems(parseData);
+      setItems(parseData.filter((item) => item.item_owner !== user_id));
     } catch (error) {
       console.log(error);
     }
@@ -60,10 +62,38 @@ const ItemsList = ({ user_id, user_name }) => {
                       <span>{item.ownerRef.user_email}</span>
                       {/* </Item.Extra>
                   <Item.Extra> */}
-                      <Button primary floated="right">
+                      {/* <Button primary floated="right">
                         Primary
                         <Icon name="chevron right" />
-                      </Button>
+                      </Button> */}
+                      <Modal
+                        trigger={
+                          <Button primary floated="right">
+                            details
+                          </Button>
+                        }
+                      >
+                        <Modal.Header>details</Modal.Header>
+                        <Modal.Content image>
+                          <Image
+                            wrapped
+                            size="medium"
+                            src={item.ownerRef.user_image}
+                          />
+                          <Modal.Description>
+                            <Header>
+                              {item.ownerRef.user_name}{" "}
+                              {item.ownerRef.user_surname}
+                            </Header>
+                            <Icon name="home" />
+                            <p>{item.ownerRef.user_city}</p>
+                            <Icon name="mail" />
+                            <p>{item.ownerRef.user_email}</p>
+                            <Icon name="call" />
+                            <p>{item.ownerRef.user_phone}</p>
+                          </Modal.Description>
+                        </Modal.Content>
+                      </Modal>
                     </Item.Extra>
                   </Item.Content>
                 </Item>

@@ -50,7 +50,10 @@ function App() {
   return (
     <Fragment>
       <BrowserRouter>
-        <ResponsiveContainer />
+        <ResponsiveContainer
+          isAuthenticated={isAuthenticated}
+          setAuth={setAuth}
+        />
         <Switch>
           <Route
             exact

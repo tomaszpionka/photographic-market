@@ -76,18 +76,23 @@ const removeImg = (result) => {
 //     .catch((err) => console.log(err));
 // };
 
-const deleteItem = (req, res) => {
-  const { id } = req.params;
-  Item.findOne({ where: { item_id: id, item_owner: req.user.id } })
-    .then((item) => {
-      return item.destroy();
-    })
-    .then((result) => {
-      res.send(result);
-      removeImg(result);
-    })
-    .catch((err) => console.log(err));
-};
+// const deleteItem = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+
+//     Item.findOne({ where: { item_id: id, item_owner: req.user.id } })
+//       .then((item) => {
+//         return item.destroy();
+//       })
+//       .then((result) => {
+//         res.send(result);
+//         removeImg(result);
+//       })
+//       .catch((err) => console.log(err));
+//   } catch (err) {
+//     console.error(err.message);
+//   }
+// };
 
 // const findItem = (req, res) => {
 //   const { name, category } = req.query;
@@ -145,7 +150,7 @@ module.exports = {
   addItem,
   getAllItems,
   getItem,
-  deleteItem,
+  // deleteItem,
   // findItem,
   getItems,
 };

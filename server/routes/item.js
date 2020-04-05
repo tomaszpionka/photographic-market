@@ -124,4 +124,15 @@ router.put("/image/:id", authorize, jsonParser, async (req, res) => {
   }
 });
 
+router.delete("/:id", jsonParser, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteItem = await db.sequelize.query(
+      `DELETE FROM items WHERE item_id = '${id}' RETURNING *`
+    );
+    res.json(deleteItem[0]);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
 module.exports = router;

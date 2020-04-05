@@ -1,15 +1,5 @@
 import React, { Fragment, useState } from "react";
-import {
-  Button,
-  Grid,
-  Header,
-  Segment,
-  Portal,
-  Input,
-  Image,
-  Modal,
-  Form,
-} from "semantic-ui-react";
+import { Button, Header, Icon, Image, Modal, Form } from "semantic-ui-react";
 
 const ItemsEdit = ({ item, setItemsChange }) => {
   const [name, setName] = useState(item.item_name);
@@ -118,7 +108,10 @@ const ItemsEdit = ({ item, setItemsChange }) => {
 
   return (
     <Fragment>
-      <Button onClick={openHandler}>edit</Button>
+      <Button onClick={openHandler}>
+        {/* <Icon name="edit" /> */}
+        edit
+      </Button>
 
       <Modal open={open} onClose={closeHandler}>
         <Modal.Header>edit item</Modal.Header>
@@ -248,53 +241,6 @@ const ItemsEdit = ({ item, setItemsChange }) => {
           />
         </Modal.Actions>
       </Modal>
-
-      {/* <Fragment>
-      <Grid columns={2}>
-        <Grid.Column>
-          <Button
-            content="edit"
-            disabled={open}
-            positive
-            onClick={() => setOpen(true)}
-          />
-
-          <Portal open={open}>
-            <Segment
-              style={{
-                left: "40%",
-                position: "fixed",
-                top: "50%",
-                zIndex: 1000,
-              }}
-            >
-              <Header>This is a controlled portal</Header>
-              <Input>
-                <input
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-                <Button
-                  content="save"
-                  onClick={() => {
-                    editDescription(item.item_id);
-                    setOpen(false);
-                  }}
-                ></Button>
-                <Button
-                  content="close"
-                  negative
-                  onClick={() => {
-                    setDescription(item.item_description);
-                    setOpen(false);
-                  }}
-                />
-              </Input>
-            </Segment>
-          </Portal>
-        </Grid.Column>
-      </Grid>
-    </Fragment> */}
     </Fragment>
   );
 };
