@@ -69,11 +69,11 @@ const ItemsList = ({ user_id, user_name }) => {
                       <Modal
                         trigger={
                           <Button primary floated="right">
-                            details
+                            contact
                           </Button>
                         }
                       >
-                        <Modal.Header>details</Modal.Header>
+                        <Modal.Header>contact</Modal.Header>
                         <Modal.Content image>
                           <Image
                             wrapped

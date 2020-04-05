@@ -41,12 +41,7 @@ const Items = () => {
             A text container is used for the main container, which is useful for
             single column layouts.
           </p>
-          <p>
-            welcome user: {name} with id: {id}
-          </p>
         </Container>
-        <ItemsForm />
-        {/* <AddItemForm /> */}
         <ItemsList />
       </Container>
     </Fragment>
