@@ -60,12 +60,6 @@ const ItemsList = ({ user_id, user_name }) => {
                     <Item.Extra>
                       <Image avatar circular src={item.ownerRef.user_image} />
                       <span>{item.ownerRef.user_email}</span>
-                      {/* </Item.Extra>
-                  <Item.Extra> */}
-                      {/* <Button primary floated="right">
-                        Primary
-                        <Icon name="chevron right" />
-                      </Button> */}
                       <Modal
                         trigger={
                           <Button primary floated="right">

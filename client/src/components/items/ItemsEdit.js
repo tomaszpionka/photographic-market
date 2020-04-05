@@ -108,10 +108,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
 
   return (
     <Fragment>
-      <Button onClick={openHandler}>
-        {/* <Icon name="edit" /> */}
-        edit
-      </Button>
+      <Button onClick={openHandler}>edit</Button>
 
       <Modal open={open} onClose={closeHandler}>
         <Modal.Header>edit item</Modal.Header>

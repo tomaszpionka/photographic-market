@@ -6,26 +6,26 @@ import ItemsForm from "./ItemsForm";
 import ItemsList from "./ItemsList";
 
 const Items = () => {
-  const [name, setName] = useState("");
-  const [id, setId] = useState("");
+  // const [name, setName] = useState("");
+  // const [id, setId] = useState("");
 
-  const getProfile = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/dashboard", {
-        method: "GET",
-        headers: { jwt_token: localStorage.token },
-      });
-      const parseData = await res.json();
-      setName(parseData[0].user_name);
-      setId(parseData[0].user_id);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+  // const getProfile = async () => {
+  //   try {
+  //     const res = await fetch("http://localhost:5000/dashboard", {
+  //       method: "GET",
+  //       headers: { jwt_token: localStorage.token },
+  //     });
+  //     const parseData = await res.json();
+  //     setName(parseData[0].user_name);
+  //     setId(parseData[0].user_id);
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
+  // };
 
-  useEffect(() => {
-    getProfile();
-  }, []);
+  // useEffect(() => {
+  //   getProfile();
+  // }, []);
 
   return (
     <Fragment>

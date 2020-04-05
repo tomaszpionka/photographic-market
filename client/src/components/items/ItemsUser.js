@@ -8,10 +8,10 @@ import {
   Modal,
 } from "semantic-ui-react";
 import ItemsEdit from "./ItemsEdit";
-// import ItemsDelete from "./ItemsDelete";
 
 const ItemsUser = ({ allItems, setItemsChange }) => {
   const [items, setItems] = useState([]); //empty array
+
   //   delete item function
 
   const deleteItem = async (id) => {
@@ -85,12 +85,6 @@ const ItemsUser = ({ allItems, setItemsChange }) => {
                           </Button>
                         </Modal.Actions>
                       </Modal>
-                      {/* <button
-                        className="btn btn-danger"
-                        onClick={() => deleteItem(item.item_id)}
-                      >
-                        Delete
-                      </button> */}
                     </td>
                   </tr>
                 ))}

@@ -4,7 +4,6 @@ import {
   Form,
   Grid,
   Header,
-  Image,
   Message,
   Segment,
   Modal,
@@ -40,7 +39,7 @@ const Register = ({ setAuth }) => {
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);
         setAuth(true);
-        toast.success("Register Successfully");
+        toast.success("registered successfully");
       } else {
         setAuth(false);
         toast.error(parseRes);
@@ -61,7 +60,7 @@ const Register = ({ setAuth }) => {
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h2" color="black" textAlign="center">
               {/* <Image src="/logo.png" />  */}
-              Register your account
+              register your account
             </Header>
             <Form size="large" onSubmit={onSubmitForm}>
               <Segment stacked>
@@ -69,7 +68,7 @@ const Register = ({ setAuth }) => {
                   fluid
                   icon="user"
                   iconPosition="left"
-                  placeholder="E-mail address"
+                  placeholder="email address"
                   name="email"
                   value={email}
                   onChange={(e) => onChange(e)}
@@ -104,12 +103,12 @@ const Register = ({ setAuth }) => {
                   onChange={(e) => onChange(e)}
                 />
                 <Button color="black" fluid size="large">
-                  Register
+                  register
                 </Button>
               </Segment>
             </Form>
             <Message>
-              Already have an account? <a href="/login">Login</a> or{" "}
+              already have an account? <a href="/login">login</a> or{" "}
               <a href="/">see more</a>
             </Message>
           </Grid.Column>

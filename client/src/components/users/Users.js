@@ -3,7 +3,7 @@ import { Container, List, Form } from "semantic-ui-react";
 // import SingleUser from "./SingleUser";
 
 const Users = () => {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [query, setQuery] = useState("");
 
   const getAllUsers = async () => {

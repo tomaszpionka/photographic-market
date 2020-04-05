@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Grid } from "semantic-ui-react";
 
 // import requireAuth from "./requireAuth";
-import UserCard from "./UserCard";
+// import UserCard from "./UserCard";
 import AddItemForm from "./AddItemForm";
 import UserItems from "./UserItems";
 
@@ -12,7 +12,7 @@ const Profile = () => {
   return (
     <Grid>
       <Grid.Column width={5}>
-        <UserCard />
+        {/* <UserCard /> */}
         <AddItemForm userId={id} />
       </Grid.Column>
       <Grid.Column width={10}>

@@ -12,13 +12,13 @@ import {
 import { Link } from "react-router-dom";
 
 const SingleItem = () => {
-  const [userId, setUserId] = useState("");
-  const [id, setId] = useState("");
+  // const [userId, setUserId] = useState("");
+  // const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
-  const [ownerId, setOwnerId] = useState("");
+  // const [ownerId, setOwnerId] = useState("");
   const [modal, setModal] = useState(false);
   const [formClass, setFormClass] = useState("");
   const [buttonClass, setButtonClass] = useState("");
@@ -224,4 +224,4 @@ const SingleItem = () => {
   );
 };
 
-export default SingleItem;
+// export default SingleItem;
