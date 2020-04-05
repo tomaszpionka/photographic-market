@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Component, Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -9,16 +9,8 @@ import {
   Header,
   Icon,
   Image,
-  List,
-  Menu,
-  Responsive,
   Segment,
-  Sidebar,
-  Visibility
 } from "semantic-ui-react";
-
-import Footer from "../menu/Footer";
-import ResponsiveContainer from "../menu/Header";
 
 // Heads up!
 // We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
@@ -38,7 +30,7 @@ const HomepageHeading = ({ mobile }) => (
         fontSize: mobile ? "2em" : "4em",
         fontWeight: "normal",
         marginBottom: 0,
-        marginTop: mobile ? "1.5em" : "3em"
+        marginTop: mobile ? "1.5em" : "3em",
       }}
     />
     <Header
@@ -48,44 +40,43 @@ const HomepageHeading = ({ mobile }) => (
       style={{
         fontSize: mobile ? "1.5em" : "1.7em",
         fontWeight: "normal",
-        marginTop: mobile ? "0.5em" : "1.5em"
+        marginTop: mobile ? "0.5em" : "1.5em",
       }}
     />
     <Button primary size="huge" as={Link} to="/items">
-      Get Started
+      get started
       <Icon name="right arrow" />
     </Button>
   </Container>
 );
 
 HomepageHeading.propTypes = {
-  mobile: PropTypes.bool
+  mobile: PropTypes.bool,
 };
 
 // responsive container
 
-const Home = ({ setAuth }) => {
+const Home = () => {
   return (
     <Fragment>
-      {/* <ResponsiveContainer /> */}
       <Segment style={{ padding: "8em 0em" }} vertical>
         <Grid container stackable verticalAlign="middle">
           <Grid.Row>
             <Grid.Column width={8}>
               <Header as="h3" style={{ fontSize: "2em" }}>
-                We Help Companies and Companions
+                we help people looking for treasures
               </Header>
               <p style={{ fontSize: "1.33em" }}>
-                We can give your company superpowers to do things that they
-                never thought possible. Let us delight your customers and
-                empower your needs... through pure data analytics.
+                we can provide you with the space for exchanging photographic
+                equipment. huge network and variety of unique items will suit
+                your needs...
               </p>
               <Header as="h3" style={{ fontSize: "2em" }}>
-                We Make Bananas That Can Dance
+                we give these items new lives
               </Header>
               <p style={{ fontSize: "1.33em" }}>
-                Yes that's right, you thought it was the stuff of dreams, but
-                even bananas can be bioengineered.
+                yes that's right, you thought it was the stuff of dreams, but
+                now you can exchange your stuff without paying.
               </p>
             </Grid.Column>
             <Grid.Column floated="right" width={6}>
@@ -93,13 +84,15 @@ const Home = ({ setAuth }) => {
                 bordered
                 rounded
                 size="large"
-                src="/images/wireframe/white-image.png"
+                src="https://images.fineartamerica.com/images-medium-large-5/1-vintage-cameras-jorg-greuel.jpg"
               />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column textAlign="center">
-              <Button size="huge">Check Them Out</Button>
+              <Button size="huge" as={Link} to="/items">
+                check it out
+              </Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -110,19 +103,22 @@ const Home = ({ setAuth }) => {
           <Grid.Row textAlign="center">
             <Grid.Column style={{ paddingBottom: "5em", paddingTop: "5em" }}>
               <Header as="h3" style={{ fontSize: "2em" }}>
-                "What a Company"
+                "what an app"
               </Header>
               <p style={{ fontSize: "1.33em" }}>
-                That is what they all say about us
+                that is what they all say about us
               </p>
             </Grid.Column>
             <Grid.Column style={{ paddingBottom: "5em", paddingTop: "5em" }}>
               <Header as="h3" style={{ fontSize: "2em" }}>
-                "I shouldn't have gone with their competitor."
+                "i shouldn't have gone with their competitor."
               </Header>
               <p style={{ fontSize: "1.33em" }}>
-                <Image avatar src="/images/avatar/large/nan.jpg" />
-                <b>Nan</b> Chief Fun Officer Acme Toys
+                <Image
+                  avatar
+                  src="https://simhub.github.io/justFlipIt/img/jenny.jpg"
+                />
+                <b>Nan</b> chief fun officer acme toys
               </p>
             </Grid.Column>
           </Grid.Row>
@@ -132,16 +128,14 @@ const Home = ({ setAuth }) => {
       <Segment style={{ padding: "8em 0em" }} vertical>
         <Container text>
           <Header as="h3" style={{ fontSize: "2em" }}>
-            Breaking The Grid, Grabs Your Attention
+            film, digital
           </Header>
           <p style={{ fontSize: "1.33em" }}>
-            Instead of focusing on content creation and hard work, we have
-            learned how to master the art of doing nothing by providing massive
-            amounts of whitespace and generic content that can seem massive,
-            monolithic and worth your attention.
+            instead of focusing on ebay products, check out our app an save real
+            money!
           </p>
           <Button as="a" size="large">
-            Read More
+            read more
           </Button>
 
           <Divider
@@ -150,62 +144,24 @@ const Home = ({ setAuth }) => {
             horizontal
             style={{ margin: "3em 0em", textTransform: "uppercase" }}
           >
-            <a href="#">Case Studies</a>
+            <a href="#">important</a>
           </Divider>
 
           <Header as="h3" style={{ fontSize: "2em" }}>
-            Did We Tell You About Our Bananas?
+            did we tell you about our service?
           </Header>
           <p style={{ fontSize: "1.33em" }}>
-            Yes I know you probably disregarded the earlier boasts as
-            non-sequitur filler content, but it's really true. It took years of
-            gene splicing and combinatory DNA research, but our bananas can
-            really dance.
+            yes i know you probably disregarded the earlier boasts as
+            non-sequitur filler content, but it's really true. transaction in
+            our app are 100% safe.
           </p>
           <Button as="a" size="large">
-            I'm Still Quite Interested
+            i'm interested
           </Button>
         </Container>
       </Segment>
-      {/* <Footer></Footer> */}
     </Fragment>
   );
-
-  /* <Segment inverted vertical style={{ padding: "5em 0em" }}>
-        <Container>
-          <Grid divided inverted stackable>
-            <Grid.Row>
-              <Grid.Column width={3}>
-                <Header inverted as="h4" content="About" />
-                <List link inverted>
-                  <List.Item as="a">Sitemap</List.Item>
-                  <List.Item as="a">Contact Us</List.Item>
-                  <List.Item as="a">Religious Ceremonies</List.Item>
-                  <List.Item as="a">Gazebo Plans</List.Item>
-                </List>
-              </Grid.Column>
-              <Grid.Column width={3}>
-                <Header inverted as="h4" content="Services" />
-                <List link inverted>
-                  <List.Item as="a">Banana Pre-Order</List.Item>
-                  <List.Item as="a">DNA FAQ</List.Item>
-                  <List.Item as="a">How To Access</List.Item>
-                  <List.Item as="a">Favorite X-Men</List.Item>
-                </List>
-              </Grid.Column>
-              <Grid.Column width={7}>
-                <Header as="h4" inverted>
-                  Footer Header
-                </Header>
-                <p>
-                  Extra space for a call to action inside the footer that could
-                  help re-engage users.
-                </p>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Container>
-  </Segment> */
 };
 
 export default Home;

@@ -1,15 +1,10 @@
 import PropTypes from "prop-types";
-import React, { Component, Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Button,
   Container,
-  Divider,
-  Grid,
-  Header,
   Icon,
-  Image,
-  List,
   Menu,
   Responsive,
   Segment,
@@ -87,7 +82,7 @@ const DesktopContainer = ({ children }) => {
             size="large"
           >
             <Container>
-              <Menu.Item as={Link} to="/" active>
+              <Menu.Item as={Link} to="/">
                 Home
               </Menu.Item>
               <Menu.Item as={Link} to="/dashboard">
@@ -96,17 +91,17 @@ const DesktopContainer = ({ children }) => {
               <Menu.Item as={Link} to="/items">
                 Items
               </Menu.Item>
-              <Menu.Item as={Link} to="/users">
+              {/* <Menu.Item as={Link} to="/users">
                 Users
               </Menu.Item>
               <Menu.Item as={Link} to="/orders">
                 Orders
-              </Menu.Item>
+              </Menu.Item> */}
               <Menu.Item position="right">
                 {!isAuthenticated ? (
                   <Fragment>
                     <Button as={Link} to="/login" inverted={!fixed}>
-                      Log in
+                      login
                     </Button>
                     <Button
                       as={Link}
@@ -115,7 +110,7 @@ const DesktopContainer = ({ children }) => {
                       primary={fixed}
                       style={{ marginLeft: "0.5em" }}
                     >
-                      Sign Up
+                      register
                     </Button>
                   </Fragment>
                 ) : (
@@ -199,20 +194,20 @@ const MobileContainer = ({ children }) => {
         visible={opened}
       >
         <Menu.Item as="a" active>
-          Home
+          home
         </Menu.Item>
         <Menu.Item as={Link} to="/dashboard">
-          Dashboard
+          dashboard
         </Menu.Item>
         <Menu.Item as={Link} to="/items">
-          Items
+          items
         </Menu.Item>
-        <Menu.Item as={Link} to="/users">
+        {/* <Menu.Item as={Link} to="/users">
           Users
         </Menu.Item>
         <Menu.Item as={Link} to="/orders">
           Orders
-        </Menu.Item>
+        </Menu.Item> */}
       </Sidebar>
 
       <Sidebar.Pusher dimmed={opened}>
@@ -229,7 +224,7 @@ const MobileContainer = ({ children }) => {
               </Menu.Item>
               <Menu.Item position="right">
                 <Button as={Link} to="/login" inverted>
-                  Log in
+                  login
                 </Button>
                 <Button
                   as={Link}
@@ -237,7 +232,7 @@ const MobileContainer = ({ children }) => {
                   inverted
                   style={{ marginLeft: "0.5em" }}
                 >
-                  Sign Up
+                  register
                 </Button>
                 <Button
                   as={Button}

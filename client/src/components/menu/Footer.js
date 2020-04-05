@@ -1,51 +1,49 @@
 import React, { Fragment } from "react";
-import {
-  Container,
-  Divider,
-  Grid,
-  Header,
-  Image,
-  List,
-  Segment
-} from "semantic-ui-react";
+import { Container, Grid, Header, List, Segment } from "semantic-ui-react";
 
-const Footer = ({ setAuth }) => {
+const Footer = () => {
   return (
-    <Segment inverted vertical style={{ padding: "5em 0em" }}>
-      <Container>
-        <Grid divided inverted stackable>
-          <Grid.Row>
-            <Grid.Column width={3}>
-              <Header inverted as="h4" content="About" />
-              <List link inverted>
-                <List.Item as="a">Sitemap</List.Item>
-                <List.Item as="a">Contact Us</List.Item>
-                <List.Item as="a">Religious Ceremonies</List.Item>
-                <List.Item as="a">Gazebo Plans</List.Item>
-              </List>
-            </Grid.Column>
-            <Grid.Column width={3}>
-              <Header inverted as="h4" content="Services" />
-              <List link inverted>
-                <List.Item as="a">Banana Pre-Order</List.Item>
-                <List.Item as="a">DNA FAQ</List.Item>
-                <List.Item as="a">How To Access</List.Item>
-                <List.Item as="a">Favorite X-Men</List.Item>
-              </List>
-            </Grid.Column>
-            <Grid.Column width={7}>
-              <Header as="h4" inverted>
-                Footer Header
-              </Header>
-              <p>
-                Extra space for a call to action inside the footer that could
-                help re-engage users.
-              </p>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
-    </Segment>
+    <Fragment>
+      <Segment
+        inverted
+        vertical
+        style={{ padding: "5em 0em", margin: "32px 0 0 0" }}
+      >
+        <Container>
+          <Grid divided inverted stackable>
+            <Grid.Row>
+              <Grid.Column width={3}>
+                <Header inverted as="h4" content="about" />
+                <List link inverted>
+                  <List.Item as="a">sitemap</List.Item>
+                  <List.Item as="a">contact us</List.Item>
+                  <List.Item as="a">events</List.Item>
+                  <List.Item as="a">partners</List.Item>
+                </List>
+              </Grid.Column>
+              <Grid.Column width={3}>
+                <Header inverted as="h4" content="services" />
+                <List link inverted>
+                  <List.Item as="a">orders</List.Item>
+                  <List.Item as="a">faq</List.Item>
+                  <List.Item as="a">access</List.Item>
+                  <List.Item as="a">subscribe</List.Item>
+                </List>
+              </Grid.Column>
+              <Grid.Column width={7}>
+                <Header as="h4" inverted>
+                  mission
+                </Header>
+                <p>
+                  our goal is to provide people with space for exchanging
+                  vintage stuff.
+                </p>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>
+      </Segment>
+    </Fragment>
   );
 };
 
