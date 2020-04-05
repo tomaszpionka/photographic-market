@@ -1,38 +1,22 @@
-const User = require('../models/user');
+const User = require("../models/user");
+const { sequelize, Sequelize } = require("../database/db");
+const Op = Sequelize.Op;
 
-const addUserController = (x) => {
-    return User.create(x);
-}
+const getAllUsers = (req, res) => {
+  return User.findAll()
+    .then((result) => res.send(result[0]))
+    .catch((error) => res.send(error));
+};
 
-const getUserByIdController = (x) => {
-    return User.findOne({
-        where: {
-            id: x
-        }
-    });
-}
+const findUser = (req, res) => {
+  const { name } = req.query;
+  //   return sequelize
+  //     .query(
+  //       `SELECT * FROM users WHERE user_name || ' ' || user_surname ILIKE '%${name}%'`
+  //     )
+  return User.findOne({ where: { user_name: { [Op.like]: `%${name}%` } } })
+    .then((result) => res.send(result[0]))
+    .catch((error) => res.send(error));
+};
 
-const getUserByMailController = (x) => {
-    return User.findOne({
-        where: {
-            email: x
-        }
-    });
-}
-
-const getSafeUserDataController = (req) => {
-    let id = req.token.sub;
-    return getUserById(id)
-        .then((results) => {
-            const user = results[0];
-            const { password_salt, password_hash, ...safeUserData} = user
-            return safeUserData
-        })
-}
-
-module.exports = {
-    addUserController,
-    getUserByIdController,
-    getUserByMailController,
-    getSafeUserDataController
-}
+module.exports = { getAllUsers, findUser };
