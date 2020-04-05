@@ -90,7 +90,8 @@ const Home = ({ setAuth }) => {
                 bordered
                 rounded
                 size="large"
-                src="/images/wireframe/white-image.png"
+                // src="https://cdn.fstoppers.com/styles/med-16-9/s3/lead/2019/09/2b8bab2c7ea412fd62885dc57e81d4bd.jpg"
+                src="https://images.fineartamerica.com/images-medium-large-5/1-vintage-cameras-jorg-greuel.jpg"
               />
             </Grid.Column>
           </Grid.Row>
@@ -118,7 +119,10 @@ const Home = ({ setAuth }) => {
                 "I shouldn't have gone with their competitor."
               </Header>
               <p style={{ fontSize: "1.33em" }}>
-                <Image avatar src="/images/avatar/large/nan.jpg" />
+                <Image
+                  avatar
+                  src="https://simhub.github.io/justFlipIt/img/jenny.jpg"
+                />
                 <b>Nan</b> Chief Fun Officer Acme Toys
               </p>
             </Grid.Column>
