@@ -21,7 +21,6 @@ const ItemsList = ({ user_id, user_name }) => {
       });
 
       const parseData = await res.json();
-      console.log(parseData);
       setItems(parseData.filter((item) => item.item_owner !== user_id));
     } catch (error) {
       console.log(error);

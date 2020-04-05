@@ -20,7 +20,6 @@ const ItemsForm = () => {
       });
 
       const parseData = await res.json();
-      console.log("looking", parseData[0].user_id);
       setId(parseData[0].user_id);
     } catch (err) {
       console.error(err.message);
@@ -63,11 +62,10 @@ const ItemsForm = () => {
     console.log(id);
 
     try {
-      const res = await fetch("http://localhost:5000/items", {
+      await fetch("http://localhost:5000/items", {
         method: "POST",
         body: formData,
       });
-      const parseData = await res.json();
       toast.success("item added");
       setTimeout(() => {
         window.location = "/items";
@@ -132,7 +130,7 @@ const ItemsForm = () => {
             </Form.Group>
             <Form.Field
               required
-              fluid={true}
+              fluid="true"
               name="description"
               id="form-textarea-control-description"
               control={TextArea}
@@ -142,7 +140,7 @@ const ItemsForm = () => {
               onChange={(e) => setDescription(e.target.value)}
             />
             <Form.Field>
-              <Button fluid="true" as="label" htmlFor="file" type="button">
+              <Button fluid={true} as="label" htmlFor="file" type="button">
                 <Icon name="file image" />
                 add
               </Button>

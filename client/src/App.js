@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, Component } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";

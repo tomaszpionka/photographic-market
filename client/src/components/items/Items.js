@@ -1,7 +1,7 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { /*useEffect, useState,*/ Fragment } from "react";
 import { Container, Header } from "semantic-ui-react";
-import ItemSearchFilter from "./ItemSearchFilter";
-import ItemsForm from "./ItemsForm";
+// import ItemSearchFilter from "./ItemSearchFilter";
+// import ItemsForm from "./ItemsForm";
 // import AddItemForm from "../AddItemForm";
 import ItemsList from "./ItemsList";
 
@@ -29,7 +29,7 @@ const Items = () => {
 
   return (
     <Fragment>
-      <Container>
+      <Container style={{ marginTop: "32px" }}>
         <Container text style={{ marginTop: "7em" }}>
           {/* <ItemSearchFilter /> */}
           <Header as="h1">Semantic UI React Fixed Template</Header>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { Header, Container } from "semantic-ui-react";
 
 //components
@@ -8,7 +8,7 @@ import ItemsForm from "../items/ItemsForm";
 import ItemsList from "../items/ItemsList";
 import ItemsUser from "../items/ItemsUser";
 
-const Dashboard = ({ setAuth }) => {
+const Dashboard = () => {
   const [name, setName] = useState("");
   const [allItems, setAllItems] = useState([]);
   const [itemsChange, setItemsChange] = useState(false);
@@ -20,21 +20,9 @@ const Dashboard = ({ setAuth }) => {
         headers: { jwt_token: localStorage.token },
       });
       const parseData = await res.json();
-      console.log(parseData);
       setAllItems(parseData);
       setId(parseData[0].user_id);
       setName(parseData[0].user_name);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  const logout = async (e) => {
-    e.preventDefault();
-    try {
-      localStorage.removeItem("token");
-      setAuth(false);
-      toast.success("Logout successfully");
     } catch (err) {
       console.error(err.message);
     }

@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from "react";
-import { Button, Header, Icon, Image, Modal, Form } from "semantic-ui-react";
+import { Button, Header, Image, Modal, Form } from "semantic-ui-react";
 
 const ItemsEdit = ({ item, setItemsChange }) => {
   const [name, setName] = useState(item.item_name);
   const [description, setDescription] = useState(item.item_description);
   const [price, setPrice] = useState(item.item_price);
   const [imageUrl, setImageUrl] = useState(item.item_image_url);
-  console.log(item);
+
   //editText function
   const editName = async (id) => {
     try {

@@ -1,8 +1,6 @@
 const fs = require("fs");
-const { sequelize, Sequelize } = require("../database/db");
 const Item = require("../models/item");
 const User = require("../models/user");
-const Op = Sequelize.Op;
 
 const collectImgsPath = (files) => {
   const images = {};
@@ -51,75 +49,6 @@ const getItem = (req, res) => {
   //TODO add 404 if result []
 };
 
-const removeImg = (result) => {
-  const img = result[0].images_json;
-  const imgKeys = Object.keys(img);
-  console.log(imgKeys);
-  imgKeys.forEach((key) => {
-    fs.unlink(img[key], (err) => {
-      if (err) throw err;
-      console.log(img[key] + " was deleted");
-    });
-  });
-};
-
-// const deleteItem = (req, res) => {
-//   const id = req.params.id;
-//   Item.findOne({ where: { item_id: id } })
-//     .then((item) => {
-//       return item.destroy();
-//     })
-//     .then((result) => {
-//       res.send(result);
-//       removeImg(result);
-//     })
-//     .catch((err) => console.log(err));
-// };
-
-// const deleteItem = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-
-//     Item.findOne({ where: { item_id: id, item_owner: req.user.id } })
-//       .then((item) => {
-//         return item.destroy();
-//       })
-//       .then((result) => {
-//         res.send(result);
-//         removeImg(result);
-//       })
-//       .catch((err) => console.log(err));
-//   } catch (err) {
-//     console.error(err.message);
-//   }
-// };
-
-// const findItem = (req, res) => {
-//   const { name, category } = req.query;
-//   let sql = "";
-//   if (category === "all") {
-//     name !== undefined
-//       ? (sql = Item.findAll({
-//           where: { item_name: { [Op.like]: `%${name}%` } },
-//         }))
-//       : (sql = Item.findAll());
-//   } else {
-//     name !== undefined
-//       ? (sql = Item.findAll({
-//           where: {
-//             item_category: `${category}`,
-//             item_name: { [Op.like]: `%${name}%` },
-//           },
-//         }))
-//       : (sql = Item.findAll({ where: { item_category: `${category}` } }));
-//   }
-
-//   return sequelize
-//     .query(sql)
-//     .then((result) => res.send(result[0]))
-//     .catch((error) => res.send(error));
-// };
-
 const getItemById = (req, res) => {
   Item.findOne({
     where: { todo_id: req.params.id },
@@ -150,7 +79,5 @@ module.exports = {
   addItem,
   getAllItems,
   getItem,
-  // deleteItem,
-  // findItem,
   getItems,
 };

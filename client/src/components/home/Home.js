@@ -144,7 +144,7 @@ const Home = () => {
             horizontal
             style={{ margin: "3em 0em", textTransform: "uppercase" }}
           >
-            <a href="#">important</a>
+            <a href="/">important</a>
           </Divider>
 
           <Header as="h3" style={{ fontSize: "2em" }}>

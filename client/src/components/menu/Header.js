@@ -83,13 +83,13 @@ const DesktopContainer = ({ children }) => {
           >
             <Container>
               <Menu.Item as={Link} to="/">
-                Home
+                home
               </Menu.Item>
               <Menu.Item as={Link} to="/dashboard">
-                Dashboard
+                dashboard
               </Menu.Item>
               <Menu.Item as={Link} to="/items">
-                Items
+                items
               </Menu.Item>
               {/* <Menu.Item as={Link} to="/users">
                 Users
@@ -131,7 +131,6 @@ const DesktopContainer = ({ children }) => {
           {/* <HomepageHeading /> */}
         </Segment>
       </Visibility>
-      {}
     </Responsive>
   );
 };
@@ -223,25 +222,30 @@ const MobileContainer = ({ children }) => {
                 <Icon name="sidebar" />
               </Menu.Item>
               <Menu.Item position="right">
-                <Button as={Link} to="/login" inverted>
-                  login
-                </Button>
-                <Button
-                  as={Link}
-                  to="/register"
-                  inverted
-                  style={{ marginLeft: "0.5em" }}
-                >
-                  register
-                </Button>
-                <Button
-                  as={Button}
-                  onClick={(e) => logout(e)}
-                  inverted
-                  style={{ marginLeft: "0.5em" }}
-                >
-                  logout
-                </Button>
+                {!isAuthenticated ? (
+                  <Fragment>
+                    <Button as={Link} to="/login" inverted>
+                      login
+                    </Button>
+                    <Button
+                      as={Link}
+                      to="/register"
+                      inverted
+                      style={{ marginLeft: "0.5em" }}
+                    >
+                      register
+                    </Button>
+                  </Fragment>
+                ) : (
+                  <Button
+                    as={Button}
+                    onClick={(e) => logout(e)}
+                    inverted
+                    style={{ marginLeft: "0.5em" }}
+                  >
+                    logout
+                  </Button>
+                )}
               </Menu.Item>
             </Menu>
           </Container>
