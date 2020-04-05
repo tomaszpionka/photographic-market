@@ -10,33 +10,48 @@ const Item = db.sequelize.define("item", {
   },
   item_name: {
     type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue: "photographic item",
   },
-  user_description: {
-    type: Sequelize.STRING,
+  item_description: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+    defaultValue: "great stuff, you should check it out!",
   },
   item_category: {
     type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue: "other",
   },
   item_price: {
     type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 1,
   },
-  item_imageUrl: {
+  item_image_url: {
     type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue:
+      "https://ya-webdesign.com/transparent250_/film-camera-png-5.png",
   },
   item_images: {
     type: Sequelize.JSON,
+    allowNull: false,
+    defaultValue: "item",
   },
   item_owner: {
     type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
   },
   createdAt: {
-    allowNull: false,
     type: Sequelize.DATE,
+    allowNull: false,
     defaultValue: Sequelize.fn("NOW"),
   },
   updatedAt: {
-    allowNull: false,
     type: Sequelize.DATE,
+    allowNull: false,
     defaultValue: Sequelize.fn("NOW"),
   },
 });

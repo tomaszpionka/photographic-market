@@ -3,6 +3,7 @@ import { Container, Header } from "semantic-ui-react";
 import ItemSearchFilter from "./ItemSearchFilter";
 import ItemsForm from "./ItemsForm";
 // import AddItemForm from "../AddItemForm";
+import ItemsList from "./ItemsList";
 
 const Items = () => {
   const [name, setName] = useState("");
@@ -14,7 +15,7 @@ const Items = () => {
         method: "GET",
         headers: { jwt_token: localStorage.token },
       });
-
+      console.log(parseData);
       const parseData = await res.json();
       setName(parseData.user_name);
       setId(parseData.user_id);
@@ -47,6 +48,7 @@ const Items = () => {
         </Container>
         <ItemsForm />
         {/* <AddItemForm /> */}
+        <ItemsList />
       </Container>
     </Fragment>
   );

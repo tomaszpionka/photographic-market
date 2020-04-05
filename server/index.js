@@ -29,7 +29,7 @@ db.sequelize
     console.error("unable to connect", err);
   });
 
-db.sequelize.sync({ logging: console.log, force: false }).then(() => {
+db.sequelize.sync({ /*logging: console.log,*/ force: false }).then(() => {
   console.log("connection to database");
   app.listen(port, () => {
     console.log(`server is running on port: ${port}`);

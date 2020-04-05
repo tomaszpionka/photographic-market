@@ -7,7 +7,7 @@ import {
   Image,
   Message,
   Segment,
-  Modal
+  Modal,
 } from "semantic-ui-react";
 import { toast } from "react-toastify";
 
@@ -16,24 +16,24 @@ const Register = ({ setAuth }) => {
     email: "",
     password: "",
     name: "",
-    surname: ""
+    surname: "",
   });
 
   const { email, password, name, surname } = inputs;
 
-  const onChange = e =>
+  const onChange = (e) =>
     setInputs({ ...inputs, [e.target.name]: e.target.value });
 
-  const onSubmitForm = async e => {
+  const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
       const body = { email, password, name, surname };
       const response = await fetch("http://localhost:5000/auth/register", {
         method: "POST",
         headers: {
-          "Content-type": "application/json"
+          "Content-type": "application/json",
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
       });
       const parseRes = await response.json();
 
@@ -72,7 +72,7 @@ const Register = ({ setAuth }) => {
                   placeholder="E-mail address"
                   name="email"
                   value={email}
-                  onChange={e => onChange(e)}
+                  onChange={(e) => onChange(e)}
                 />
                 <Form.Input
                   fluid
@@ -81,7 +81,7 @@ const Register = ({ setAuth }) => {
                   type="password"
                   name="password"
                   value={password}
-                  onChange={e => onChange(e)}
+                  onChange={(e) => onChange(e)}
                 />
                 <Form.Input
                   fluid
@@ -91,7 +91,7 @@ const Register = ({ setAuth }) => {
                   name="name"
                   value={name}
                   placeholder="name"
-                  onChange={e => onChange(e)}
+                  onChange={(e) => onChange(e)}
                 />
                 <Form.Input
                   fluid
@@ -101,7 +101,7 @@ const Register = ({ setAuth }) => {
                   name="surname"
                   value={surname}
                   placeholder="surname"
-                  onChange={e => onChange(e)}
+                  onChange={(e) => onChange(e)}
                 />
                 <Button color="black" fluid size="large">
                   Register

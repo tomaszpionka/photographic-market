@@ -1,6 +1,7 @@
 const fs = require("fs");
 const { sequelize, Sequelize } = require("../database/db");
 const Item = require("../models/item");
+const User = require("../models/user");
 const Op = Sequelize.Op;
 
 const collectImgsPath = (files) => {
@@ -13,14 +14,14 @@ const collectImgsPath = (files) => {
 };
 
 const addItem = (req, res) => {
-  const { userId, itemName, category, description } = req.body;
+  const { userId, itemName, category, description, imageUrl, price } = req.body;
   const images = collectImgsPath(req.files);
   Item.create({
     item_name: itemName,
-    item_description: description,
+    item_description: description.length > 0 ? description : undefined,
     item_category: category,
-    item_price: 1,
-    item_imageUrl: "default",
+    item_price: price.length > 0 ? price : undefined,
+    item_image_url: imageUrl.length > 0 ? imageUrl : undefined,
     item_images: JSON.stringify(images),
     item_owner: parseInt(userId),
   })
@@ -61,9 +62,23 @@ const removeImg = (result) => {
     });
   });
 };
+
+// const deleteItem = (req, res) => {
+//   const id = req.params.id;
+//   Item.findOne({ where: { item_id: id } })
+//     .then((item) => {
+//       return item.destroy();
+//     })
+//     .then((result) => {
+//       res.send(result);
+//       removeImg(result);
+//     })
+//     .catch((err) => console.log(err));
+// };
+
 const deleteItem = (req, res) => {
-  const id = req.params.id;
-  Item.findOne({ where: { item_id: id } })
+  const { id } = req.params;
+  Item.findOne({ where: { item_id: id, item_owner: req.user.id } })
     .then((item) => {
       return item.destroy();
     })
@@ -74,30 +89,56 @@ const deleteItem = (req, res) => {
     .catch((err) => console.log(err));
 };
 
-const findItem = (req, res) => {
-  const { name, category } = req.query;
-  let sql = "";
-  if (category === "all") {
-    name !== undefined
-      ? (sql = Item.findAll({
-          where: { item_name: { [Op.like]: `%${name}%` } },
-        }))
-      : (sql = Item.findAll());
-  } else {
-    name !== undefined
-      ? (sql = Item.findAll({
-          where: {
-            item_category: `${category}`,
-            item_name: { [Op.like]: `%${name}%` },
-          },
-        }))
-      : (sql = Item.findAll({ where: { item_category: `${category}` } }));
-  }
+// const findItem = (req, res) => {
+//   const { name, category } = req.query;
+//   let sql = "";
+//   if (category === "all") {
+//     name !== undefined
+//       ? (sql = Item.findAll({
+//           where: { item_name: { [Op.like]: `%${name}%` } },
+//         }))
+//       : (sql = Item.findAll());
+//   } else {
+//     name !== undefined
+//       ? (sql = Item.findAll({
+//           where: {
+//             item_category: `${category}`,
+//             item_name: { [Op.like]: `%${name}%` },
+//           },
+//         }))
+//       : (sql = Item.findAll({ where: { item_category: `${category}` } }));
+//   }
 
-  return sequelize
-    .query(sql)
-    .then((result) => res.send(result[0]))
-    .catch((error) => res.send(error));
+//   return sequelize
+//     .query(sql)
+//     .then((result) => res.send(result[0]))
+//     .catch((error) => res.send(error));
+// };
+
+const getItemById = (req, res) => {
+  Item.findOne({
+    where: { todo_id: req.params.id },
+    include: [{ model: User, as: "ownerRef" }],
+  })
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const getItems = (req, res) => {
+  Item.findAll({
+    order: [["createdAt", "DESC"]],
+    include: [{ model: User, as: "ownerRef" }],
+  })
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 module.exports = {
@@ -105,5 +146,6 @@ module.exports = {
   getAllItems,
   getItem,
   deleteItem,
-  findItem,
+  // findItem,
+  getItems,
 };
