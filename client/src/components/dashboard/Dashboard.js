@@ -38,15 +38,10 @@ const Dashboard = () => {
       <Container>
         <Container text style={{ marginTop: "7em" }}>
           {/* <ItemSearchFilter /> */}
-          <Header as="h1">Semantic UI React Fixed Template</Header>
+          <Header as="h1">dashboard</Header>
 
-          <p>
-            This is a basic fixed menu template using fixed size containers.
-          </p>
-          <p>
-            A text container is used for the main container, which is useful for
-            single column layouts.
-          </p>
+          <p>this is a protected admin panel</p>
+          <p>inventory can be managed by user here</p>
         </Container>
         <ItemsForm setItemsChange={setItemsChange} />
         <ItemsUser allItems={allItems} setItemsChange={setItemsChange} />
