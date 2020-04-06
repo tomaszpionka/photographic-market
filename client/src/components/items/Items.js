@@ -32,15 +32,10 @@ const Items = () => {
       <Container style={{ marginTop: "32px" }}>
         <Container text style={{ marginTop: "7em" }}>
           {/* <ItemSearchFilter /> */}
-          <Header as="h1">Semantic UI React Fixed Template</Header>
+          <Header as="h1">items</Header>
 
-          <p>
-            This is a basic fixed menu template using fixed size containers.
-          </p>
-          <p>
-            A text container is used for the main container, which is useful for
-            single column layouts.
-          </p>
+          <p>this is a basic item market</p>
+          <p>user or a visitor can see the content freely</p>
         </Container>
         <ItemsList />
       </Container>
