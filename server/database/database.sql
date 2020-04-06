@@ -2,10 +2,12 @@
 -- run command: psql -U postgres
 -- enter the password
 
+-- ONLY IF YOU ARE WORKING ON LOCALHOST DATABASE!!!
+
 -- run command:
 CREATE DATABASE photomarket;
 -- run command: \c photomarket 
--- set sync({ orce : true }) in index.js
+-- set sync({ force : true }) in index.js
 -- run server once, and set ({ force : false })
 
 -- disregard

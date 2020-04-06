@@ -66,24 +66,29 @@ const Register = ({ setAuth }) => {
               <Segment stacked>
                 <Form.Input
                   fluid
+                  required
                   icon="user"
                   iconPosition="left"
                   placeholder="email address"
+                  type="email"
                   name="email"
                   value={email}
                   onChange={(e) => onChange(e)}
                 />
                 <Form.Input
                   fluid
+                  required
                   icon="lock"
                   iconPosition="left"
                   type="password"
                   name="password"
+                  minLength="8"
                   value={password}
                   onChange={(e) => onChange(e)}
                 />
                 <Form.Input
                   fluid
+                  required
                   icon="user"
                   iconPosition="left"
                   type="text"
@@ -94,6 +99,7 @@ const Register = ({ setAuth }) => {
                 />
                 <Form.Input
                   fluid
+                  required
                   icon="user"
                   iconPosition="left"
                   type="text"
