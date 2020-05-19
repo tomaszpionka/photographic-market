@@ -1,12 +1,12 @@
-import React, { /*useEffect, useState,*/ Fragment } from "react";
-import { Container, Header } from "semantic-ui-react";
+import React, { useEffect, useState, Fragment } from "react";
+import { Container, Header, Form, Button, Item } from "semantic-ui-react";
 // import ItemSearchFilter from "./ItemSearchFilter";
 // import ItemsForm from "./ItemsForm";
 // import AddItemForm from "../AddItemForm";
 import ItemsList from "./ItemsList";
+import ItemsSearch from "./ItemsSearch";
 
 const Items = () => {
-  // const [name, setName] = useState("");
   // const [id, setId] = useState("");
 
   // const getProfile = async () => {
@@ -37,6 +37,7 @@ const Items = () => {
           <p>this is a basic item market</p>
           <p>user or a visitor can see the content freely</p>
         </Container>
+        <ItemsSearch />
         <ItemsList />
       </Container>
     </Fragment>
