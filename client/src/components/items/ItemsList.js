@@ -10,25 +10,25 @@ import {
   Modal,
 } from "semantic-ui-react";
 
-const ItemsList = ({ user_id, user_name }) => {
+const ItemsList = () => {
   const [items, setItems] = useState([]);
-
   const getItems = async () => {
     try {
       const res = await fetch("http://localhost:5000/items", {
         method: "GET",
         headers: { jwt_token: localStorage.token },
       });
-
       const parseData = await res.json();
-      setItems(parseData.filter((item) => item.item_owner !== user_id));
+      setItems(parseData);
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     getItems();
   }, []);
+
   return (
     <Fragment>
       <Header as="h2" attached="top" block>

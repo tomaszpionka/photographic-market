@@ -6,6 +6,8 @@ const path = require("path");
 const db = require("../database/db");
 const authorize = require("../middleware/authorize");
 
+const { QueryTypes } = require("sequelize");
+
 const Item = require("../models/item");
 const User = require("../models/user");
 
@@ -133,6 +135,24 @@ router.delete("/:id", jsonParser, async (req, res) => {
     res.json(deleteItem[0]);
   } catch (err) {
     console.log(err.message);
+  }
+});
+
+router.get("/query", jsonParser, async (req, res) => {
+  try {
+    const { name } = req.query;
+
+    const items = await db.sequelize.query(
+      "SELECT * FROM items WHERE item_name || ' ' || item_description || ' ' || item_category ILIKE ?",
+      {
+        replacements: [`%${name}%`],
+        type: QueryTypes.SELECT,
+      }
+    );
+    // res.json(req.query);
+    res.json(items);
+  } catch (err) {
+    console.error(err.message);
   }
 });
 module.exports = router;

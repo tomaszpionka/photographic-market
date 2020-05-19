@@ -5,7 +5,7 @@
 -- ONLY IF YOU ARE WORKING ON LOCALHOST DATABASE!!!
 
 -- run command:
-CREATE DATABASE photomarket;
+-- CREATE DATABASE photomarket;
 -- run command: \c photomarket 
 -- set sync({ force : true }) in index.js
 -- run server once, and set ({ force : false })
