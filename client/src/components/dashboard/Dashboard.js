@@ -7,6 +7,7 @@ import { Header, Container } from "semantic-ui-react";
 import ItemsForm from "../items/ItemsForm";
 import ItemsList from "../items/ItemsList";
 import ItemsUser from "../items/ItemsUser";
+import User from "../users/User";
 
 const Dashboard = () => {
   const [name, setName] = useState("");
@@ -44,6 +45,7 @@ const Dashboard = () => {
           <p>inventory can be managed by user here</p>
         </Container>
         <ItemsForm setItemsChange={setItemsChange} />
+        <User user_id={id} />
         <ItemsUser allItems={allItems} setItemsChange={setItemsChange} />
         <ItemsList user_id={id} user_name={name} /*otherItems={otherItems}*/ />
       </Container>

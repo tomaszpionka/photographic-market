@@ -14,8 +14,13 @@ const findUser = (req, res) => {
   //     .query(
   //       `SELECT * FROM users WHERE user_name || ' ' || user_surname ILIKE '%${name}%'`
   //     )
-  return User.findOne({ where: { user_name: { [Op.like]: `%${name}%` } } })
-    .then((result) => res.send(result[0]))
+  // return User.findOne({ where: { user_id: { [Op.like]: `%${name}%` } } })
+  return User.findOne({ where: { user_id: `${name}` } })
+    .then((result) => {
+      console.log(result);
+      // res.send(result[0]);
+      res.json(result);
+    })
     .catch((error) => res.send(error));
 };
 

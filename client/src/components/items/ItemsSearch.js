@@ -5,21 +5,38 @@ import {
   Form,
   Button,
   Item,
-  Input,
   Icon,
   Segment,
+  Modal,
+  Image,
 } from "semantic-ui-react";
 
 const ItemSearch = () => {
   const [name, setName] = useState("");
   const [query, setQuery] = useState([]);
+  const [user, setUser] = useState([]);
   const onSubmitForm = async (e) => {
+    if (name.length > 0) {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/items/query/?name=${name}`
+        );
+        const parsedResponse = await response.json();
+        setQuery(parsedResponse);
+      } catch (err) {
+        console.error(err.message);
+      }
+    } else {
+      setQuery([]);
+    }
+  };
+  const getUser = async (x) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/items/query/?name=${name}`
+        `http://localhost:5000/users/query/?name=${x}`
       );
       const parsedResponse = await response.json();
-      setQuery(parsedResponse);
+      setUser(parsedResponse[0]);
     } catch (err) {
       console.error(err.message);
     }
@@ -67,6 +84,35 @@ const ItemSearch = () => {
                       <span>${item.item_price}</span>
                     </Item.Meta>
                     <Item.Description>{item.item_description}</Item.Description>
+                    <Item.Extra>
+                      <Modal
+                        trigger={
+                          <Button
+                            onClick={() => getUser(item.item_owner)}
+                            primary
+                            floated="right"
+                          >
+                            contact
+                          </Button>
+                        }
+                      >
+                        <Modal.Header>contact</Modal.Header>
+                        <Modal.Content image>
+                          <Image wrapped size="medium" src={user.user_image} />
+                          <Modal.Description>
+                            <Header>
+                              {user.user_name} {user.user_surname}
+                            </Header>
+                            <Icon name="home" />
+                            <p>{user.user_city}</p>
+                            <Icon name="mail" />
+                            <p>{user.user_email}</p>
+                            <Icon name="call" />
+                            <p>{user.user_phone}</p>
+                          </Modal.Description>
+                        </Modal.Content>
+                      </Modal>
+                    </Item.Extra>
                   </Item.Content>
                 </Item>
               ))}
