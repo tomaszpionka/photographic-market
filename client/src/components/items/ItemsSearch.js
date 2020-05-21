@@ -5,7 +5,6 @@ import {
   Form,
   Button,
   Item,
-  Input,
   Icon,
   Segment,
   Modal,
@@ -17,14 +16,18 @@ const ItemSearch = () => {
   const [query, setQuery] = useState([]);
   const [user, setUser] = useState([]);
   const onSubmitForm = async (e) => {
-    try {
-      const response = await fetch(
-        `http://localhost:5000/items/query/?name=${name}`
-      );
-      const parsedResponse = await response.json();
-      setQuery(parsedResponse);
-    } catch (err) {
-      console.error(err.message);
+    if (name.length > 0) {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/items/query/?name=${name}`
+        );
+        const parsedResponse = await response.json();
+        setQuery(parsedResponse);
+      } catch (err) {
+        console.error(err.message);
+      }
+    } else {
+      setQuery([]);
     }
   };
   const getUser = async (x) => {
