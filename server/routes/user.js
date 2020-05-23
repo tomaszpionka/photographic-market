@@ -6,7 +6,7 @@ const db = require("../database/db");
 const { QueryTypes } = require("sequelize");
 
 router.get("/", bodyParser.json(), userController.getAllUsers);
-// router.get("/query", bodyParser.json(), userController.findUser);
+router.get("/find", bodyParser.json(), userController.findUser);
 router.get("/query", bodyParser.json(), async (req, res) => {
   try {
     const { name } = req.query;
@@ -18,7 +18,6 @@ router.get("/query", bodyParser.json(), async (req, res) => {
         type: QueryTypes.SELECT,
       }
     );
-    // res.json(req.query);
     res.json(items);
   } catch (err) {
     console.error(err.message);

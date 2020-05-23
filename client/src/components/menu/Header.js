@@ -91,9 +91,10 @@ const DesktopContainer = ({ children }) => {
               <Menu.Item as={Link} to="/items">
                 items
               </Menu.Item>
-              {/* <Menu.Item as={Link} to="/users">
-                Users
+              <Menu.Item as={Link} to="/users">
+                users
               </Menu.Item>
+              {/* 
               <Menu.Item as={Link} to="/orders">
                 Orders
               </Menu.Item> */}

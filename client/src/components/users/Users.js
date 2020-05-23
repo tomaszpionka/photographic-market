@@ -1,9 +1,9 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Container, List, Form } from "semantic-ui-react";
-// import SingleUser from "./SingleUser";
+import SingleUser from "./SingleUser";
 
 const Users = () => {
-  // const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   const [query, setQuery] = useState("");
 
   const getAllUsers = async () => {
@@ -22,9 +22,9 @@ const Users = () => {
     }
   };
 
-  useEffect(() => {
-    getAllUsers();
-  }, []);
+  // useEffect(() => {
+  //   getAllUsers();
+  // }, []);
 
   const search = async (e) => {
     e.preventDefault();
@@ -35,7 +35,7 @@ const Users = () => {
 
       const parseResponse = await response.json();
 
-      setUsers(parseResponse);
+      setUsers(parseResponse[0]);
       console.log(parseResponse);
     } catch (err) {
       console.error(err.message);
@@ -60,13 +60,13 @@ const Users = () => {
             />
           </Form>
           <List divided relaxed>
-            {/* {users.length === 0 ? (
+            {users.length === 0 ? (
               <p>Not found</p>
             ) : (
               users.map((user, i) => (
                 <SingleUser key={i} redirect={() => {}} userData={user} />
               ))
-            )} */}
+            )}
           </List>
         </Container>
       </Container>
