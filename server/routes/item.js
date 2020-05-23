@@ -126,6 +126,25 @@ router.put("/image/:id", authorize, jsonParser, async (req, res) => {
   }
 });
 
+router.put("/owner/:id", authorize, jsonParser, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { buyer } = req.body;
+    const updateOwner = await db.sequelize.query(
+      `UPDATE items SET item_owner = ${buyer} WHERE item_id = ${id} AND item_owner = ${req.user.id} RETURNING *`
+    );
+
+    console.log(updateOwner[0].length);
+    if (updateOwner[0].length === 0) {
+      return res.json("this item is not yours");
+    }
+    console.log(updateOwner[0]);
+    res.json(updateOwner[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 router.delete("/:id", jsonParser, async (req, res) => {
   try {
     const { id } = req.params;
@@ -149,7 +168,6 @@ router.get("/query", jsonParser, async (req, res) => {
         type: QueryTypes.SELECT,
       }
     );
-    // res.json(req.query);
     res.json(items);
   } catch (err) {
     console.error(err.message);
