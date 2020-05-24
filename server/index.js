@@ -12,11 +12,13 @@ app.use("/auth", require("./routes/auth"));
 app.use("/dashboard", require("./routes/dashboard"));
 app.use("/items", require("./routes/item"));
 app.use("/users", require("./routes/user"));
+app.use("/orders", require("./routes/order"));
 app.use("/static", express.static(path.join(__dirname, "assets")));
 
 const db = require("./database/db");
 const User = require("./models/user");
 const Item = require("./models/item");
+const Order = require("./models/order");
 
 Item.belongsTo(User, { as: "ownerRef", foreignKey: "item_owner" });
 
@@ -31,8 +33,8 @@ db.sequelize
 
 db.sequelize
   .sync({
-    /*logging: console.log,*/
-    /*force: false*/
+    // logging: console.log,
+    // force: true,
   })
   .then(() => {
     console.log("connection to database");

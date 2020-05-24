@@ -62,7 +62,7 @@ const ItemsForm = () => {
     console.log(id);
 
     try {
-      await fetch("http://localhost:5000/items", {
+      await fetch(`http://localhost:5000/items`, {
         method: "POST",
         body: formData,
       });
@@ -139,14 +139,14 @@ const ItemsForm = () => {
               placeholder="// (max. 300) this camera was bought in 1979, repaired two times, perfect condition."
               onChange={(e) => setDescription(e.target.value)}
             />
-            <Form.Field>
+            {/* <Form.Field>
               <Button fluid={true} as="label" htmlFor="file" type="button">
                 <Icon name="file image" />
                 add
               </Button>
-            </Form.Field>
+            </Form.Field> */}
             <input type="file" id="file" hidden multiple ref={images} />
-            <Form.Button>Save</Form.Button>
+            <Form.Button primary>Save</Form.Button>
           </Form>
         </Container>
       </Segment>

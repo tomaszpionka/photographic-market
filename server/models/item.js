@@ -44,6 +44,11 @@ const Item = db.sequelize.define("item", {
     allowNull: false,
     defaultValue: 0,
   },
+  item_lock: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },
   createdAt: {
     type: Sequelize.DATE,
     allowNull: false,

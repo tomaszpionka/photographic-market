@@ -8,6 +8,8 @@ import {
   Message,
   Segment,
   Modal,
+  Icon,
+  Container,
 } from "semantic-ui-react";
 import { toast } from "react-toastify";
 
@@ -52,47 +54,49 @@ const Login = ({ setAuth }) => {
   return (
     <Fragment>
       <Modal open={true}>
-        <Grid
-          textAlign="center"
-          style={{ height: "50vh" }}
-          verticalAlign="middle"
-        >
-          <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as="h2" color="black" textAlign="center">
-              {/* <Image src="/logo.png" />  */}
-              login to your account
-            </Header>
-            <Form size="large" onSubmit={onSubmitForm}>
-              <Segment stacked>
-                <Form.Input
-                  fluid
-                  icon="user"
-                  iconPosition="left"
-                  placeholder="email address"
-                  name="email"
-                  value={email}
-                  onChange={(e) => onChange(e)}
-                />
-                <Form.Input
-                  fluid
-                  icon="lock"
-                  iconPosition="left"
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={(e) => onChange(e)}
-                />
-                <Button color="black" fluid size="large">
-                  Login
-                </Button>
-              </Segment>
-            </Form>
-            <Message>
-              new to us? <a href="/register">register</a> or{" "}
-              <a href="/"> see more</a>
-            </Message>
-          </Grid.Column>
-        </Grid>
+        <Fragment>
+          <Header as="h2" attached="top" block>
+            <Icon name="sign-in" />
+            <Header.Content>login</Header.Content>
+          </Header>
+          <Segment attached>
+            <Container>
+              <Grid textAlign="center">
+                <Grid.Column style={{ maxWidth: 450 }}>
+                  <Form size="large" onSubmit={onSubmitForm}>
+                    <Segment stacked>
+                      <Form.Input
+                        fluid
+                        icon="user"
+                        iconPosition="left"
+                        placeholder="email address"
+                        name="email"
+                        value={email}
+                        onChange={(e) => onChange(e)}
+                      />
+                      <Form.Input
+                        fluid
+                        icon="lock"
+                        iconPosition="left"
+                        type="password"
+                        name="password"
+                        value={password}
+                        onChange={(e) => onChange(e)}
+                      />
+                      <Button color="black" fluid size="large">
+                        Login
+                      </Button>
+                    </Segment>
+                  </Form>
+                  <Message>
+                    new to us? <a href="/register">register</a> or{" "}
+                    <a href="/"> see more</a>
+                  </Message>
+                </Grid.Column>
+              </Grid>
+            </Container>
+          </Segment>
+        </Fragment>
       </Modal>
     </Fragment>
   );
