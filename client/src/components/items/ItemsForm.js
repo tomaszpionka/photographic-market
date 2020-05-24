@@ -21,7 +21,6 @@ const ItemsForm = () => {
 
       const parseData = await res.json();
       setId(parseData[0].user_id);
-      console.log(parseData[0].user_id);
     } catch (err) {
       console.error(err.message);
     }
