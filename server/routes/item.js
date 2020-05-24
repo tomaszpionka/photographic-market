@@ -132,6 +132,7 @@ router.put(
   jsonParser,
   async (req, res) => {
     try {
+      console.log(req.params);
       const { item_id, item_owner, user_id } = req.params;
       const updateOwner = await db.sequelize.query(
         `UPDATE items SET item_owner = ${user_id} WHERE item_id = ${item_id} AND item_owner = ${item_owner} RETURNING *`

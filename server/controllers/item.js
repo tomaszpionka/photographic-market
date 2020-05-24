@@ -14,6 +14,8 @@ const collectImgsPath = (files) => {
 const addItem = (req, res) => {
   const { userId, itemName, category, description, imageUrl, price } = req.body;
   const images = collectImgsPath(req.files);
+
+  console.log(userId);
   Item.create({
     item_name: itemName,
     item_description: description.length > 0 ? description : undefined,
@@ -49,18 +51,18 @@ const getItem = (req, res) => {
   //TODO add 404 if result []
 };
 
-const getItemById = (req, res) => {
-  Item.findOne({
-    where: { todo_id: req.params.id },
-    include: [{ model: User, as: "ownerRef" }],
-  })
-    .then((user) => {
-      res.json(user);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
+// const getItemById = (req, res) => {
+//   Item.findOne({
+//     where: { todo_id: req.params.id },
+//     include: [{ model: User, as: "ownerRef" }],
+//   })
+//     .then((user) => {
+//       res.json(user);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
 
 const getItems = (req, res) => {
   Item.findAll({

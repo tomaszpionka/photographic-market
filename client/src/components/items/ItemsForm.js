@@ -21,6 +21,7 @@ const ItemsForm = () => {
 
       const parseData = await res.json();
       setId(parseData[0].user_id);
+      console.log(parseData[0].user_id);
     } catch (err) {
       console.error(err.message);
     }
@@ -62,7 +63,7 @@ const ItemsForm = () => {
     console.log(id);
 
     try {
-      await fetch("http://localhost:5000/items", {
+      await fetch(`http://localhost:5000/items`, {
         method: "POST",
         body: formData,
       });
