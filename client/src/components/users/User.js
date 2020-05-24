@@ -39,22 +39,26 @@ const User = ({ user_id }) => {
           <Item.Group divided>
             {query.length !== 0 &&
               query[0].user_id !== null &&
-              query.map((item) => (
-                <Item key={item.user_id}>
-                  <Item.Image src={item.user_image} />
+              query.map((user) => (
+                <Item key={user.user_id}>
+                  <Item.Image src={user.user_image} />
                   <Item.Content>
-                    <Item.Header as="a">{item.user_name}</Item.Header>
+                    <Item.Header as="a">
+                      {user.user_name} {user.user_surname}
+                    </Item.Header>
                     <Item.Meta>
                       <span>
-                        {item.createdAt.slice(0, 10)}{" "}
-                        {item.createdAt.slice(11, 16)}
+                        {user.createdAt.slice(0, 10)}{" "}
+                        {user.createdAt.slice(11, 16)}
                       </span>
                       <br />
-                      <span>{item.user_phone}</span>
+                      <span>{user.user_email}</span>
                       <br />
-                      <span>{item.user_city}</span>
+                      <span>{user.user_phone}</span>
+                      <br />
+                      <span>{user.user_city}</span>
                     </Item.Meta>
-                    <Item.Description>{item.item_description}</Item.Description>
+                    <Item.Description>{user.item_description}</Item.Description>
                   </Item.Content>
                 </Item>
               ))}
