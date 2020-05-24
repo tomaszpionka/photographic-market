@@ -11,17 +11,15 @@ import {
 } from "semantic-ui-react";
 
 const OrdersUser = () => {
-  const [name, setName] = useState("");
   const [id, setId] = useState("");
+
   const getProfile = async () => {
     try {
       const res = await fetch("http://localhost:5000/dashboard", {
         method: "GET",
         headers: { jwt_token: localStorage.token },
       });
-
       const parseData = await res.json();
-      setName(parseData.user_name);
       setId(parseData[0].user_id);
     } catch (err) {
       console.error(err.message);
@@ -36,7 +34,7 @@ const OrdersUser = () => {
         headers: { jwt_token: localStorage.token },
       });
       const parseData = await res.json();
-      console.log(parseData);
+      // console.log(parseData);
       setOrders(parseData.filter((order) => order.item_buyer === id));
     } catch (error) {
       console.log(error);
@@ -56,7 +54,7 @@ const OrdersUser = () => {
         }
       );
       // const parseData = await res.json();
-      // window.location = "/dashboard";
+      window.location = "/dashboard";
     } catch (error) {
       console.log(error);
     }
@@ -71,14 +69,16 @@ const OrdersUser = () => {
       });
       const parseData = await res.json();
       setItems(parseData);
-      console.log(parseData);
+      // console.log(parseData);
     } catch (error) {
       console.log(error);
     }
   };
+
   const filteredItems = (order) => {
     for (let i = 0; i < items.length; i++) {
-      if (items[i].item_id == order.item_id) {
+      // console.log(items[i]);
+      if (items[i].item_id === order.item_id) {
         return (
           <Item key={order.order_id}>
             <Item.Image src={items[i].item_image_url} />
@@ -170,7 +170,7 @@ const OrdersUser = () => {
             {orders.length !== 0 &&
               orders[0].order_id !== null &&
               orders.map((order) => (
-                <Fragment>{filteredItems(order)}</Fragment>
+                <Fragment key={order.order_id}>{filteredItems(order)}</Fragment>
               ))}
           </Item.Group>
         </Container>
