@@ -11,7 +11,7 @@ import User from "../users/User";
 
 const Dashboard = () => {
   const [name, setName] = useState("");
-  const [allItems, setAllItems] = useState([]);
+  const [userItems, setUserItems] = useState([]);
   const [itemsChange, setItemsChange] = useState(false);
   const [id, setId] = useState("");
   const getProfile = async () => {
@@ -21,7 +21,7 @@ const Dashboard = () => {
         headers: { jwt_token: localStorage.token },
       });
       const parseData = await res.json();
-      setAllItems(parseData);
+      setUserItems(parseData);
       setId(parseData[0].user_id);
       setName(parseData[0].user_name);
     } catch (err) {
@@ -38,16 +38,16 @@ const Dashboard = () => {
     <Fragment>
       <Container>
         <Container text style={{ marginTop: "7em" }}>
-          {/* <ItemSearchFilter /> */}
           <Header as="h1">dashboard</Header>
 
           <p>this is a protected admin panel</p>
           <p>inventory can be managed by user here</p>
         </Container>
-        <ItemsForm setItemsChange={setItemsChange} />
         <User user_id={id} />
-        <ItemsUser allItems={allItems} setItemsChange={setItemsChange} />
-        <ItemsList user_id={id} user_name={name} /*otherItems={otherItems}*/ />
+        <ItemsForm setItemsChange={setItemsChange} />
+
+        <ItemsUser userItems={userItems} setItemsChange={setItemsChange} />
+        <ItemsList user_id={id} user_name={name} />
       </Container>
     </Fragment>
   );

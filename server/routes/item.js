@@ -126,24 +126,25 @@ router.put("/image/:id", authorize, jsonParser, async (req, res) => {
   }
 });
 
-router.put("/owner/:id", authorize, jsonParser, async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { buyer } = req.body;
-    const updateOwner = await db.sequelize.query(
-      `UPDATE items SET item_owner = ${buyer} WHERE item_id = ${id} AND item_owner = ${req.user.id} RETURNING *`
-    );
-
-    console.log(updateOwner[0].length);
-    if (updateOwner[0].length === 0) {
-      return res.json("this item is not yours");
+router.put(
+  "/owner/:item_id/:item_owner/:user_id",
+  authorize,
+  jsonParser,
+  async (req, res) => {
+    try {
+      const { item_id, item_owner, user_id } = req.params;
+      const updateOwner = await db.sequelize.query(
+        `UPDATE items SET item_owner = ${user_id} WHERE item_id = ${item_id} AND item_owner = ${item_owner} RETURNING *`
+      );
+      if (updateOwner[0].length === 0) {
+        return res.json("this item is not yours");
+      }
+      res.json(updateOwner[0]);
+    } catch (err) {
+      console.error(err.message);
     }
-    console.log(updateOwner[0]);
-    res.json(updateOwner[0]);
-  } catch (err) {
-    console.error(err.message);
   }
-});
+);
 
 router.delete("/:id", jsonParser, async (req, res) => {
   try {

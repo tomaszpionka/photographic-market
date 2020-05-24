@@ -11,7 +11,7 @@ import {
 } from "semantic-ui-react";
 import ItemsEdit from "./ItemsEdit";
 
-const ItemsUser = ({ allItems, setItemsChange }) => {
+const ItemsUser = ({ userItems, setItemsChange }) => {
   const [items, setItems] = useState([]); //empty array
 
   //   delete item function
@@ -31,8 +31,8 @@ const ItemsUser = ({ allItems, setItemsChange }) => {
   };
 
   useEffect(() => {
-    setItems(allItems);
-  }, [allItems]);
+    setItems(userItems);
+  }, [userItems]);
 
   return (
     <Fragment>

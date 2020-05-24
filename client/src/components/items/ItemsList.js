@@ -10,7 +10,7 @@ import {
   Modal,
 } from "semantic-ui-react";
 
-const ItemsList = () => {
+const ItemsList = ({ user_id }) => {
   const [items, setItems] = useState([]);
   const getItems = async () => {
     try {
@@ -20,6 +20,25 @@ const ItemsList = () => {
       });
       const parseData = await res.json();
       setItems(parseData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const orderItem = async (item_id, item_owner, user_id) => {
+    console.log(user_id);
+    const body = { user_id };
+    try {
+      const res = await fetch(
+        `http://localhost:5000/items/owner/${item_id}/${item_owner}/${user_id}`,
+        {
+          method: "PUT",
+          headers: { jwt_token: localStorage.token },
+          body: JSON.stringify(body),
+        }
+      );
+      const parseData = await res.json();
+      console.log(parseData[0]);
+      window.location = "/dashboard";
     } catch (error) {
       console.log(error);
     }
@@ -59,6 +78,15 @@ const ItemsList = () => {
                     <Item.Extra>
                       <Image avatar circular src={item.ownerRef.user_image} />
                       <span>{item.ownerRef.user_email}</span>
+                      {item.item_owner !== user_id ? (
+                        <Button
+                          onClick={() =>
+                            orderItem(item.item_id, item.item_owner, user_id)
+                          }
+                        >
+                          order
+                        </Button>
+                      ) : null}
                       <Modal
                         trigger={
                           <Button primary floated="right">
