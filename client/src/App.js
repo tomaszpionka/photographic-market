@@ -13,7 +13,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Home from "./components/home/Home";
 import Items from "./components/items/Items";
 import Users from "./components/users/Users";
-// import Orders from "./components/orders/Orders";
+import Orders from "./components/orders/Orders";
 import ResponsiveContainer from "./components/menu/Header";
 import Footer from "./components/menu/Footer";
 import Profile from "./components/profile/Profile";
@@ -79,11 +79,11 @@ function App() {
             path="/users"
             render={(props) => <Users {...props} setAuth={setAuth} />}
           />
-          {/* <Route
+          <Route
             exact
             path="/orders"
             render={(props) => <Orders {...props} setAuth={setAuth} />}
-          /> */}
+          />
           <Route
             exact
             path="/login"
