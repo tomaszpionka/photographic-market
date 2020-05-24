@@ -23,6 +23,16 @@ const Order = db.sequelize.define("order", {
     allowNull: false,
     defaultValue: 0,
   },
+  order_init: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },
+  order_process: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },
   order_success: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
