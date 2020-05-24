@@ -80,11 +80,14 @@ const updateProcess = async (req, res) => {
 
 const confirmOrder = async (req, res) => {
   try {
-    const { order_id } = req.params;
+    const { order_id, item_buyer, item_id } = req.params;
     const confirmOrder = await db.sequelize.query(
       `UPDATE orders SET order_success = 'true' WHERE order_id = '${order_id}' RETURNING *`
     );
-    res.json(confirmOrder[0]);
+    const changeOwner = await db.sequelize.query(
+      `UPDATE items SET item_owner = '${item_buyer}' WHERE item_id = '${item_id}' RETURNING *`
+    );
+    res.json({ order: confirmOrder[0], owner: changeOwner });
   } catch (err) {
     console.error(err.message);
   }

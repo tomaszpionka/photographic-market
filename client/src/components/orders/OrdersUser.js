@@ -43,17 +43,20 @@ const OrdersUser = () => {
     }
   };
 
-  const confirmOrder = async (id) => {
+  const confirmOrder = async (order_id, item_buyer, item_id) => {
     try {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
-      const res = await fetch(`http://localhost:5000/orders/confirm/${id}`, {
-        method: "PUT",
-        headers: myHeaders,
-      });
+      const res = await fetch(
+        `http://localhost:5000/orders/confirm/${order_id}/${item_buyer}/${item_id}`,
+        {
+          method: "PUT",
+          headers: myHeaders,
+        }
+      );
       // const parseData = await res.json();
-      window.location = "/dashboard";
+      // window.location = "/dashboard";
     } catch (error) {
       console.log(error);
     }
@@ -132,7 +135,13 @@ const OrdersUser = () => {
                           <Button
                             color="green"
                             inverted
-                            onClick={() => confirmOrder(order.order_id)}
+                            onClick={() =>
+                              confirmOrder(
+                                order.order_id,
+                                order.item_buyer,
+                                order.item_id
+                              )
+                            }
                           >
                             <Icon name="checkmark" /> Yes
                           </Button>

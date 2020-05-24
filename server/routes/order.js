@@ -20,7 +20,7 @@ router.put(
   orderController.updateProcess
 );
 router.put(
-  "/confirm/:order_id",
+  "/confirm/:order_id/:item_buyer/:item_id",
   authorize,
   jsonParser,
   orderController.confirmOrder
