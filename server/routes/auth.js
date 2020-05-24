@@ -6,17 +6,16 @@ const { QueryTypes } = require("sequelize");
 const validInfo = require("../middleware/validInfo");
 const jwtGenerator = require("../utils/jwtGenerator");
 const authorize = require("../middleware/authorize");
-const bodyParser = require('body-parser');
-
+const bodyParser = require("body-parser");
 
 router.post("/register", bodyParser.json(), validInfo, async (req, res) => {
-  const { email, name, surname, password } = req.body;
+  const { email, name, surname, password, phone, city } = req.body;
 
   try {
     const user = await db.sequelize.query(
       `SELECT * FROM users WHERE user_email = '${email}'`,
       {
-        type: QueryTypes.SELECT
+        type: QueryTypes.SELECT,
       }
     );
 
@@ -28,9 +27,9 @@ router.post("/register", bodyParser.json(), validInfo, async (req, res) => {
     const bcryptPassword = await bcrypt.hash(password, salt);
 
     let newUser = await db.sequelize.query(
-      `INSERT INTO users (user_name, user_surname, user_email, user_password) VALUES ('${name}','${surname}','${email}','${bcryptPassword}') RETURNING *`,
+      `INSERT INTO users (user_name, user_surname, user_email, user_password, user_phone, user_city) VALUES ('${name}','${surname}','${email}','${bcryptPassword}', '${phone}','${city}') RETURNING *`,
       {
-        type: QueryTypes.SELECT
+        type: QueryTypes.SELECT,
       }
     );
 
@@ -50,7 +49,7 @@ router.post("/login", bodyParser.json(), validInfo, async (req, res) => {
     const user = await db.sequelize.query(
       `SELECT * FROM users WHERE user_email = '${email}'`,
       {
-        type: QueryTypes.SELECT
+        type: QueryTypes.SELECT,
       }
     );
 
