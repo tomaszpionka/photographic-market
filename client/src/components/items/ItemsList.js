@@ -24,21 +24,24 @@ const ItemsList = ({ user_id }) => {
       console.log(error);
     }
   };
+
   const orderItem = async (item_id, item_owner, user_id) => {
     console.log(user_id);
     const body = { user_id };
     try {
       const res = await fetch(
-        `http://localhost:5000/items/owner/${item_id}/${item_owner}/${user_id}`,
+        // `http://localhost:5000/items/owner/${item_id}/${item_owner}/${user_id}`,
+        `http://localhost:5000/orders/${item_id}/${item_owner}/${user_id}`,
         {
-          method: "PUT",
+          // method: "PUT",
+          method: "POST",
           headers: { jwt_token: localStorage.token },
           body: JSON.stringify(body),
         }
       );
       const parseData = await res.json();
       console.log(parseData[0]);
-      window.location = "/dashboard";
+      // window.location = "/dashboard";
     } catch (error) {
       console.log(error);
     }
