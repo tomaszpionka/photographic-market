@@ -87,7 +87,14 @@ const confirmOrder = async (req, res) => {
     const changeOwner = await db.sequelize.query(
       `UPDATE items SET item_owner = '${item_buyer}' WHERE item_id = '${item_id}' RETURNING *`
     );
-    res.json({ order: confirmOrder[0], owner: changeOwner });
+    const updateOffers = await db.sequelize.query(
+      `UPDATE orders SET item_owner = '${item_buyer}' WHERE item_id = '${item_id}' AND NOT order_id = '${order_id}' RETURNING *`
+    );
+    res.json({
+      order: confirmOrder[0],
+      owner: changeOwner[0],
+      offer: updateOffers[0],
+    });
   } catch (err) {
     console.error(err.message);
   }
