@@ -23,7 +23,6 @@ const Dashboard = () => {
         headers: { jwt_token: localStorage.token },
       });
       const parseData = await res.json();
-      console.log(parseData);
       setUserItems(parseData);
       setId(parseData[0].user_id);
       setName(parseData[0].user_name);
