@@ -115,38 +115,42 @@ const OrdersUser = () => {
                         setItemsChange={setItemsChange}
                         inline
                       /> */}
-
-                      <Modal
-                        trigger={<Button>confirm</Button>}
-                        basic
-                        size="small"
-                      >
-                        <Header icon="trash" content="delete order" />
-                        <Modal.Content>
-                          <p>
-                            this will permanently confirm order {order.order_id}{" "}
-                            , would you like to continue?
-                          </p>
-                        </Modal.Content>
-                        <Modal.Actions>
-                          <Button basic color="red" inverted>
-                            <Icon name="remove" /> No
-                          </Button>
-                          <Button
-                            color="green"
-                            inverted
-                            onClick={() =>
-                              confirmOrder(
-                                order.order_id,
-                                order.item_buyer,
-                                order.item_id
-                              )
-                            }
-                          >
-                            <Icon name="checkmark" /> Yes
-                          </Button>
-                        </Modal.Actions>
-                      </Modal>
+                      {order.order_success ===
+                      true ? null : order.order_process === false ? (
+                        <p>not sent</p>
+                      ) : (
+                        <Modal
+                          trigger={<Button>confirm</Button>}
+                          basic
+                          size="small"
+                        >
+                          <Header icon="trash" content="delete order" />
+                          <Modal.Content>
+                            <p>
+                              this will permanently confirm order{" "}
+                              {order.order_id} , would you like to continue?
+                            </p>
+                          </Modal.Content>
+                          <Modal.Actions>
+                            <Button basic color="red" inverted>
+                              <Icon name="remove" /> No
+                            </Button>
+                            <Button
+                              color="green"
+                              inverted
+                              onClick={() =>
+                                confirmOrder(
+                                  order.order_id,
+                                  order.item_buyer,
+                                  order.item_id
+                                )
+                              }
+                            >
+                              <Icon name="checkmark" /> Yes
+                            </Button>
+                          </Modal.Actions>
+                        </Modal>
+                      )}
                     </Item.Extra>
                   </Item.Content>
                 </Item>
