@@ -8,6 +8,8 @@ import ItemsForm from "../items/ItemsForm";
 import ItemsList from "../items/ItemsList";
 import ItemsUser from "../items/ItemsUser";
 import User from "../users/User";
+import OrdersUser from "../orders/OrdersUser";
+import OffersUser from "../offers/OffersUser";
 
 const Dashboard = () => {
   const [name, setName] = useState("");
@@ -21,6 +23,7 @@ const Dashboard = () => {
         headers: { jwt_token: localStorage.token },
       });
       const parseData = await res.json();
+      console.log(parseData);
       setUserItems(parseData);
       setId(parseData[0].user_id);
       setName(parseData[0].user_name);
@@ -44,6 +47,8 @@ const Dashboard = () => {
           <p>inventory can be managed by user here</p>
         </Container>
         <User user_id={id} />
+        <OrdersUser />
+        <OffersUser />
         <ItemsForm setItemsChange={setItemsChange} />
 
         <ItemsUser userItems={userItems} setItemsChange={setItemsChange} />
