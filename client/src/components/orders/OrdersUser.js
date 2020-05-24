@@ -62,9 +62,100 @@ const OrdersUser = () => {
     }
   };
 
+  const [items, setItems] = useState([]);
+  const getItems = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/items", {
+        method: "GET",
+        headers: { jwt_token: localStorage.token },
+      });
+      const parseData = await res.json();
+      setItems(parseData);
+      console.log(parseData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const filteredItems = (order) => {
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].item_id == order.item_id) {
+        return (
+          <Item key={order.order_id}>
+            <Item.Image src={items[i].item_image_url} />
+            <Item.Content>
+              <Item.Header as="a">{items[i].item_name}</Item.Header>
+              <Item.Meta>
+                <span>
+                  order placed at: {order.createdAt.slice(0, 10)}{" "}
+                  {order.createdAt.slice(11, 16)}
+                </span>
+                <br />
+                <span>order value: ${items[i].item_price}</span>
+                <br />
+                <span>order accepted: {order.order_process.toString()}</span>
+              </Item.Meta>
+              <Item.Description>{items[i].item_description}</Item.Description>
+              <Item.Extra>
+                <Image avatar circular src={items[i].ownerRef.user_image} />
+                <span floated="right">{items[i].ownerRef.user_email}</span>
+
+                <Modal
+                  trigger={
+                    order.order_success === true ? (
+                      <Button positive floated="right" disabled>
+                        received
+                      </Button>
+                    ) : order.order_process === false ? (
+                      <Button secondary floated="right" disabled>
+                        not sent
+                      </Button>
+                    ) : (
+                      <Button primary floated="right">
+                        confirm
+                      </Button>
+                    )
+                  }
+                  basic
+                  size="small"
+                >
+                  <Header icon="trash" content="delete order" />
+                  <Modal.Content>
+                    <p>
+                      this will permanently confirm order {order.order_id} ,
+                      would you like to continue?
+                    </p>
+                  </Modal.Content>
+                  <Modal.Actions>
+                    <Button basic color="red" inverted>
+                      <Icon name="remove" /> No
+                    </Button>
+                    <Button
+                      color="green"
+                      inverted
+                      onClick={() =>
+                        confirmOrder(
+                          order.order_id,
+                          order.item_buyer,
+                          order.item_id
+                        )
+                      }
+                    >
+                      <Icon name="checkmark" /> Yes
+                    </Button>
+                  </Modal.Actions>
+                </Modal>
+              </Item.Extra>
+            </Item.Content>
+          </Item>
+        );
+      }
+    }
+  };
+
   useEffect(() => {
     getProfile();
     getOrders(id);
+    getItems();
   }, [id]);
 
   return (
@@ -79,81 +170,7 @@ const OrdersUser = () => {
             {orders.length !== 0 &&
               orders[0].order_id !== null &&
               orders.map((order) => (
-                <Item key={order.order_id}>
-                  {/* <Item.Image src={order.order_image_url} /> */}
-                  <Item.Content>
-                    <Item.Header as="a">{order.order_id}</Item.Header>
-                    <Item.Meta>
-                      <span>
-                        {order.createdAt.slice(0, 10)}{" "}
-                        {order.createdAt.slice(11, 16)}
-                      </span>
-                      <br />
-                      <span>item id {order.item_id}</span>
-                      <br />
-                      <span>
-                        item owner {order.item_owner} vs {id}
-                      </span>
-                      <br />
-                      <span>
-                        item buyer {order.item_buyer} vs {id}
-                      </span>
-                      <br />
-                      <span>
-                        order process {order.order_process.toString()}
-                      </span>
-                    </Item.Meta>
-                    <Item.Description>
-                      order success {order.order_success.toString()}
-                    </Item.Description>
-                    <Item.Extra>
-                      {/* <Image avatar circular src={order.user_image} /> */}
-                      {/* <span>{order.user_email}</span> */}
-
-                      {/* <ItemsEdit
-                        item={order}
-                        setItemsChange={setItemsChange}
-                        inline
-                      /> */}
-                      {order.order_success ===
-                      true ? null : order.order_process === false ? (
-                        <p>not sent</p>
-                      ) : (
-                        <Modal
-                          trigger={<Button>confirm</Button>}
-                          basic
-                          size="small"
-                        >
-                          <Header icon="trash" content="delete order" />
-                          <Modal.Content>
-                            <p>
-                              this will permanently confirm order{" "}
-                              {order.order_id} , would you like to continue?
-                            </p>
-                          </Modal.Content>
-                          <Modal.Actions>
-                            <Button basic color="red" inverted>
-                              <Icon name="remove" /> No
-                            </Button>
-                            <Button
-                              color="green"
-                              inverted
-                              onClick={() =>
-                                confirmOrder(
-                                  order.order_id,
-                                  order.item_buyer,
-                                  order.item_id
-                                )
-                              }
-                            >
-                              <Icon name="checkmark" /> Yes
-                            </Button>
-                          </Modal.Actions>
-                        </Modal>
-                      )}
-                    </Item.Extra>
-                  </Item.Content>
-                </Item>
+                <Fragment>{filteredItems(order)}</Fragment>
               ))}
           </Item.Group>
         </Container>
