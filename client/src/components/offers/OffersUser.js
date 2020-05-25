@@ -27,7 +27,7 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
           headers: myHeaders,
         }
       );
-      // window.location = "/orders";
+      window.location = "/orders";
     } catch (error) {
       console.log(error);
     }
