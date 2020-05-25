@@ -9,6 +9,7 @@ import {
   Segment,
   Modal,
 } from "semantic-ui-react";
+import { toast } from "react-toastify";
 
 const ItemsList = ({ user_id }) => {
   const [items, setItems] = useState([]);
@@ -39,8 +40,8 @@ const ItemsList = ({ user_id }) => {
         }
       );
       const parseData = await res.json();
-      console.log(parseData[0]);
-      // window.location = "/dashboard";
+      console.log(parseData);
+      toast.success(parseData);
     } catch (error) {
       console.log(error);
     }
