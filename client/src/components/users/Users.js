@@ -1,30 +1,10 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { Container, List, Form } from "semantic-ui-react";
 import SingleUser from "./SingleUser";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [query, setQuery] = useState("");
-
-  const getAllUsers = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/users", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      const parseData = await res.json();
-      setUsers(parseData);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  // useEffect(() => {
-  //   getAllUsers();
-  // }, []);
 
   const search = async (e) => {
     e.preventDefault();
@@ -34,9 +14,7 @@ const Users = () => {
       );
 
       const parseResponse = await response.json();
-
       setUsers(parseResponse[0]);
-      console.log(parseResponse);
     } catch (err) {
       console.error(err.message);
     }
@@ -54,7 +32,7 @@ const Users = () => {
               action={{
                 type: "submit",
                 icon: "search",
-                color: "primary",
+                color: "blue",
                 content: "Search",
               }}
             />
