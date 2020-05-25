@@ -10,75 +10,33 @@ import {
   Button,
 } from "semantic-ui-react";
 
-const OrdersUser = () => {
-  const [id, setId] = useState("");
-
-  const getProfile = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/dashboard", {
-        method: "GET",
-        headers: { jwt_token: localStorage.token },
-      });
-      const parseData = await res.json();
-      setId(parseData[0].user_id);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  const [orders, setOrders] = useState([]);
-  const getOrders = async (id) => {
-    try {
-      const res = await fetch("http://localhost:5000/orders", {
-        method: "GET",
-        headers: { jwt_token: localStorage.token },
-      });
-      const parseData = await res.json();
-      // console.log(parseData);
-      setOrders(parseData.filter((order) => order.item_buyer === id));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const OrdersUser = ({ allOrders, user_id, allItems }) => {
+  const [id, setId] = useState(user_id);
+  const [orders, setOrders] = useState(allOrders);
 
   const confirmOrder = async (order_id, item_buyer, item_id) => {
     try {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
-      const res = await fetch(
+      await fetch(
         `http://localhost:5000/orders/confirm/${order_id}/${item_buyer}/${item_id}`,
         {
           method: "PUT",
           headers: myHeaders,
         }
       );
-      // const parseData = await res.json();
-      window.location = "/dashboard";
+      window.location = "/orders";
     } catch (error) {
       console.log(error);
     }
   };
 
-  const [items, setItems] = useState([]);
-  const getItems = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/items", {
-        method: "GET",
-        headers: { jwt_token: localStorage.token },
-      });
-      const parseData = await res.json();
-      setItems(parseData);
-      // console.log(parseData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [items, setItems] = useState(allItems);
 
   const filteredItems = (order) => {
     for (let i = 0; i < items.length; i++) {
-      // console.log(items[i]);
-      if (items[i].item_id === order.item_id) {
+      if (items[i].item_id === order.item_id && order.item_buyer === id) {
         return (
           <Item key={order.order_id}>
             <Item.Image src={items[i].item_image_url} />
@@ -153,16 +111,16 @@ const OrdersUser = () => {
   };
 
   useEffect(() => {
-    getProfile();
-    getOrders(id);
-    getItems();
-  }, [id]);
+    setId(user_id);
+    setOrders(allOrders);
+    setItems(allItems);
+  }, [user_id, allOrders, allItems]);
 
   return (
     <Fragment>
       <Header as="h2" attached="top" block>
         <Icon name="camera retro" />
-        <Header.Content>user orders</Header.Content>
+        <Header.Content>user orders {id}</Header.Content>
       </Header>
       <Segment attached>
         <Container>
