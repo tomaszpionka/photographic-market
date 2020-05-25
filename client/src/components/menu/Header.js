@@ -91,13 +91,13 @@ const DesktopContainer = ({ children }) => {
               <Menu.Item as={Link} to="/items">
                 items
               </Menu.Item>
+              <Menu.Item as={Link} to="/orders">
+                orders
+              </Menu.Item>
               <Menu.Item as={Link} to="/users">
                 users
               </Menu.Item>
-              {/* 
-              <Menu.Item as={Link} to="/orders">
-                Orders
-              </Menu.Item> */}
+
               <Menu.Item position="right">
                 {!isAuthenticated ? (
                   <Fragment>
@@ -202,12 +202,12 @@ const MobileContainer = ({ children }) => {
         <Menu.Item as={Link} to="/items">
           items
         </Menu.Item>
-        {/* <Menu.Item as={Link} to="/users">
-          Users
-        </Menu.Item>
         <Menu.Item as={Link} to="/orders">
-          Orders
-        </Menu.Item> */}
+          orders
+        </Menu.Item>
+        <Menu.Item as={Link} to="/users">
+          users
+        </Menu.Item>
       </Sidebar>
 
       <Sidebar.Pusher dimmed={opened}>

@@ -11,9 +11,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
   const editName = async (id) => {
     try {
       const body = { name };
-
       const myHeaders = new Headers();
-
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
@@ -22,9 +20,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
         headers: myHeaders,
         body: JSON.stringify(body),
       });
-
       setItemsChange(true);
-
       // window.location = "/";
     } catch (err) {
       console.error(err.message);
@@ -34,9 +30,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
   const editDescription = async (id) => {
     try {
       const body = { description };
-
       const myHeaders = new Headers();
-
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
@@ -45,9 +39,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
         headers: myHeaders,
         body: JSON.stringify(body),
       });
-
       setItemsChange(true);
-
       // window.location = "/";
     } catch (err) {
       console.error(err.message);
@@ -56,9 +48,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
   const editPrice = async (id) => {
     try {
       const body = { price };
-
       const myHeaders = new Headers();
-
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
@@ -67,9 +57,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
         headers: myHeaders,
         body: JSON.stringify(body),
       });
-
       setItemsChange(true);
-
       // window.location = "/";
     } catch (err) {
       console.error(err.message);
@@ -78,9 +66,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
   const editImageUrl = async (id) => {
     try {
       const body = { imageUrl };
-
       const myHeaders = new Headers();
-
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
@@ -89,9 +75,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
         headers: myHeaders,
         body: JSON.stringify(body),
       });
-
       setItemsChange(true);
-
       // window.location = "/";
     } catch (err) {
       console.error(err.message);

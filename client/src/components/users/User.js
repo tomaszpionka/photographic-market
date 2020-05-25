@@ -1,9 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import {
-  Item,
   Container,
   Header,
-  Button,
   Card,
   Image,
   Icon,
@@ -14,8 +12,6 @@ import UserEdit from "./UserEdit";
 
 const User = ({ user, setUsersChange }) => {
   const [userData, setUserData] = useState(user);
-  console.log(userData.length);
-
   useEffect(() => {
     setUserData(user);
   }, [user]);

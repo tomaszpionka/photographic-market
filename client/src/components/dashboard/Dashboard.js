@@ -8,8 +8,6 @@ import ItemsForm from "../items/ItemsForm";
 import ItemsList from "../items/ItemsList";
 import ItemsUser from "../items/ItemsUser";
 import User from "../users/User";
-import OrdersUser from "../orders/OrdersUser";
-import OffersUser from "../offers/OffersUser";
 
 const Dashboard = () => {
   const [name, setName] = useState("");
@@ -46,13 +44,10 @@ const Dashboard = () => {
       <Container>
         <Container text style={{ marginTop: "7em" }}>
           <Header as="h1">dashboard</Header>
-
           <p>this is a protected admin panel</p>
           <p>inventory can be managed by user here</p>
         </Container>
         <User user={user} setUsersChange={setUsersChange} />
-        {/* <OrdersUser />
-        <OffersUser /> */}
         <ItemsForm setItemsChange={setItemsChange} />
 
         <ItemsUser userItems={userItems} setItemsChange={setItemsChange} />
