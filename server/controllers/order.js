@@ -45,6 +45,7 @@ const getOrders = async (req, res) => {
 const updateProcess = async (req, res) => {
   try {
     const { order_id, item_id, process } = req.params;
+    console.log(req.params);
     if (process === "true") {
       const offer = await db.sequelize.query(
         `SELECT * from orders WHERE item_id = '${item_id}' and order_process = 'true'`,
@@ -88,7 +89,7 @@ const confirmOrder = async (req, res) => {
       `UPDATE items SET item_owner = '${item_buyer}' WHERE item_id = '${item_id}' RETURNING *`
     );
     const updateOffers = await db.sequelize.query(
-      `UPDATE orders SET item_owner = '${item_buyer}' WHERE item_id = '${item_id}' AND NOT order_id = '${order_id}' RETURNING *`
+      `UPDATE orders SET item_owner = '${item_buyer}', order_process = 'false' WHERE item_id = '${item_id}' RETURNING *`
     );
     res.json({
       order: confirmOrder[0],
