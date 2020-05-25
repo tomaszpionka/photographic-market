@@ -15,7 +15,10 @@ const Dashboard = () => {
   const [name, setName] = useState("");
   const [userItems, setUserItems] = useState([]);
   const [itemsChange, setItemsChange] = useState(false);
+  const [userChange, setUsersChange] = useState(false);
   const [id, setId] = useState("");
+  const [user, setUser] = useState([]);
+
   const getProfile = async () => {
     try {
       const res = await fetch("http://localhost:5000/dashboard", {
@@ -26,6 +29,7 @@ const Dashboard = () => {
       setUserItems(parseData);
       setId(parseData[0].user_id);
       setName(parseData[0].user_name);
+      setUser(parseData[0]);
     } catch (err) {
       console.error(err.message);
     }
@@ -34,7 +38,8 @@ const Dashboard = () => {
   useEffect(() => {
     getProfile();
     setItemsChange(false);
-  }, [itemsChange]);
+    setUsersChange(false);
+  }, [itemsChange, userChange]);
 
   return (
     <Fragment>
@@ -45,9 +50,9 @@ const Dashboard = () => {
           <p>this is a protected admin panel</p>
           <p>inventory can be managed by user here</p>
         </Container>
-        <User user_id={id} />
-        <OrdersUser />
-        <OffersUser />
+        <User user={user} setUsersChange={setUsersChange} />
+        {/* <OrdersUser />
+        <OffersUser /> */}
         <ItemsForm setItemsChange={setItemsChange} />
 
         <ItemsUser userItems={userItems} setItemsChange={setItemsChange} />
