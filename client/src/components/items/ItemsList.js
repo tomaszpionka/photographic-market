@@ -26,7 +26,6 @@ const ItemsList = ({ user_id }) => {
   };
 
   const orderItem = async (item_id, item_owner, user_id) => {
-    console.log(user_id);
     const body = { user_id };
     try {
       const res = await fetch(
@@ -83,13 +82,19 @@ const ItemsList = ({ user_id }) => {
                       <span>{item.ownerRef.user_email}</span>
                       {item.item_owner !== user_id ? (
                         <Button
+                          positive
+                          floated="right"
                           onClick={() =>
                             orderItem(item.item_id, item.item_owner, user_id)
                           }
                         >
                           order
                         </Button>
-                      ) : null}
+                      ) : (
+                        <Button negative floated="right" disabled>
+                          stock
+                        </Button>
+                      )}
                       <Modal
                         trigger={
                           <Button primary floated="right">
