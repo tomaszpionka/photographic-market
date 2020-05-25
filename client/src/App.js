@@ -16,7 +16,7 @@ import Users from "./components/users/Users";
 import Orders from "./components/orders/Orders";
 import ResponsiveContainer from "./components/menu/Header";
 import Footer from "./components/menu/Footer";
-import Profile from "./components/profile/Profile";
+// import Profile from "./components/profile/Profile";
 // import SingleItem from "./components/items/SingleItem";
 
 toast.configure();
@@ -54,11 +54,11 @@ function App() {
           setAuth={setAuth}
         />
         <Switch>
-          <Route
+          {/* <Route
             exact
             path="/profile"
             render={(props) => <Profile {...props} setAuth={setAuth} />}
-          />
+          /> */}
           {/* <Route
             exact
             path="/item/:id"
