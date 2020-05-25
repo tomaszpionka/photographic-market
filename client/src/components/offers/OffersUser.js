@@ -35,7 +35,11 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
 
   const filteredItems = (order) => {
     for (let i = 0; i < items.length; i++) {
-      if (items[i].item_id === order.item_id && order.item_owner === id) {
+      if (
+        items[i].item_id === order.item_id &&
+        order.item_owner === id &&
+        order.item_buyer !== id
+      ) {
         return (
           <Item key={order.order_id}>
             <Item.Image src={items[i].item_image_url} />
