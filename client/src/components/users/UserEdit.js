@@ -1,63 +1,112 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Button, Header, Image, Modal, Form } from "semantic-ui-react";
 
-const ItemsEdit = ({ item, setItemsChange }) => {
-  const [name, setName] = useState(item.item_name);
-  const [description, setDescription] = useState(item.item_description);
-  const [price, setPrice] = useState(item.item_price);
-  const [imageUrl, setImageUrl] = useState(item.item_image_url);
+const UserEdit = ({ userData, setUsersChange }) => {
+  const [name, setName] = useState(userData.user_name);
+  const [surname, setSurname] = useState(userData.user_surname);
+  const [phone, setPhone] = useState(userData.user_phone);
+  const [city, setCity] = useState(userData.user_city);
+  const [imageUrl, setImageUrl] = useState(userData.user_image);
+
+  useEffect(() => {
+    setName(userData.user_name);
+    setSurname(userData.user_surname);
+    setPhone(userData.user_phone);
+    setCity(userData.user_city);
+    setImageUrl(userData.user_image);
+  }, [
+    userData.user_name,
+    userData.user_surname,
+    userData.user_phone,
+    userData.user_city,
+    userData.user_image,
+  ]);
 
   //editText function
   const editName = async (id) => {
     try {
       const body = { name };
+
       const myHeaders = new Headers();
+
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      await fetch(`http://localhost:5000/items/name/${id}`, {
+      await fetch(`http://localhost:5000/users/name/${id}`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify(body),
       });
-      setItemsChange(true);
+
+      setUsersChange(true);
+
       // window.location = "/";
     } catch (err) {
       console.error(err.message);
     }
   };
 
-  const editDescription = async (id) => {
+  const editSurname = async (id) => {
     try {
-      const body = { description };
+      const body = { surname };
+
       const myHeaders = new Headers();
+
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      await fetch(`http://localhost:5000/items/description/${id}`, {
+      await fetch(`http://localhost:5000/users/surname/${id}`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify(body),
       });
-      setItemsChange(true);
+
+      setUsersChange(true);
+
       // window.location = "/";
     } catch (err) {
       console.error(err.message);
     }
   };
-  const editPrice = async (id) => {
+  const editPhone = async (id) => {
     try {
-      const body = { price };
+      const body = { phone };
+
       const myHeaders = new Headers();
+
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      await fetch(`http://localhost:5000/items/price/${id}`, {
+      await fetch(`http://localhost:5000/users/phone/${id}`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify(body),
       });
-      setItemsChange(true);
+
+      setUsersChange(true);
+
+      // window.location = "/";
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+  const editCity = async (id) => {
+    try {
+      const body = { city };
+
+      const myHeaders = new Headers();
+
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("jwt_token", localStorage.token);
+
+      await fetch(`http://localhost:5000/users/city/${id}`, {
+        method: "PUT",
+        headers: myHeaders,
+        body: JSON.stringify(body),
+      });
+
+      setUsersChange(true);
+
       // window.location = "/";
     } catch (err) {
       console.error(err.message);
@@ -66,16 +115,20 @@ const ItemsEdit = ({ item, setItemsChange }) => {
   const editImageUrl = async (id) => {
     try {
       const body = { imageUrl };
+
       const myHeaders = new Headers();
+
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      await fetch(`http://localhost:5000/items/image/${id}`, {
+      await fetch(`http://localhost:5000/users/image/${id}`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify(body),
       });
-      setItemsChange(true);
+
+      setUsersChange(true);
+
       // window.location = "/";
     } catch (err) {
       console.error(err.message);
@@ -92,16 +145,14 @@ const ItemsEdit = ({ item, setItemsChange }) => {
 
   return (
     <Fragment>
-      <Button primary floated="right" onClick={openHandler}>
-        edit
-      </Button>
+      <Button onClick={openHandler}>edit</Button>
 
       <Modal open={open} onClose={closeHandler}>
-        <Modal.Header>edit item</Modal.Header>
+        <Modal.Header>edit user</Modal.Header>
         <Modal.Content image>
-          <Image wrapped size="medium" src={imageUrl} />
+          <Image wrapped size="medium" src={userData.user_image} />
           <Modal.Description>
-            <Header>item edit</Header>
+            <Header>user edit</Header>
             <p>
               We've found the following gravatar image associated with your
               e-mail address.
@@ -113,7 +164,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
                 <input
                   value={name}
                   type="text"
-                  minLength="6"
+                  minLength="2"
                   onChange={(e) => setName(e.target.value)}
                 />
               </Form.Field>
@@ -121,67 +172,91 @@ const ItemsEdit = ({ item, setItemsChange }) => {
                 <Form.Button
                   content="update"
                   onClick={() => {
-                    editName(item.item_id);
+                    editName(userData.user_id);
                   }}
                 />
                 <Form.Button
                   content="discard"
                   negative
                   onClick={() => {
-                    setName(item.item_name);
+                    setName(userData.user_name);
                   }}
                 />
               </Form.Group>
             </Form>
             <Form>
               <Form.Field>
-                <label>description</label>
+                <label>surname</label>
                 <input
-                  value={description}
+                  value={surname}
                   type="text"
-                  minLength="6"
-                  onChange={(e) => setDescription(e.target.value)}
+                  minLength="2"
+                  onChange={(e) => setSurname(e.target.value)}
                 />
               </Form.Field>
               <Form.Group>
                 <Form.Button
                   content="update"
                   onClick={() => {
-                    editDescription(item.item_id);
+                    editSurname(userData.user_id);
                   }}
                 />
                 <Form.Button
                   content="discard"
                   negative
                   onClick={() => {
-                    setDescription(item.item_description);
+                    setSurname(userData.user_surname);
                   }}
                 />
               </Form.Group>
             </Form>
             <Form>
               <Form.Field>
-                <label>price</label>
+                <label>phone</label>
                 <input
-                  value={price}
+                  value={phone}
                   type="number"
                   min="0"
-                  max="100"
-                  onChange={(e) => setPrice(e.target.value)}
+                  onChange={(e) => setPhone(e.target.value)}
                 />
               </Form.Field>
               <Form.Group>
                 <Form.Button
                   content="update"
                   onClick={() => {
-                    editPrice(item.item_id);
+                    editPhone(userData.user_id);
                   }}
                 />
                 <Form.Button
                   content="discard"
                   negative
                   onClick={() => {
-                    setPrice(item.item_price);
+                    setPhone(userData.user_phone);
+                  }}
+                />
+              </Form.Group>
+            </Form>
+            <Form>
+              <Form.Field>
+                <label>city</label>
+                <input
+                  value={city}
+                  type="text"
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </Form.Field>
+              <Form.Group>
+                <Form.Button
+                  content="update"
+                  onClick={() => {
+                    editCity(userData.user_id);
+                  }}
+                />
+                <Form.Button
+                  content="discard"
+                  negative
+                  onClick={() => {
+                    setCity(userData.user_city);
                   }}
                 />
               </Form.Group>
@@ -200,14 +275,14 @@ const ItemsEdit = ({ item, setItemsChange }) => {
                 <Form.Button
                   content="update"
                   onClick={() => {
-                    editImageUrl(item.item_id);
+                    editImageUrl(userData.user_id);
                   }}
                 />
                 <Form.Button
                   content="discard"
                   negative
                   onClick={() => {
-                    setImageUrl(item.item_image_url);
+                    setImageUrl(userData.user_image);
                   }}
                 />
               </Form.Group>
@@ -228,4 +303,4 @@ const ItemsEdit = ({ item, setItemsChange }) => {
   );
 };
 
-export default ItemsEdit;
+export default UserEdit;

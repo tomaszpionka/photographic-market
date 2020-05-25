@@ -16,8 +16,6 @@ import Users from "./components/users/Users";
 import Orders from "./components/orders/Orders";
 import ResponsiveContainer from "./components/menu/Header";
 import Footer from "./components/menu/Footer";
-import Profile from "./components/profile/Profile";
-// import SingleItem from "./components/items/SingleItem";
 
 toast.configure();
 
@@ -56,16 +54,6 @@ function App() {
         <Switch>
           <Route
             exact
-            path="/profile"
-            render={(props) => <Profile {...props} setAuth={setAuth} />}
-          />
-          {/* <Route
-            exact
-            path="/item/:id"
-            render={(props) => <SingleItem {...props} setAuth={setAuth} />}
-          /> */}
-          <Route
-            exact
             path="/"
             render={(props) => <Home {...props} setAuth={setAuth} />}
           />
@@ -82,8 +70,15 @@ function App() {
           <Route
             exact
             path="/orders"
-            render={(props) => <Orders {...props} setAuth={setAuth} />}
+            render={(props) =>
+              isAuthenticated ? (
+                <Orders {...props} setAuth={setAuth} />
+              ) : (
+                <Redirect to="/login" />
+              )
+            }
           />
+          } />
           <Route
             exact
             path="/login"

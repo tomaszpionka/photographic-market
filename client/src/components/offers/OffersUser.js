@@ -10,48 +10,116 @@ import {
   Button,
 } from "semantic-ui-react";
 
-const OffersUser = () => {
-  const [name, setName] = useState("");
-  const [id, setId] = useState("");
-  const getProfile = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/dashboard", {
-        method: "GET",
-        headers: { jwt_token: localStorage.token },
-      });
+const OffersUser = ({ allOrders, user_id, allItems }) => {
+  const [id, setId] = useState(user_id);
+  const [orders, setOrders] = useState(allOrders);
+  const [items, setItems] = useState([]);
 
-      const parseData = await res.json();
-      setName(parseData.user_name);
-      setId(parseData[0].user_id);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  const [orders, setOrders] = useState([]);
-  const getOrders = async (id) => {
+  const processOrder = async (order_id, item_id, order_process) => {
     try {
-      const res = await fetch("http://localhost:5000/orders", {
-        method: "GET",
-        headers: { jwt_token: localStorage.token },
-      });
-      const parseData = await res.json();
-      setOrders(parseData.filter((order) => order.item_owner === id));
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("jwt_token", localStorage.token);
+      await fetch(
+        `http://localhost:5000/orders/offer/${order_id}/${item_id}/${order_process}`,
+        {
+          method: "PUT",
+          headers: myHeaders,
+        }
+      );
+      // window.location = "/orders";
     } catch (error) {
       console.log(error);
     }
   };
 
+  const filteredItems = (order) => {
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].item_id === order.item_id && order.item_owner === id) {
+        return (
+          <Item key={order.order_id}>
+            <Item.Image src={items[i].item_image_url} />
+            <Item.Content>
+              <Item.Header as="a">{items[i].item_name}</Item.Header>
+              <Item.Meta>
+                <span>
+                  order placed at: {order.createdAt.slice(0, 10)}{" "}
+                  {order.createdAt.slice(11, 16)}
+                </span>
+                <br />
+                <span>order value: ${items[i].item_price}</span>
+                <br />
+                <span>order accepted: {order.order_process.toString()}</span>
+              </Item.Meta>
+              <Item.Description>{items[i].item_description}</Item.Description>
+              <Item.Extra>
+                <Image avatar circular src={items[i].ownerRef.user_image} />
+                <span floated="right">{items[i].ownerRef.user_email}</span>
+                <span>offer by: {order.item_buyer}</span>
+                <Modal
+                  trigger={
+                    order.order_success === true ? (
+                      <Button positive floated="right" disabled>
+                        received
+                      </Button>
+                    ) : order.order_process === false ? (
+                      <Button secondary floated="right">
+                        accept
+                      </Button>
+                    ) : (
+                      <Button primary floated="right">
+                        pending
+                      </Button>
+                    )
+                  }
+                  basic
+                  size="small"
+                >
+                  <Header icon="trash" content="delete order" />
+                  <Modal.Content>
+                    <p>
+                      this will permanently confirm order {order.order_id} ,
+                      would you like to continue?
+                    </p>
+                  </Modal.Content>
+                  <Modal.Actions>
+                    <Button basic color="red" inverted>
+                      <Icon name="remove" /> No
+                    </Button>
+                    <Button
+                      color="green"
+                      inverted
+                      onClick={() =>
+                        processOrder(
+                          order.order_id,
+                          order.item_id,
+                          !order.order_process
+                        )
+                      }
+                    >
+                      <Icon name="checkmark" /> Yes
+                    </Button>
+                  </Modal.Actions>
+                </Modal>
+              </Item.Extra>
+            </Item.Content>
+          </Item>
+        );
+      }
+    }
+  };
+
   useEffect(() => {
-    getProfile();
-    getOrders(id);
-  }, [id]);
+    setId(user_id);
+    setOrders(allOrders);
+    setItems(allItems);
+  }, [user_id, allOrders, allItems]);
 
   return (
     <Fragment>
       <Header as="h2" attached="top" block>
         <Icon name="camera retro" />
-        <Header.Content>user orders</Header.Content>
+        <Header.Content>user offers {id}</Header.Content>
       </Header>
       <Segment attached>
         <Container>
@@ -59,65 +127,7 @@ const OffersUser = () => {
             {orders.length !== 0 &&
               orders[0].order_id !== null &&
               orders.map((order) => (
-                <Item key={order.order_id}>
-                  {/* <Item.Image src={order.order_image_url} /> */}
-                  <Item.Content>
-                    <Item.Header as="a">{order.order_id}</Item.Header>
-                    <Item.Meta>
-                      <span>
-                        {order.createdAt.slice(0, 10)}{" "}
-                        {order.createdAt.slice(11, 16)}
-                      </span>
-                      <br />
-                      <span>{order.item_id}</span>
-                      <br />
-                      <span>item owner {order.item_owner}</span>
-                      <br />
-                      <span>
-                        item buyer {order.item_buyer} vs {id}
-                      </span>
-                      <br />
-                      <span>{order.order_success.toString()}</span>
-                    </Item.Meta>
-                    <Item.Description>{order.order_success}</Item.Description>
-                    <Item.Extra>
-                      <Image avatar circular src={order.user_image} />
-                      <span>{order.user_email}</span>
-
-                      {/* <ItemsEdit
-                        item={order}
-                        setItemsChange={setItemsChange}
-                        inline
-                      /> */}
-
-                      <Modal
-                        trigger={<Button>delete</Button>}
-                        basic
-                        size="small"
-                      >
-                        <Header icon="trash" content="delete order" />
-                        <Modal.Content>
-                          <p>
-                            this will permanently delete order {order.order_id}{" "}
-                            from the database, would you like to continue?
-                          </p>
-                        </Modal.Content>
-                        <Modal.Actions>
-                          <Button basic color="red" inverted>
-                            <Icon name="remove" /> No
-                          </Button>
-                          <Button
-                            color="green"
-                            inverted
-                            // onClick={() => deleteItem(order.order_id)}
-                          >
-                            <Icon name="checkmark" /> Yes
-                          </Button>
-                        </Modal.Actions>
-                      </Modal>
-                    </Item.Extra>
-                  </Item.Content>
-                </Item>
+                <Fragment key={order.order_id}>{filteredItems(order)}</Fragment>
               ))}
           </Item.Group>
         </Container>

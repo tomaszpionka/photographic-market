@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import {
   Form,
-  Button,
   Header,
   Icon,
   Input,

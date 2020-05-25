@@ -8,14 +8,15 @@ import ItemsForm from "../items/ItemsForm";
 import ItemsList from "../items/ItemsList";
 import ItemsUser from "../items/ItemsUser";
 import User from "../users/User";
-import OrdersUser from "../orders/OrdersUser";
-import OffersUser from "../offers/OffersUser";
 
 const Dashboard = () => {
   const [name, setName] = useState("");
   const [userItems, setUserItems] = useState([]);
   const [itemsChange, setItemsChange] = useState(false);
+  const [userChange, setUsersChange] = useState(false);
   const [id, setId] = useState("");
+  const [user, setUser] = useState([]);
+
   const getProfile = async () => {
     try {
       const res = await fetch("http://localhost:5000/dashboard", {
@@ -26,6 +27,7 @@ const Dashboard = () => {
       setUserItems(parseData);
       setId(parseData[0].user_id);
       setName(parseData[0].user_name);
+      setUser(parseData[0]);
     } catch (err) {
       console.error(err.message);
     }
@@ -34,20 +36,18 @@ const Dashboard = () => {
   useEffect(() => {
     getProfile();
     setItemsChange(false);
-  }, [itemsChange]);
+    setUsersChange(false);
+  }, [itemsChange, userChange]);
 
   return (
     <Fragment>
       <Container>
         <Container text style={{ marginTop: "7em" }}>
           <Header as="h1">dashboard</Header>
-
           <p>this is a protected admin panel</p>
           <p>inventory can be managed by user here</p>
         </Container>
-        <User user_id={id} />
-        <OrdersUser />
-        <OffersUser />
+        <User user={user} setUsersChange={setUsersChange} />
         <ItemsForm setItemsChange={setItemsChange} />
 
         <ItemsUser userItems={userItems} setItemsChange={setItemsChange} />

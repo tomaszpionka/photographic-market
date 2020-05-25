@@ -1,5 +1,6 @@
 const User = require("../models/user");
-const { sequelize, Sequelize } = require("../database/db");
+const db = require("../database/db");
+const { sequelize } = require("../database/db");
 
 const getAllUsers = (req, res) => {
   return User.findAll()
@@ -19,4 +20,92 @@ const findUser = (req, res) => {
     .catch((error) => res.send(error));
 };
 
-module.exports = { getAllUsers, findUser };
+const updateName = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name } = req.body;
+    const updateUser = await db.sequelize.query(
+      `UPDATE users SET user_name = '${name}' WHERE user_id = ${id} RETURNING *`
+    );
+    if (updateUser[0].length === 0) {
+      return res.json("this user is not yours");
+    }
+    res.json(updateUser[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+const updateSurname = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { surname } = req.body;
+    const updateUser = await db.sequelize.query(
+      `UPDATE users SET user_surname = '${surname}' WHERE user_id = ${id} RETURNING *`
+    );
+    if (updateUser[0].length === 0) {
+      return res.json("this user is not yours");
+    }
+    res.json(updateUser[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+const updatePhone = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { phone } = req.body;
+    const updateUser = await db.sequelize.query(
+      `UPDATE users SET user_phone = '${phone}' WHERE user_id = ${id} RETURNING *`
+    );
+    if (updateUser[0].length === 0) {
+      return res.json("this user is not yours");
+    }
+    res.json(updateUser[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+const updateCity = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { city } = req.body;
+    const updateUser = await db.sequelize.query(
+      `UPDATE users SET user_city = '${city}' WHERE user_id = ${id} RETURNING *`
+    );
+    if (updateUser[0].length === 0) {
+      return res.json("this user is not yours");
+    }
+    res.json(updateUser[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+const updateImageUrl = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { imageUrl } = req.body;
+    const updateUser = await db.sequelize.query(
+      `UPDATE users SET user_image = '${imageUrl}' WHERE user_id = ${id} RETURNING *`
+    );
+    if (updateUser[0].length === 0) {
+      return res.json("this user is not yours");
+    }
+    res.json(updateUser[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+module.exports = {
+  getAllUsers,
+  findUser,
+  updateName,
+  updateSurname,
+  updatePhone,
+  updateCity,
+  updateImageUrl,
+};
