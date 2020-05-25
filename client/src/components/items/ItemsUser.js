@@ -65,14 +65,12 @@ const ItemsUser = ({ userItems, setItemsChange }) => {
                       <Image avatar circular src={item.user_image} />
                       <span>{item.user_email}</span>
 
-                      <ItemsEdit
-                        item={item}
-                        setItemsChange={setItemsChange}
-                        inline
-                      />
-
                       <Modal
-                        trigger={<Button>delete</Button>}
+                        trigger={
+                          <Button negative floated="right">
+                            delete
+                          </Button>
+                        }
                         basic
                         size="small"
                       >
@@ -96,6 +94,11 @@ const ItemsUser = ({ userItems, setItemsChange }) => {
                           </Button>
                         </Modal.Actions>
                       </Modal>
+                      <ItemsEdit
+                        item={item}
+                        setItemsChange={setItemsChange}
+                        inline
+                      />
                     </Item.Extra>
                   </Item.Content>
                 </Item>
