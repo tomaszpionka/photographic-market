@@ -12,7 +12,7 @@ const findUser = (req, res) => {
   const { name } = req.query;
   return sequelize
     .query(
-      `SELECT * FROM users WHERE user_name || ' ' || user_surname ILIKE '%${name}%'`
+      `SELECT * FROM users WHERE user_name || ' ' || user_surname || ' ' || user_id ILIKE '%${name}%'`
     )
     .then((result) => {
       res.json(result);
