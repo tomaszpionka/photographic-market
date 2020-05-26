@@ -31,7 +31,7 @@ const Order = db.sequelize.define("order", {
   order_answer: {
     type: Sequelize.TEXT,
     allowNull: false,
-    defaultValue: "",
+    defaultValue: "Offer review in progress...",
   },
   order_offer: {
     type: Sequelize.INTEGER,
