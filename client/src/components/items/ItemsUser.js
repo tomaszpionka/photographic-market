@@ -17,9 +17,8 @@ const ItemsUser = ({ userItems, setItemsChange }) => {
   //   delete item function
 
   const deleteItem = async (id) => {
-    console.log(id);
     try {
-      const response = await fetch(`http://localhost:5000/items/${id}`, {
+      await fetch(`http://localhost:5000/items/${id}`, {
         method: "DELETE",
         headers: { jwt_token: localStorage.token },
       });

@@ -27,15 +27,42 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
           headers: myHeaders,
         }
       );
-      // window.location = "/orders";
+      window.location = "/orders";
     } catch (error) {
       console.log(error);
     }
   };
 
+  const [users, setUsers] = useState([]);
+
+  const search = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/users/find/?name=${""}`
+      );
+
+      const parseResponse = await response.json();
+      setUsers(parseResponse[0]);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const getBuyer = (buyer_id) => {
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].user_id === buyer_id) {
+        return users[i].user_email;
+      }
+    }
+  };
+
   const filteredItems = (order) => {
     for (let i = 0; i < items.length; i++) {
-      if (items[i].item_id === order.item_id && order.item_owner === id) {
+      if (
+        items[i].item_id === order.item_id &&
+        order.item_owner === id &&
+        order.item_buyer !== id
+      ) {
         return (
           <Item key={order.order_id}>
             <Item.Image src={items[i].item_image_url} />
@@ -55,7 +82,7 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
               <Item.Extra>
                 <Image avatar circular src={items[i].ownerRef.user_image} />
                 <span floated="right">{items[i].ownerRef.user_email}</span>
-                <span>offer by: {order.item_buyer}</span>
+                <span>offer by: {getBuyer(order.item_buyer)}</span>
                 <Modal
                   trigger={
                     order.order_success === true ? (
@@ -113,6 +140,7 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
     setId(user_id);
     setOrders(allOrders);
     setItems(allItems);
+    search();
   }, [user_id, allOrders, allItems]);
 
   return (

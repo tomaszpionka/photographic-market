@@ -91,14 +91,35 @@ const confirmOrder = async (req, res) => {
     const updateOffers = await db.sequelize.query(
       `UPDATE orders SET item_owner = '${item_buyer}', order_process = 'false' WHERE item_id = '${item_id}' RETURNING *`
     );
+    const deleteOrder = await db.sequelize.query(
+      `DELETE FROM orders WHERE order_id = '${order_id}' RETURNING *`
+    );
     res.json({
       order: confirmOrder[0],
       owner: changeOwner[0],
       offer: updateOffers[0],
+      delete: deleteOrder[0],
     });
   } catch (err) {
     console.error(err.message);
   }
 };
+const deleteOrder = async (req, res) => {
+  try {
+    const { order_id, item_buyer } = req.params;
+    const deleteOrder = await db.sequelize.query(
+      `DELETE FROM orders WHERE order_id = '${order_id}' AND item_buyer = '${item_buyer}' RETURNING *`
+    );
+    res.json(deleteOrder[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
 
-module.exports = { createOrder, getOrders, updateProcess, confirmOrder };
+module.exports = {
+  createOrder,
+  getOrders,
+  updateProcess,
+  confirmOrder,
+  deleteOrder,
+};

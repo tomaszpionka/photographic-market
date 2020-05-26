@@ -23,6 +23,21 @@ const Order = db.sequelize.define("order", {
     allowNull: false,
     defaultValue: 0,
   },
+  order_message: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+    defaultValue: "I'm interested in that product!",
+  },
+  order_answer: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+    defaultValue: "Offer review in progress...",
+  },
+  order_offer: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 1,
+  },
   order_init: {
     type: Sequelize.BOOLEAN,
     allowNull: false,

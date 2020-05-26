@@ -5,7 +5,6 @@ import SingleUser from "./SingleUser";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [query, setQuery] = useState("");
-
   const search = async (e) => {
     e.preventDefault();
     try {

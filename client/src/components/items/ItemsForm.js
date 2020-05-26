@@ -57,9 +57,6 @@ const ItemsForm = () => {
     for (let i = 0; i < images.current.files.length; i++) {
       formData.append("img", images.current.files[i]);
     }
-    console.log(formData);
-    console.log(id);
-
     try {
       await fetch(`http://localhost:5000/items`, {
         method: "POST",
