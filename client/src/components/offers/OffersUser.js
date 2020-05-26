@@ -34,16 +34,15 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
   };
 
   const [users, setUsers] = useState([]);
-  const [query, setQuery] = useState("");
+
   const search = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/users/find/?name=${query}`
+        `http://localhost:5000/users/find/?name=${""}`
       );
 
       const parseResponse = await response.json();
       setUsers(parseResponse[0]);
-      console.log(parseResponse[0]);
     } catch (err) {
       console.error(err.message);
     }
