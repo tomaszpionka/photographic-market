@@ -32,6 +32,21 @@ const OrdersUser = ({ allOrders, user_id, allItems }) => {
     }
   };
 
+  const deleteOrder = async (order_id, item_buyer) => {
+    try {
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("jwt_token", localStorage.token);
+      await fetch(`http://localhost:5000/orders/${order_id}/${item_buyer}`, {
+        method: "DELETE",
+        headers: myHeaders,
+      });
+      // window.location = "/orders";
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const [items, setItems] = useState(allItems);
 
   const filteredItems = (order) => {
@@ -60,7 +75,43 @@ const OrdersUser = ({ allOrders, user_id, allItems }) => {
               <Item.Extra>
                 <Image avatar circular src={items[i].ownerRef.user_image} />
                 <span floated="right">{items[i].ownerRef.user_email}</span>
-
+                <Modal
+                  trigger={
+                    order.order_process === false ? (
+                      <Button negative floated="right">
+                        delete
+                      </Button>
+                    ) : (
+                      <Button negative floated="right" disabled>
+                        delete
+                      </Button>
+                    )
+                  }
+                  basic
+                  size="small"
+                >
+                  <Header icon="trash" content="delete order" />
+                  <Modal.Content>
+                    <p>
+                      this will permanently delete order {order.order_id} ,
+                      would you like to continue?
+                    </p>
+                  </Modal.Content>
+                  <Modal.Actions>
+                    <Button basic color="red" inverted>
+                      <Icon name="remove" /> No
+                    </Button>
+                    <Button
+                      color="green"
+                      inverted
+                      onClick={() =>
+                        deleteOrder(order.order_id, order.item_buyer)
+                      }
+                    >
+                      <Icon name="checkmark" /> Yes
+                    </Button>
+                  </Modal.Actions>
+                </Modal>
                 <Modal
                   trigger={
                     order.order_success === true ? (
