@@ -92,7 +92,7 @@ const confirmOrder = async (req, res) => {
       `UPDATE orders SET item_owner = '${item_buyer}', order_process = 'false' WHERE item_id = '${item_id}' RETURNING *`
     );
     const deleteOrder = await db.sequelize.query(
-      `DELETE FROM orders WHERE order_id = '${order_id}' AND item_buyer = '${item_buyer}' RETURNING *`
+      `DELETE FROM orders WHERE order_id = '${order_id}' RETURNING *`
     );
     res.json({
       order: confirmOrder[0],
