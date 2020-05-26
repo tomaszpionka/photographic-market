@@ -25,5 +25,10 @@ router.put(
   jsonParser,
   orderController.confirmOrder
 );
+router.delete(
+  "/:order_id/:item_buyer",
+  jsonParser,
+  orderController.deleteOrder
+);
 
 module.exports = router;
