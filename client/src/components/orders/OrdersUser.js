@@ -175,7 +175,7 @@ const OrdersUser = ({ allOrders, user_id, allItems }) => {
     <Fragment>
       <Header as="h2" attached="top" block>
         <Icon name="camera retro" />
-        <Header.Content>user orders {id}</Header.Content>
+        <Header.Content>user orders</Header.Content>
       </Header>
       <Segment attached>
         <Container>

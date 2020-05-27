@@ -76,8 +76,8 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
               </Item.Meta>
               <Item.Description>{items[i].item_description}</Item.Description>
               <Item.Extra>
-                <Image avatar circular src={items[i].ownerRef.user_image} />
-                <span floated="right">{items[i].ownerRef.user_email}</span>
+                {/* <Image avatar circular src={items[i].ownerRef.user_image} />
+                <span floated="right">{items[i].ownerRef.user_email}</span> */}
                 <span>offer by: {getBuyer(order.item_buyer)}</span>
                 <Modal
                   trigger={
@@ -143,7 +143,7 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
     <Fragment>
       <Header as="h2" attached="top" block>
         <Icon name="camera retro" />
-        <Header.Content>user offers {id}</Header.Content>
+        <Header.Content>user offers</Header.Content>
       </Header>
       <Segment attached>
         <Container>
