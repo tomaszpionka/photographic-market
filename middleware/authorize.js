@@ -1,7 +1,9 @@
+const dotenv = require("dotenv");
+const path = require("path");
+dotenv.config({ path: path.join(process.env.PWD, ".env") });
 const jwt = require("jsonwebtoken");
-const config = require("../config");
 
-module.exports = function(req, res, next) {
+module.exports = function (req, res, next) {
   const token = req.header("jwt_token");
 
   if (!token) {
@@ -9,7 +11,7 @@ module.exports = function(req, res, next) {
   }
 
   try {
-    const verify = jwt.verify(token, config.secret);
+    const verify = jwt.verify(token, process.env.SECRET);
     req.user = verify.user;
     next();
   } catch (err) {
