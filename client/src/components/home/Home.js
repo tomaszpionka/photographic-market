@@ -43,7 +43,7 @@ const HomepageHeading = ({ mobile }) => (
         marginTop: mobile ? "0.5em" : "1.5em",
       }}
     />
-    <Button primary size="huge" as={Link} to="/items">
+    <Button primary size="huge" as={Link} to="/-items">
       get started
       <Icon name="right arrow" />
     </Button>
@@ -90,7 +90,7 @@ const Home = () => {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column textAlign="center">
-              <Button size="huge" as={Link} to="/items">
+              <Button size="huge" as={Link} to="/-items">
                 check it out
               </Button>
             </Grid.Column>
@@ -134,7 +134,7 @@ const Home = () => {
             instead of focusing on ebay products, check out our app an save real
             money!
           </p>
-          <Button as="a" size="large">
+          <Button as={Link} to="/-register" size="large">
             read more
           </Button>
 
@@ -155,7 +155,7 @@ const Home = () => {
             non-sequitur filler content, but it's really true. transaction in
             our app are 100% safe.
           </p>
-          <Button as="a" size="large">
+          <Button size="large" as={Link} to="/-items">
             i'm interested
           </Button>
         </Container>
