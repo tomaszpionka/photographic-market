@@ -85,28 +85,28 @@ const DesktopContainer = ({ children }) => {
               <Menu.Item as={Link} to="/">
                 home
               </Menu.Item>
-              <Menu.Item as={Link} to="/dashboard">
+              <Menu.Item as={Link} to="/-dashboard">
                 dashboard
               </Menu.Item>
-              <Menu.Item as={Link} to="/items">
+              <Menu.Item as={Link} to="/-items">
                 items
               </Menu.Item>
-              <Menu.Item as={Link} to="/orders">
+              <Menu.Item as={Link} to="/-orders">
                 orders
               </Menu.Item>
-              <Menu.Item as={Link} to="/users">
+              <Menu.Item as={Link} to="/-users">
                 users
               </Menu.Item>
 
               <Menu.Item position="right">
                 {!isAuthenticated ? (
                   <Fragment>
-                    <Button as={Link} to="/login" inverted={!fixed}>
+                    <Button as={Link} to="/-login" inverted={!fixed}>
                       login
                     </Button>
                     <Button
                       as={Link}
-                      to="/register"
+                      to="/-register"
                       inverted={!fixed}
                       primary={fixed}
                       style={{ marginLeft: "0.5em" }}
@@ -196,16 +196,16 @@ const MobileContainer = ({ children }) => {
         <Menu.Item as="a" active>
           home
         </Menu.Item>
-        <Menu.Item as={Link} to="/dashboard">
+        <Menu.Item as={Link} to="/-dashboard">
           dashboard
         </Menu.Item>
-        <Menu.Item as={Link} to="/items">
+        <Menu.Item as={Link} to="/-items">
           items
         </Menu.Item>
-        <Menu.Item as={Link} to="/orders">
+        <Menu.Item as={Link} to="/-orders">
           orders
         </Menu.Item>
-        <Menu.Item as={Link} to="/users">
+        <Menu.Item as={Link} to="/-users">
           users
         </Menu.Item>
       </Sidebar>
@@ -225,12 +225,12 @@ const MobileContainer = ({ children }) => {
               <Menu.Item position="right">
                 {!isAuthenticated ? (
                   <Fragment>
-                    <Button as={Link} to="/login" inverted>
+                    <Button as={Link} to="/-login" inverted>
                       login
                     </Button>
                     <Button
                       as={Link}
-                      to="/register"
+                      to="/-register"
                       inverted
                       style={{ marginLeft: "0.5em" }}
                     >

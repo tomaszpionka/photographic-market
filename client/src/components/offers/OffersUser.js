@@ -9,7 +9,7 @@ import {
   Modal,
   Button,
 } from "semantic-ui-react";
-
+import { toast } from "react-toastify";
 const OffersUser = ({ allOrders, user_id, allItems }) => {
   const [id, setId] = useState(user_id);
   const [orders, setOrders] = useState(allOrders);
@@ -24,7 +24,8 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
         method: "PUT",
         headers: myHeaders,
       });
-      window.location = "/orders";
+      toast.success("order processed");
+      window.location = "/-orders";
     } catch (error) {
       console.log(error);
     }
