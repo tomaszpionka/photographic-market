@@ -7,7 +7,7 @@ const Orders = () => {
   const [id, setId] = useState("");
   const getProfile = async () => {
     try {
-      const res = await fetch("http://localhost:5000/dashboard", {
+      const res = await fetch("/dashboard", {
         method: "GET",
         headers: { jwt_token: localStorage.token },
       });
@@ -21,7 +21,7 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const getOrders = async () => {
     try {
-      const res = await fetch("http://localhost:5000/orders", {
+      const res = await fetch("/orders", {
         method: "GET",
         headers: { jwt_token: localStorage.token },
       });
@@ -35,7 +35,7 @@ const Orders = () => {
   const [items, setItems] = useState([]);
   const getItems = async () => {
     try {
-      const res = await fetch("http://localhost:5000/items", {
+      const res = await fetch("/items", {
         method: "GET",
         headers: { jwt_token: localStorage.token },
       });

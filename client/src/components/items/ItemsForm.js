@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 const ItemsForm = () => {
   const getProfile = async () => {
     try {
-      const res = await fetch("http://localhost:5000/dashboard", {
+      const res = await fetch("/dashboard", {
         method: "GET",
         headers: { jwt_token: localStorage.token },
       });
@@ -58,7 +58,7 @@ const ItemsForm = () => {
       formData.append("img", images.current.files[i]);
     }
     try {
-      await fetch(`http://localhost:5000/items`, {
+      await fetch(`/items`, {
         method: "POST",
         body: formData,
       });

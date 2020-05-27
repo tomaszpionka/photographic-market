@@ -18,9 +18,7 @@ const ItemSearch = () => {
   const onSubmitForm = async (e) => {
     if (name.length > 0) {
       try {
-        const response = await fetch(
-          `http://localhost:5000/items/query/?name=${name}`
-        );
+        const response = await fetch(`/items/query/?name=${name}`);
         const parsedResponse = await response.json();
         setQuery(parsedResponse);
       } catch (err) {
@@ -32,9 +30,7 @@ const ItemSearch = () => {
   };
   const getUser = async (x) => {
     try {
-      const response = await fetch(
-        `http://localhost:5000/users/query/?name=${x}`
-      );
+      const response = await fetch(`/users/query/?name=${x}`);
       const parsedResponse = await response.json();
       setUser(parsedResponse[0]);
     } catch (err) {

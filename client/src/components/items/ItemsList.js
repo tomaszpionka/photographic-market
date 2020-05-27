@@ -15,7 +15,7 @@ const ItemsList = ({ user_id }) => {
   const [items, setItems] = useState([]);
   const getItems = async () => {
     try {
-      const res = await fetch("http://localhost:5000/items", {
+      const res = await fetch("/items", {
         method: "GET",
         headers: { jwt_token: localStorage.token },
       });
@@ -30,8 +30,8 @@ const ItemsList = ({ user_id }) => {
     const body = { user_id };
     try {
       const res = await fetch(
-        // `http://localhost:5000/items/owner/${item_id}/${item_owner}/${user_id}`,
-        `http://localhost:5000/orders/${item_id}/${item_owner}/${user_id}`,
+        // `/items/owner/${item_id}/${item_owner}/${user_id}`,
+        `/orders/${item_id}/${item_owner}/${user_id}`,
         {
           // method: "PUT",
           method: "POST",
