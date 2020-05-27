@@ -25,7 +25,7 @@ const getWidth = () => {
 const DesktopContainer = ({ children }) => {
   const checkAuthenticated = async () => {
     try {
-      const res = await fetch("/auth/verify", {
+      const res = await fetch("/api/auth/verify", {
         method: "POST",
         headers: { jwt_token: localStorage.token },
       });
@@ -143,7 +143,7 @@ DesktopContainer.propTypes = {
 const MobileContainer = ({ children }) => {
   const checkAuthenticated = async () => {
     try {
-      const res = await fetch("/auth/verify", {
+      const res = await fetch("/api/auth/verify", {
         method: "POST",
         headers: { jwt_token: localStorage.token },
       });

@@ -15,7 +15,7 @@ const ItemsUser = ({ userItems, setItemsChange }) => {
   const [items, setItems] = useState([]);
   const deleteItem = async (id) => {
     try {
-      await fetch(`/items/${id}`, {
+      await fetch(`/api/items/${id}`, {
         method: "DELETE",
         headers: { jwt_token: localStorage.token },
       });

@@ -17,11 +17,11 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
 }
 
-app.use("/auth", require("./routes/auth"));
-app.use("/dashboard", require("./routes/dashboard"));
-app.use("/items", require("./routes/item"));
-app.use("/users", require("./routes/user"));
-app.use("/orders", require("./routes/order"));
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/dashboard", require("./routes/dashboard"));
+app.use("/api/items", require("./routes/item"));
+app.use("/api/users", require("./routes/user"));
+app.use("/api/orders", require("./routes/order"));
 app.use("/static", express.static(path.join(__dirname, "assets")));
 
 app.get("*", (req, res) => {
