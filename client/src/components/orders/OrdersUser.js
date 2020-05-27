@@ -9,6 +9,7 @@ import {
   Modal,
   Button,
 } from "semantic-ui-react";
+import { toast } from "react-toastify";
 
 const OrdersUser = ({ allOrders, user_id, allItems }) => {
   const [id, setId] = useState(user_id);
@@ -23,7 +24,8 @@ const OrdersUser = ({ allOrders, user_id, allItems }) => {
         method: "PUT",
         headers: myHeaders,
       });
-      window.location = "/orders";
+      // window.location = "/orders";
+      toast.success("order confirmed");
     } catch (error) {
       console.log(error);
     }
@@ -39,6 +41,7 @@ const OrdersUser = ({ allOrders, user_id, allItems }) => {
         headers: myHeaders,
       });
       // window.location = "/orders";
+      toast.success("order deleted");
     } catch (error) {
       console.log(error);
     }
