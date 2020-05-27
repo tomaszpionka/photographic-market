@@ -59,56 +59,56 @@ function App() {
           />
           <Route
             exact
-            path="/items"
+            path="/-items"
             render={(props) => <Items {...props} setAuth={setAuth} />}
           />
           <Route
             exact
-            path="/users"
+            path="/-users"
             render={(props) => <Users {...props} setAuth={setAuth} />}
           />
           <Route
             exact
-            path="/orders"
+            path="/-orders"
             render={(props) =>
               isAuthenticated ? (
                 <Orders {...props} setAuth={setAuth} />
               ) : (
-                <Redirect to="/login" />
+                <Redirect to="/-login" />
               )
             }
           />
           } />
           <Route
             exact
-            path="/login"
+            path="/-login"
             render={(props) =>
               !isAuthenticated ? (
                 <Login {...props} setAuth={setAuth} />
               ) : (
-                <Redirect to="/dashboard" />
+                <Redirect to="/-dashboard" />
               )
             }
           />
           <Route
             exact
-            path="/register"
+            path="/-register"
             render={(props) =>
               !isAuthenticated ? (
                 <Register {...props} setAuth={setAuth} />
               ) : (
-                <Redirect to="/dashboard" />
+                <Redirect to="/-dashboard" />
               )
             }
           />
           <Route
             exact
-            path="/dashboard"
+            path="/-dashboard"
             render={(props) =>
               isAuthenticated ? (
                 <Dashboard {...props} setAuth={setAuth} />
               ) : (
-                <Redirect to="/login" />
+                <Redirect to="/-login" />
               )
             }
           />
