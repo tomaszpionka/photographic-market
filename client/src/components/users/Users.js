@@ -8,7 +8,7 @@ const Users = () => {
   const search = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`/users/find/?name=${query}`);
+      const response = await fetch(`/api/users/find/?name=${query}`);
 
       const parseResponse = await response.json();
       setUsers(parseResponse[0]);

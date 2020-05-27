@@ -15,7 +15,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      await fetch(`/items/name/${id}`, {
+      await fetch(`/api/items/name/${id}`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify(body),
@@ -34,7 +34,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      await fetch(`/items/description/${id}`, {
+      await fetch(`/api/items/description/${id}`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify(body),
@@ -52,7 +52,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      await fetch(`/items/price/${id}`, {
+      await fetch(`/api/items/price/${id}`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify(body),
@@ -70,7 +70,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      await fetch(`/items/image/${id}`, {
+      await fetch(`/api/items/image/${id}`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify(body),

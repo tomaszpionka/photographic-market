@@ -7,7 +7,7 @@ const Items = () => {
   const [id, setId] = useState("");
   const getProfile = async () => {
     try {
-      const res = await fetch("/dashboard", {
+      const res = await fetch("/api/dashboard", {
         method: "GET",
         headers: { jwt_token: localStorage.token },
       });

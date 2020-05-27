@@ -20,7 +20,7 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
-      await fetch(`/orders/offer/${order_id}/${item_id}/${order_process}`, {
+      await fetch(`/api/orders/offer/${order_id}/${item_id}/${order_process}`, {
         method: "PUT",
         headers: myHeaders,
       });
@@ -35,7 +35,7 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
 
   const search = async () => {
     try {
-      const response = await fetch(`/users/find/?name=${""}`);
+      const response = await fetch(`/api/users/find/?name=${""}`);
 
       const parseResponse = await response.json();
       setUsers(parseResponse[0]);

@@ -20,7 +20,7 @@ const OrdersUser = ({ allOrders, user_id, allItems }) => {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
-      await fetch(`/orders/confirm/${order_id}/${item_buyer}/${item_id}`, {
+      await fetch(`/api/orders/confirm/${order_id}/${item_buyer}/${item_id}`, {
         method: "PUT",
         headers: myHeaders,
       });
@@ -36,7 +36,7 @@ const OrdersUser = ({ allOrders, user_id, allItems }) => {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
-      await fetch(`/orders/${order_id}/${item_buyer}`, {
+      await fetch(`/api/orders/${order_id}/${item_buyer}`, {
         method: "DELETE",
         headers: myHeaders,
       });
