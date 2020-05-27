@@ -19,13 +19,10 @@ const OrdersUser = ({ allOrders, user_id, allItems }) => {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
-      await fetch(
-        `http://localhost:5000/orders/confirm/${order_id}/${item_buyer}/${item_id}`,
-        {
-          method: "PUT",
-          headers: myHeaders,
-        }
-      );
+      await fetch(`/orders/confirm/${order_id}/${item_buyer}/${item_id}`, {
+        method: "PUT",
+        headers: myHeaders,
+      });
       window.location = "/orders";
     } catch (error) {
       console.log(error);
@@ -37,7 +34,7 @@ const OrdersUser = ({ allOrders, user_id, allItems }) => {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
-      await fetch(`http://localhost:5000/orders/${order_id}/${item_buyer}`, {
+      await fetch(`/orders/${order_id}/${item_buyer}`, {
         method: "DELETE",
         headers: myHeaders,
       });

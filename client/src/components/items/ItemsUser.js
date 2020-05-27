@@ -12,13 +12,10 @@ import {
 import ItemsEdit from "./ItemsEdit";
 
 const ItemsUser = ({ userItems, setItemsChange }) => {
-  const [items, setItems] = useState([]); //empty array
-
-  //   delete item function
-
+  const [items, setItems] = useState([]);
   const deleteItem = async (id) => {
     try {
-      await fetch(`http://localhost:5000/items/${id}`, {
+      await fetch(`/items/${id}`, {
         method: "DELETE",
         headers: { jwt_token: localStorage.token },
       });

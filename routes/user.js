@@ -9,22 +9,7 @@ const { QueryTypes } = require("sequelize");
 
 router.get("/", jsonParser, userController.getAllUsers);
 router.get("/find", jsonParser, userController.findUser);
-router.get("/query", jsonParser, async (req, res) => {
-  try {
-    const { name } = req.query;
-    const id = parseInt(name);
-
-    const items = await db.sequelize.query(
-      `SELECT * FROM users WHERE user_id = ${id}`,
-      {
-        type: QueryTypes.SELECT,
-      }
-    );
-    res.json(items);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
+router.get("/query", jsonParser, userController.userQuery);
 
 router.put("/name/:id", authorize, jsonParser, userController.updateName);
 router.put("/surname/:id", authorize, jsonParser, userController.updateSurname);

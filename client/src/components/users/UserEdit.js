@@ -32,7 +32,7 @@ const UserEdit = ({ userData, setUsersChange }) => {
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      await fetch(`http://localhost:5000/users/name/${id}`, {
+      await fetch(`/users/name/${id}`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify(body),
@@ -55,7 +55,7 @@ const UserEdit = ({ userData, setUsersChange }) => {
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      await fetch(`http://localhost:5000/users/surname/${id}`, {
+      await fetch(`/users/surname/${id}`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify(body),
@@ -77,7 +77,7 @@ const UserEdit = ({ userData, setUsersChange }) => {
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      await fetch(`http://localhost:5000/users/phone/${id}`, {
+      await fetch(`/users/phone/${id}`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify(body),
@@ -99,7 +99,7 @@ const UserEdit = ({ userData, setUsersChange }) => {
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      await fetch(`http://localhost:5000/users/city/${id}`, {
+      await fetch(`/users/city/${id}`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify(body),
@@ -121,7 +121,7 @@ const UserEdit = ({ userData, setUsersChange }) => {
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      await fetch(`http://localhost:5000/users/image/${id}`, {
+      await fetch(`/users/image/${id}`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify(body),

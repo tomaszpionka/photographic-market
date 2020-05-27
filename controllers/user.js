@@ -100,6 +100,23 @@ const updateImageUrl = async (req, res) => {
   }
 };
 
+const userQuery = async (req, res) => {
+  try {
+    const { name } = req.query;
+    const id = parseInt(name);
+
+    const items = await db.sequelize.query(
+      `SELECT * FROM users WHERE user_id = ${id}`,
+      {
+        type: QueryTypes.SELECT,
+      }
+    );
+    res.json(items);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
 module.exports = {
   getAllUsers,
   findUser,
@@ -108,4 +125,5 @@ module.exports = {
   updatePhone,
   updateCity,
   updateImageUrl,
+  userQuery,
 };
