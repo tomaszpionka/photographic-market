@@ -24,8 +24,8 @@ const OrdersUser = ({ allOrders, user_id, allItems }) => {
         method: "PUT",
         headers: myHeaders,
       });
-      // window.location = "/orders";
       toast.success("order confirmed");
+      window.location = "/-orders";
     } catch (error) {
       console.log(error);
     }
@@ -40,8 +40,8 @@ const OrdersUser = ({ allOrders, user_id, allItems }) => {
         method: "DELETE",
         headers: myHeaders,
       });
-      // window.location = "/orders";
       toast.success("order deleted");
+      window.location = "/-orders";
     } catch (error) {
       console.log(error);
     }

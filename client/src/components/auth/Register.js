@@ -140,7 +140,7 @@ const Register = ({ setAuth }) => {
                     </Segment>
                   </Form>
                   <Message>
-                    already have an account? <a href="/login">login</a> or{" "}
+                    already have an account? <a href="/-login">login</a> or{" "}
                     <a href="/">see more</a>
                   </Message>
                 </Grid.Column>

@@ -89,7 +89,7 @@ const Login = ({ setAuth }) => {
                     </Segment>
                   </Form>
                   <Message>
-                    new to us? <a href="/register">register</a> or{" "}
+                    new to us? <a href="/-register">register</a> or{" "}
                     <a href="/"> see more</a>
                   </Message>
                 </Grid.Column>

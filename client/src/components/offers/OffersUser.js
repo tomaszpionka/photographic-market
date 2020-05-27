@@ -24,8 +24,8 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
         method: "PUT",
         headers: myHeaders,
       });
-      // window.location = "/orders";
       toast.success("order processed");
+      window.location = "/-orders";
     } catch (error) {
       console.log(error);
     }
