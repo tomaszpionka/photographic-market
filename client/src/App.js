@@ -16,6 +16,7 @@ import Users from "./components/users/Users";
 import Orders from "./components/orders/Orders";
 import ResponsiveContainer from "./components/menu/Header";
 import Footer from "./components/menu/Footer";
+import Admin from "./components/admin/Admin";
 
 toast.configure();
 
@@ -111,6 +112,11 @@ function App() {
                 <Redirect to="/-login" />
               )
             }
+          />
+          <Route
+            exact
+            path="/-admin"
+            render={(props) => <Admin {...props} setAuth={setAuth} />}
           />
         </Switch>
         <Footer />

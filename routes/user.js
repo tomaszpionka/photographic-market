@@ -4,8 +4,6 @@ const userController = require("../controllers/user");
 const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json();
 const authorize = require("../middleware/authorize");
-const db = require("../database/db");
-const { QueryTypes } = require("sequelize");
 
 router.get("/", jsonParser, userController.getAllUsers);
 router.get("/find", jsonParser, userController.findUser);

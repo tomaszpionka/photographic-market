@@ -22,6 +22,7 @@ app.use("/api/dashboard", require("./routes/dashboard"));
 app.use("/api/items", require("./routes/item"));
 app.use("/api/users", require("./routes/user"));
 app.use("/api/orders", require("./routes/order"));
+app.use("/api/admin", require("./routes/admin"));
 app.use("/static", express.static(path.join(__dirname, "assets")));
 
 app.get("*", (req, res) => {
