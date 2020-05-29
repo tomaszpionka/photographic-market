@@ -40,7 +40,7 @@ const ItemsList = ({ user_id }) => {
         }
       );
       const parseData = await res.json();
-      toast.error(parseData);
+      toast.info(parseData);
     } catch (error) {
       console.log(error);
     }
