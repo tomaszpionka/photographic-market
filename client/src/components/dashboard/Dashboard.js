@@ -5,16 +5,16 @@ import { Header, Container } from "semantic-ui-react";
 //components
 
 import ItemsForm from "../items/ItemsForm";
-import ItemsList from "../items/ItemsList";
+// import ItemsList from "../items/ItemsList";
 import ItemsUser from "../items/ItemsUser";
 import User from "../users/User";
 
 const Dashboard = () => {
-  const [name, setName] = useState("");
+  // const [id, setId] = useState("");
+  // const [name, setName] = useState("");
   const [userItems, setUserItems] = useState([]);
   const [itemsChange, setItemsChange] = useState(false);
   const [userChange, setUsersChange] = useState(false);
-  const [id, setId] = useState("");
   const [user, setUser] = useState([]);
 
   const getProfile = async () => {
@@ -25,8 +25,8 @@ const Dashboard = () => {
       });
       const parseData = await res.json();
       setUserItems(parseData);
-      setId(parseData[0].user_id);
-      setName(parseData[0].user_name);
+      // setId(parseData[0].user_id);
+      // setName(parseData[0].user_name);
       setUser(parseData[0]);
     } catch (err) {
       console.error(err.message);
@@ -51,7 +51,7 @@ const Dashboard = () => {
         <ItemsForm setItemsChange={setItemsChange} />
 
         <ItemsUser userItems={userItems} setItemsChange={setItemsChange} />
-        <ItemsList user_id={id} user_name={name} />
+        {/* <ItemsList user_id={id} user_name={name} /> */}
       </Container>
     </Fragment>
   );
