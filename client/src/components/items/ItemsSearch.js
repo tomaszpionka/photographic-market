@@ -15,6 +15,7 @@ const ItemSearch = () => {
   const [name, setName] = useState("");
   const [query, setQuery] = useState([]);
   const [user, setUser] = useState([]);
+
   const onSubmitForm = async (e) => {
     if (name.length > 0) {
       try {
@@ -37,6 +38,7 @@ const ItemSearch = () => {
       console.error(err.message);
     }
   };
+
   return (
     <Fragment>
       <Header as="h2" attached="top" block>
@@ -45,7 +47,11 @@ const ItemSearch = () => {
       </Header>
       <Segment attached>
         <Container>
-          <Form onSubmit={onSubmitForm}>
+          <Form
+            onSubmit={() => {
+              onSubmitForm();
+            }}
+          >
             <Form.Input>
               <input
                 type="text"

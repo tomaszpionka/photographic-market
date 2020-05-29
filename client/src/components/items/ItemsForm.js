@@ -64,7 +64,7 @@ const ItemsForm = () => {
       });
       toast.success("item added");
       setTimeout(() => {
-        window.location = "/-items";
+        window.location = "/-dashboard";
       }, 4000);
     } catch (err) {
       console.log(err.message);

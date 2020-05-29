@@ -72,10 +72,14 @@ const Admin = () => {
 
   const adminCheck = (id) => {
     if (id !== 1) {
-      return null;
+      return <Container style={{ height: "100vh" }}></Container>;
     } else {
       return (
         <Fragment>
+          <Container text style={{ marginTop: "7em" }}>
+            <Header as="h1">admin</Header>
+            <p>this is an admin panel</p>
+          </Container>
           <Header as="h2" attached="top" block>
             <Icon name="settings" />
             <Header.Content>users</Header.Content>
@@ -139,13 +143,7 @@ const Admin = () => {
   };
   return (
     <Fragment>
-      <Container>
-        <Container text style={{ marginTop: "7em" }}>
-          <Header as="h1">admin</Header>
-          <p>this is an admin panel</p>
-        </Container>
-        {adminCheck(admin)}
-      </Container>
+      <Container>{adminCheck(admin)}</Container>
     </Fragment>
   );
 };

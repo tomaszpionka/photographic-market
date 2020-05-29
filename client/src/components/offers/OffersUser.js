@@ -20,11 +20,15 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
-      await fetch(`/api/orders/offer/${order_id}/${item_id}/${order_process}`, {
-        method: "PUT",
-        headers: myHeaders,
-      });
-      toast.success("order processed");
+      const response = await fetch(
+        `/api/orders/offer/${order_id}/${item_id}/${order_process}`,
+        {
+          method: "PUT",
+          headers: myHeaders,
+        }
+      );
+      const parseResponse = await response.json();
+      toast.success(parseResponse);
       window.location = "/-orders";
     } catch (error) {
       console.log(error);
@@ -36,7 +40,6 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
   const search = async () => {
     try {
       const response = await fetch(`/api/users/find/?name=${""}`);
-
       const parseResponse = await response.json();
       setUsers(parseResponse[0]);
     } catch (err) {
@@ -91,7 +94,7 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
                       </Button>
                     ) : (
                       <Button primary floated="right">
-                        pending
+                        processing
                       </Button>
                     )
                   }
@@ -101,8 +104,8 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
                   <Header icon="trash" content="delete order" />
                   <Modal.Content>
                     <p>
-                      this will permanently confirm order {order.order_id} ,
-                      would you like to continue?
+                      this will change status of offer {order.order_id}, would
+                      you like to continue?
                     </p>
                   </Modal.Content>
                   <Modal.Actions>

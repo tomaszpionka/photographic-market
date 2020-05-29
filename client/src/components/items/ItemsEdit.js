@@ -7,7 +7,6 @@ const ItemsEdit = ({ item, setItemsChange }) => {
   const [price, setPrice] = useState(item.item_price);
   const [imageUrl, setImageUrl] = useState(item.item_image_url);
 
-  //editText function
   const editName = async (id) => {
     try {
       const body = { name };
@@ -95,7 +94,6 @@ const ItemsEdit = ({ item, setItemsChange }) => {
       <Button primary floated="right" onClick={openHandler}>
         edit
       </Button>
-
       <Modal open={open} onClose={closeHandler}>
         <Modal.Header>edit item</Modal.Header>
         <Modal.Content image>

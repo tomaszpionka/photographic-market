@@ -12,7 +12,7 @@ const createOrder = async (req, res) => {
       }
     );
     if (order.length > 0) {
-      return res.status(401).json("order already exist!");
+      return res.status(401).json("order already exists");
     }
     Order.create({
       item_id: item_id,
@@ -20,8 +20,8 @@ const createOrder = async (req, res) => {
       item_buyer: item_buyer,
       order_init: true,
     })
-      .then((result) => {
-        res.send({ result });
+      .then(() => {
+        res.json("order created");
       })
       .catch((error) => {
         res.status(500).send(`SQL ERROR ${error}`);
@@ -45,7 +45,6 @@ const getOrders = async (req, res) => {
 const updateProcess = async (req, res) => {
   try {
     const { order_id, item_id, process } = req.params;
-    console.log(req.params);
     if (process === "true") {
       const offer = await db.sequelize.query(
         `SELECT * from orders WHERE item_id = '${item_id}' and order_process = 'true'`,
@@ -82,24 +81,19 @@ const updateProcess = async (req, res) => {
 const confirmOrder = async (req, res) => {
   try {
     const { order_id, item_buyer, item_id } = req.params;
-    const confirmOrder = await db.sequelize.query(
+    await db.sequelize.query(
       `UPDATE orders SET order_success = 'true' WHERE order_id = '${order_id}' RETURNING *`
     );
-    const changeOwner = await db.sequelize.query(
+    await db.sequelize.query(
       `UPDATE items SET item_owner = '${item_buyer}' WHERE item_id = '${item_id}' RETURNING *`
     );
-    const updateOffers = await db.sequelize.query(
+    await db.sequelize.query(
       `UPDATE orders SET item_owner = '${item_buyer}', order_process = 'false' WHERE item_id = '${item_id}' RETURNING *`
     );
-    const deleteOrder = await db.sequelize.query(
+    await db.sequelize.query(
       `DELETE FROM orders WHERE order_id = '${order_id}' RETURNING *`
     );
-    res.json({
-      order: confirmOrder[0],
-      owner: changeOwner[0],
-      offer: updateOffers[0],
-      delete: deleteOrder[0],
-    });
+    res.json("order confirmed");
   } catch (err) {
     console.error(err.message);
   }
