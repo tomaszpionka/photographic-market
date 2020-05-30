@@ -100,6 +100,7 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
                   }
                   basic
                   size="small"
+                  closeIcon
                 >
                   <Header icon="trash" content="delete order" />
                   <Modal.Content>
@@ -109,9 +110,6 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
                     </p>
                   </Modal.Content>
                   <Modal.Actions>
-                    <Button basic color="red" inverted>
-                      <Icon name="remove" /> No
-                    </Button>
                     <Button
                       color="green"
                       inverted

@@ -97,6 +97,7 @@ const ItemSearch = () => {
                             contact
                           </Button>
                         }
+                        closeIcon
                       >
                         <Modal.Header>contact</Modal.Header>
                         <Modal.Content image>
