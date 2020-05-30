@@ -147,7 +147,7 @@ const UserEdit = ({ userData, setUsersChange }) => {
     <Fragment>
       <Button onClick={openHandler}>edit</Button>
 
-      <Modal open={open} onClose={closeHandler}>
+      <Modal open={open} onClose={closeHandler} closeIcon>
         <Modal.Header>edit user</Modal.Header>
         <Modal.Content image>
           <Image wrapped size="medium" src={userData.user_image} />

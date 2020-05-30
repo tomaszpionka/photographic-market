@@ -101,6 +101,7 @@ const ItemsList = ({ user_id }) => {
                             contact
                           </Button>
                         }
+                        closeIcon
                       >
                         <Modal.Header>contact</Modal.Header>
                         <Modal.Content image>

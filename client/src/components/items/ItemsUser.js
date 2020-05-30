@@ -68,6 +68,7 @@ const ItemsUser = ({ userItems, setItemsChange }) => {
                         }
                         basic
                         size="small"
+                        closeIcon
                       >
                         <Header icon="trash" content="delete item" />
                         <Modal.Content>
@@ -77,9 +78,6 @@ const ItemsUser = ({ userItems, setItemsChange }) => {
                           </p>
                         </Modal.Content>
                         <Modal.Actions>
-                          <Button basic color="red" inverted>
-                            <Icon name="remove" /> No
-                          </Button>
                           <Button
                             color="green"
                             inverted

@@ -94,7 +94,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
       <Button primary floated="right" onClick={openHandler}>
         edit
       </Button>
-      <Modal open={open} onClose={closeHandler}>
+      <Modal open={open} onClose={closeHandler} closeIcon>
         <Modal.Header>edit item</Modal.Header>
         <Modal.Content image>
           <Image wrapped size="medium" src={imageUrl} />
@@ -212,7 +212,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
             </Form>
           </Modal.Description>
         </Modal.Content>
-        <Modal.Actions>
+        {/* <Modal.Actions>
           <Button
             positive
             icon="checkmark"
@@ -220,7 +220,7 @@ const ItemsEdit = ({ item, setItemsChange }) => {
             content="alright"
             onClick={closeHandler}
           />
-        </Modal.Actions>
+        </Modal.Actions> */}
       </Modal>
     </Fragment>
   );
