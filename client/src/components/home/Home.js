@@ -67,7 +67,7 @@ const Home = () => {
                 find the treasures
               </Header>
               <p style={{ fontSize: "1.33em" }}>
-                huge network and variety of unique items will suit your needs...
+                add your items and start ordering
               </p>
               <Header as="h3" style={{ fontSize: "2em" }}>
                 give items new life
@@ -128,8 +128,7 @@ const Home = () => {
             film &#x26; digital
           </Header>
           <p style={{ fontSize: "1.33em" }}>
-            instead of focusing on ebay products, check out this app an save
-            real money!
+            huge network and variety of unique items will suit your needs...
           </p>
           <Button as={Link} to="/-items" size="large">
             try it
