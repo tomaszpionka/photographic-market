@@ -15,10 +15,22 @@ const Footer = () => {
               <Grid.Column width={3}>
                 <Header inverted as="h4" content="about" />
                 <List link inverted>
-                  <List.Item as="a">sitemap</List.Item>
-                  <List.Item as="a">contact us</List.Item>
+                  {/* <List.Item as="a">sitemap</List.Item> */}
+                  <List.Item
+                    as="a"
+                    target="_blank"
+                    href="https://linkedin.com/in/tomaszpionka"
+                  >
+                    contact us
+                  </List.Item>
                   <List.Item as="a">events</List.Item>
-                  <List.Item as="a">partners</List.Item>
+                  <List.Item
+                    as="a"
+                    target="_blank"
+                    href="https://github.com/tomaszpionka"
+                  >
+                    partners
+                  </List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={3}>
