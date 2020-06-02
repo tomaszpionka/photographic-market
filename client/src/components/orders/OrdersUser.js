@@ -46,7 +46,7 @@ const OrdersUser = ({ allOrders, user_id, allItems }) => {
       console.log(error);
     }
   };
-
+  // todo comment section
   const [items, setItems] = useState(allItems);
 
   const filteredItems = (order) => {
@@ -129,12 +129,9 @@ const OrdersUser = ({ allOrders, user_id, allItems }) => {
                   basic
                   size="small"
                 >
-                  <Header icon="trash" content="delete order" />
+                  <Header icon="check circle outline" content="confirm order" />
                   <Modal.Content>
-                    <p>
-                      this will permanently confirm order {order.order_id} ,
-                      would you like to continue?
-                    </p>
+                    <p>do you want to confirm order {order.order_id}?</p>
                   </Modal.Content>
                   <Modal.Actions>
                     <Button

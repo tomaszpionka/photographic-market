@@ -64,19 +64,16 @@ const Home = () => {
           <Grid.Row>
             <Grid.Column width={8}>
               <Header as="h3" style={{ fontSize: "2em" }}>
-                we help people looking for treasures
+                find the treasures
               </Header>
               <p style={{ fontSize: "1.33em" }}>
-                we can provide you with the space for exchanging photographic
-                equipment. huge network and variety of unique items will suit
-                your needs...
+                add your items and start ordering
               </p>
               <Header as="h3" style={{ fontSize: "2em" }}>
-                we give these items new lives
+                give items new life
               </Header>
               <p style={{ fontSize: "1.33em" }}>
-                yes that's right, you thought it was the stuff of dreams, but
-                now you can exchange your stuff without paying.
+                exchange vintage stuff without paying
               </p>
             </Grid.Column>
             <Grid.Column floated="right" width={6}>
@@ -103,22 +100,22 @@ const Home = () => {
           <Grid.Row textAlign="center">
             <Grid.Column style={{ paddingBottom: "5em", paddingTop: "5em" }}>
               <Header as="h3" style={{ fontSize: "2em" }}>
-                "what an app"
+                "what an app!"
               </Header>
               <p style={{ fontSize: "1.33em" }}>
-                that is what they all say about us
+                that is what they say about us
               </p>
             </Grid.Column>
             <Grid.Column style={{ paddingBottom: "5em", paddingTop: "5em" }}>
               <Header as="h3" style={{ fontSize: "2em" }}>
-                "i shouldn't have gone with their competitor."
+                "I saved a lot with this app!"
               </Header>
               <p style={{ fontSize: "1.33em" }}>
                 <Image
                   avatar
                   src="https://simhub.github.io/justFlipIt/img/jenny.jpg"
                 />
-                <b>Nan</b> chief fun officer acme toys
+                <b>Nan</b> amateur photographer
               </p>
             </Grid.Column>
           </Grid.Row>
@@ -128,14 +125,13 @@ const Home = () => {
       <Segment style={{ padding: "8em 0em" }} vertical>
         <Container text>
           <Header as="h3" style={{ fontSize: "2em" }}>
-            film, digital
+            film &#x26; digital
           </Header>
           <p style={{ fontSize: "1.33em" }}>
-            instead of focusing on ebay products, check out our app an save real
-            money!
+            huge network and variety of unique items will suit your needs...
           </p>
-          <Button as={Link} to="/-register" size="large">
-            read more
+          <Button as={Link} to="/-items" size="large">
+            try it
           </Button>
 
           <Divider
@@ -148,15 +144,16 @@ const Home = () => {
           </Divider>
 
           <Header as="h3" style={{ fontSize: "2em" }}>
-            did we tell you about our service?
+            authors
           </Header>
-          <p style={{ fontSize: "1.33em" }}>
-            yes i know you probably disregarded the earlier boasts as
-            non-sequitur filler content, but it's really true. transaction in
-            our app are 100% safe.
-          </p>
-          <Button size="large" as={Link} to="/-items">
-            i'm interested
+          <p style={{ fontSize: "1.33em" }}>check out our projects</p>
+          <Button
+            size="large"
+            as="a"
+            href="https://github.com/tomaszpionka"
+            target="_blank"
+          >
+            visit
           </Button>
         </Container>
       </Segment>

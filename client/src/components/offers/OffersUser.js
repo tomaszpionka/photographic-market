@@ -102,11 +102,11 @@ const OffersUser = ({ allOrders, user_id, allItems }) => {
                   size="small"
                   closeIcon
                 >
-                  <Header icon="trash" content="delete order" />
+                  <Header icon="exchange" content="update offer" />
                   <Modal.Content>
                     <p>
-                      this will change status of offer {order.order_id}, would
-                      you like to continue?
+                      this will change offer {order.order_id} status, would you
+                      like to continue?
                     </p>
                   </Modal.Content>
                   <Modal.Actions>
